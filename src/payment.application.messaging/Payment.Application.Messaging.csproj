@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\payment.crosscutting.kafka\Payment.Infrastructure.Crosscutting.Kafka.csproj" />
+    <ProjectReference Include="..\payment.domain.commands\Payment.Domain.Commands.csproj" />
+    <ProjectReference Include="..\payment.domain.query.model\Payment.Domain.Query.csproj" />
+    <ProjectReference Include="..\payment.domain\Payment.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

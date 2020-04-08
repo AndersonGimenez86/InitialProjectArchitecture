@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>74d20891-7559-444d-85a2-f20e17029096</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\checkout.com.payment.application.messaging\Payment.Application.Messaging.csproj" />
+    <ProjectReference Include="..\checkout.com.payment.crosscutting.kafka\Payment.Infrastructure.Crosscutting.Kafka.csproj" />
+    <ProjectReference Include="..\checkout.com.payment.infrastructure.crosscutting.ioc\Payment.Infrastructure.Crosscutting.Ioc.csproj" />
+  </ItemGroup>
+
+</Project>

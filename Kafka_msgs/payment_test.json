@@ -1,0 +1,19 @@
+{
+	"EventID": "4f3ba8bb-0d75-46e2-927e-468f91695a8c",
+	"ShopperID": "d9c2dbd6-7e6a-194d-b976-a80336efeccc",
+	"CreditCard": {
+		"CreditCardID": "00000000-0000-0000-0000-000000000000",
+		"Number": "CfDJ8AE_Yg6_hutJvRB5Xo3FhGhlALmk7XaFXfh_0S2XeEgHs24pHISpsR3udJJwdRlA2iYAhwot15DiV3diT6PWXj-7bUD9OFWJMAll-Gg0CbEPn3BjcFEJFz-PEFK_STk5OkSHlMAKx8uDb8bwNCl8R70",
+		"Owner": "CfDJ8AE_Yg6_hutJvRB5Xo3FhGgPCK-Wi8qylD7-YKTjYG7CF4GyF7rr9O9tWSdk0snJ54KHmUXP64QDCY3GMWnKlxrpeJqjk60BNsZmzBrrZJOVQFcW3l-dIo25xWWC22KeJJGYiB1_W9aduDjQ2kPSIEI",
+		"ExpireDate": "CfDJ8AE_Yg6_hutJvRB5Xo3FhGg1tNRnAHKE8PtrDPCk9kzt72alqgX4E4LD2wB0HbcTDm3P9GvFFnlDqUQttG8DMoVbUyvWQOV6E9NYjXhKxNY3qMmAocPiCTZyshhC-AijXgoCiIOV5RFmeo9LD5COz9s",
+		"CreditCardType": "CfDJ8AE_Yg6_hutJvRB5Xo3FhGgg45YcPg3jSL9PCrBMP4fQmIdmTMkV00Nz2coEX6cXRYSyFGNt0Ii5BXfXaMmo-H3Ca49o-saIThkKR3pvz991rn1k8mklL1WNSp8OA0OpUw",
+		"CVV": "CfDJ8AE_Yg6_hutJvRB5Xo3FhGjgAr2uiAn4vAgUi8nn2JABVvyuLVNmIoWuIfILgMgAGvRQ1lJXda9HjeXFWI9o6rs6xQ71XQ19-3LtvBMHFL44RqrljNBUUiA34w5DrkzRpQ"
+	},
+	"Amount": {
+		"Currency": {
+			"Symbol": "€",
+			"Name": "EUR"
+		},
+		"Value": 290.0
+	}
+}

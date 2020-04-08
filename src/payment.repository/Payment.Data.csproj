@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.10.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\checkout.com.payment.domain.commands\Payment.Domain.Commands.csproj" />
+    <ProjectReference Include="..\checkout.com.payment.domain.query.model\Payment.Domain.Query.csproj" />
+    <ProjectReference Include="..\checkout.com.payment.domain\Payment.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

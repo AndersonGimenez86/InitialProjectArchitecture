@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="NovaPasta\**" />
+    <EmbeddedResource Remove="NovaPasta\**" />
+    <None Remove="NovaPasta\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ether.Outcomes" Version="2.9.5" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\checkout.com.payment.domain.commands\Payment.Domain.Commands.csproj" />
+    <ProjectReference Include="..\checkout.com.payment.domain\Payment.Domain.csproj" />
+    <ProjectReference Include="..\checkout.com.payment.infrastructure.crosscutting\checkout.com.payment.infrastructure.crosscutting.csproj" />
+    <ProjectReference Include="..\checkout.com.payment.repository\checkout.com.payment.repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Collections">
+      <HintPath>..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.2.0\ref\netcoreapp2.2\System.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.2.0\ref\netcoreapp2.2\System.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

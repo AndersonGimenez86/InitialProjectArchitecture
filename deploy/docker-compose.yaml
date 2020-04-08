@@ -1,0 +1,82 @@
+version: "3.1"
+
+services:
+  # account:
+ #   image: "checkout-account"
+ #   build:
+ #     context:
+ #     dockerfile: ../src/checkout.com.payment.account/Dockerfile
+ #   ports:
+ #     - "5050:5050"
+ #     - "5051:5051"
+ #   restart: always
+ #   networks:
+ #     - checkout-network      
+ 
+  paymentapi:
+    image: "checkout-gateway"
+    build:
+      context: .
+      dockerfile: ../src/checkout.com.payment.gateway/Dockerfile
+    depends_on:
+      - mongo
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    restart: always
+    networks:
+      - checkout-network     
+
+  bankapi:
+    image: "checkout-bank"
+    build:
+      context: .
+      dockerfile: ../src/checkout.com.payment.bank/Dockerfile 
+    ports:
+      - "5500:5500"
+      - "5501:5501"
+    restart: always
+    networks:
+      - checkout-network  
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=checkout_payment
+      - MONGO_INITDB_ROOT_USERNAME=checkout
+      - MONGO_INITDB_ROOT_PASSWORD=checkout    
+    ports:
+      - "27017-27019:27017-27019"
+    restart: always
+    networks:
+      - checkout-network
+      
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181"
+    hostname: zookeeper
+    networks:
+      - checkout-network
+      
+  kafka:
+    image: wurstmeister/kafka
+    command: [start-kafka.sh]
+    ports:
+      - "9092"
+    hostname: kafka
+    environment:
+      KAFKA_CREATE_TOPICS: "payment.bank.acquiring:1:1" # topic:partition:replicas
+      KAFKA_ADVERTISED_HOST_NAME: kafka # docker-machine ip
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_PORT: 9092
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - "zookeeper"
+    networks:
+      - checkout-network
+
+networks:
+  checkout-network:
+    driver: bridge
+
