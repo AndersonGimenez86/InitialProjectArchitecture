@@ -7,9 +7,9 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using AG.PaymentApp.Domain.ValueObject;
 
-    public class PaymentProcessingDTO
+    public class PaymentProcessingViewModel
     {
-        public PaymentProcessingDTO()
+        public PaymentProcessingViewModel()
         {
             Messages = new Collection<string>();
         }

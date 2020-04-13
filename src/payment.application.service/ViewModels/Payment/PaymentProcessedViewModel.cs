@@ -2,9 +2,9 @@
 {
     using AG.PaymentApp.Domain.Entity.Payments;
 
-    public class PaymentProcessedDTO
+    public class PaymentProcessedViewModel
     {
-        public PaymentProcessedDTO()
+        public PaymentProcessedViewModel()
         {
         }
         public string OrderID { get; set; } = string.Empty;

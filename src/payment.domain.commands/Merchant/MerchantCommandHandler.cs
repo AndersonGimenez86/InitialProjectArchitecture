@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using AutoMapper;
-    using AG.PaymentApp.Domain.commands.Interface;
+    using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Entity.Merchants;
     using AG.PaymentApp.Domain.events;
     using AG.PaymentApp.repository.commands.Interface;

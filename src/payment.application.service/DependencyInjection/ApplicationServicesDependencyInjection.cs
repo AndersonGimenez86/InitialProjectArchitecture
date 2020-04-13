@@ -42,9 +42,9 @@
                     .AddTransient<IMerchantApplicationService, MerchantApplicationService>()
                     .AddTransient<IShopperApplicationService, ShopperApplicationService>()
                     .AddTransient<IEventCommandHandler<CreatePaymentEvent, Payment>, ProcessEventBeforePaymentCommand>()
-                    .AddSingleton<IAdaptEntityToDTO<Payment, PaymentDTO>, AdaptEntityToDTO<Payment, PaymentDTO>>()
-                    .AddSingleton<IAdaptEntityToDTO<Merchant, MerchantDTO>, AdaptEntityToDTO<Merchant, MerchantDTO>>()
-                    .AddSingleton<IAdaptEntityToDTO<Shopper, ShopperDTO>, AdaptEntityToDTO<Shopper, ShopperDTO>>()
+                    .AddSingleton<IAdaptEntityToViewModel<Payment, PaymentViewModel>, AdaptEntityToViewModel<Payment, PaymentViewModel>>()
+                    .AddSingleton<IAdaptEntityToViewModel<Merchant, MerchantViewModel>, AdaptEntityToViewModel<Merchant, MerchantViewModel>>()
+                    .AddSingleton<IAdaptEntityToViewModel<Shopper, ShopperViewModel>, AdaptEntityToViewModel<Shopper, ShopperViewModel>>()
                     .AddSingleton<IMessageSerializer<CreatePaymentEvent>, JsonMessageSerializer<CreatePaymentEvent>>()
                     .AddSingleton<IMessageSerializer<CreateTransactionEvent>, JsonMessageSerializer<CreateTransactionEvent>>();
 

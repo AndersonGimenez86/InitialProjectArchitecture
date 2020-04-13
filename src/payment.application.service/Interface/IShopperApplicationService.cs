@@ -8,9 +8,9 @@ namespace AG.PaymentApp.application.services.Interface
 {
     public interface IShopperApplicationService
     {
-        Task CreateAsync(ShopperDTO shopperDTO);
-        Task<ShopperDTO> GetAsync(Guid shopperID);
-        Task<IEnumerable<ShopperDTO>> GetShoppersByGender(Gender gender);
-        Task<IEnumerable<ShopperDTO>> GetAllAsync();
+        Task CreateAsync(ShopperViewModel shopperDTO);
+        Task<ShopperViewModel> GetAsync(Guid shopperID);
+        Task<IEnumerable<ShopperViewModel>> GetShoppersByGender(Gender gender);
+        Task<IEnumerable<ShopperViewModel>> GetAllAsync();
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.Domain.commands.Interface
+﻿namespace AG.PaymentApp.Domain.Commands.Interface
 {
     using AG.PaymentApp.Domain.Entity.Merchants;
 

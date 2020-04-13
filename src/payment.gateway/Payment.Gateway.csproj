@@ -24,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\checkout.com.payment.application.service\Payment.Application.Services.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.infrastructure.crosscutting.ioc\Payment.Infrastructure.Crosscutting.Ioc.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.infrastructure.crosscutting\Payment.Infrastructure.Crosscutting.csproj" />
+    <ProjectReference Include="..\payment.application.service\Payment.Application.Services.csproj" />
+    <ProjectReference Include="..\payment.infrastructure.crosscutting.ioc\Payment.Infrastructure.Crosscutting.Ioc.csproj" />
+    <ProjectReference Include="..\payment.infrastructure.crosscutting\Payment.Infrastructure.Crosscutting.csproj" />
   </ItemGroup>
 
 </Project>

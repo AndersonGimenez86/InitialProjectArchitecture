@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using AG.PaymentApp.application.messaging.Events;
-    using AG.PaymentApp.Domain.commands.Interface;
+    using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Enum;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Payments;

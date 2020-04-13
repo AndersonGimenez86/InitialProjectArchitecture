@@ -7,9 +7,9 @@
 
     public interface IPaymentApplicationService
     {
-        Task<PaymentProcessingResponseDTO> CreateAsync(PaymentProcessingDTO paymentProcessingDTO);
-        Task<PaymentDTO> GetAsync(Guid paymentID);
-        Task<IEnumerable<PaymentDTO>> GetAllAsync();
-        Task<PaymentDTO> GetLastPaymentReceivedAsync(Guid shopperID);
+        Task<PaymentProcessingResponseViewModel> CreateAsync(PaymentProcessingViewModel paymentProcessingDTO);
+        Task<PaymentViewModel> GetAsync(Guid paymentID);
+        Task<IEnumerable<PaymentViewModel>> GetAllAsync();
+        Task<PaymentViewModel> GetLastPaymentReceivedAsync(Guid shopperID);
     }
 }

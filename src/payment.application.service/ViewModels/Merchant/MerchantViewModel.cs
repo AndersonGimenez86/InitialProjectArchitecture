@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using AG.PaymentApp.Domain.ValueObject;
 
-    public class MerchantDTO
+    public class MerchantViewModel
     {
         public Guid MerchantID { get; set; }
         [Required]

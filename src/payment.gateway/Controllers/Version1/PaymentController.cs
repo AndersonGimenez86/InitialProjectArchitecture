@@ -33,18 +33,18 @@
         /// </summary>
         /// <param name="paymentProcessingDTO">The object to create the payment from.</param>        
         [HttpPost]
-        [ProducesResponseType(typeof(PaymentResponseDTO), 200)]
+        [ProducesResponseType(typeof(PaymentResponseViewModel), 200)]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         [Route("Post")]
-        public async Task<IActionResult> Post([FromBody]PaymentProcessingDTO paymentProcessingDTO)
+        public async Task<IActionResult> Post([FromBody]PaymentProcessingViewModel paymentProcessingDTO)
         {
             try
             {
                 await this.paymentApplicationService.CreateAsync(paymentProcessingDTO);
 
-                return Ok(new PaymentResponseDTO());
+                return Ok(new PaymentResponseViewModel());
             }
             catch (Exception ex)
             {

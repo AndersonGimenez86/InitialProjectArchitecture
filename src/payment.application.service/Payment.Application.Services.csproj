@@ -10,10 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\checkout.com.payment.application.messaging\Payment.Application.Messaging.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.domain.query.model\Payment.Domain.Query.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.domain\Payment.Domain.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.repository\Payment.Data.csproj" />
+    <ProjectReference Include="..\payment.application.messaging\Payment.Application.Messaging.csproj" />
+    <ProjectReference Include="..\payment.domain.query.model\Payment.Domain.Query.csproj" />
+    <ProjectReference Include="..\payment.domain\Payment.Domain.csproj" />
+    <ProjectReference Include="..\payment.repository\Payment.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,9 +1,9 @@
-﻿namespace AG.PaymentApp.Domain.commands.Payments
+﻿namespace AG.PaymentApp.Domain.Commands.Payments
 {
     using System;
     using System.Threading.Tasks;
     using AutoMapper;
-    using AG.PaymentApp.Domain.commands.Interface;
+    using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.events;
     using AG.PaymentApp.repository.commands.Interface;
@@ -27,7 +27,7 @@
             {
                 var paymentMongo = this.typeMapper.Map<PaymentMongo>(payment);
 
-                var paymentDataCommand = new PaymentDataCommand(paymentMongo);
+                var paymentDataCommand = new PaymentCommand(paymentMongo);
 
                 //save payment event into mongoDB
                 await this.eventRepository.SaveAsync(paymentDataCommand);
@@ -44,7 +44,7 @@
             {
                 var paymentMongo = this.typeMapper.Map<PaymentMongo>(payment);
 
-                var paymentDataCommand = new PaymentDataCommand(paymentMongo);
+                var paymentDataCommand = new PaymentCommand(paymentMongo);
 
                 //update payment status on mongoDB
                 await this.eventRepository.UpdateAsync(paymentDataCommand);

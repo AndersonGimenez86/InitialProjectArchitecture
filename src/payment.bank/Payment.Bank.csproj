@@ -15,9 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\checkout.com.payment.application.messaging\Payment.Application.Messaging.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.crosscutting.kafka\Payment.Infrastructure.Crosscutting.Kafka.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.infrastructure.crosscutting.ioc\Payment.Infrastructure.Crosscutting.Ioc.csproj" />
+    <ProjectReference Include="..\payment.application.messaging\Payment.Application.Messaging.csproj" />
+    <ProjectReference Include="..\payment.crosscutting.kafka\Payment.Infrastructure.Crosscutting.Kafka.csproj" />
+    <ProjectReference Include="..\payment.infrastructure.crosscutting.ioc\Payment.Infrastructure.Crosscutting.Ioc.csproj" />
   </ItemGroup>
 
 </Project>

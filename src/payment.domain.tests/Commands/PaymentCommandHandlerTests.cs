@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using AutoMapper;
     using AG.PaymentApp.Domain.commands.Mapper;
-    using AG.PaymentApp.Domain.commands.Payments;
+    using AG.PaymentApp.Domain.Commands.Payments;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.Enum;
     using AG.PaymentApp.Domain.events;
@@ -52,7 +52,7 @@
                 MerchantID = merchantID
             };
 
-            var paymentDataCommand = new PaymentDataCommand(paymentMongo);
+            var paymentDataCommand = new PaymentCommand(paymentMongo);
 
             var mockIPaymentEventRepository = new Mock<IPaymentEventRepository>();
             mockIPaymentEventRepository.Setup(r => r.SaveAsync(paymentDataCommand));

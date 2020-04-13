@@ -7,9 +7,9 @@
 
     public interface IMerchantApplicationService
     {
-        Task CreateAsync(MerchantDTO merchantDTO);
-        Task<MerchantDTO> GetAsync(Guid merchantID);
-        Task<IEnumerable<MerchantDTO>> GetAllAsync();
-        Task<IEnumerable<MerchantDTO>> GetMerchantsByCountry(string country);
+        Task CreateAsync(MerchantViewModel merchantDTO);
+        Task<MerchantViewModel> GetAsync(Guid merchantID);
+        Task<IEnumerable<MerchantViewModel>> GetAllAsync();
+        Task<IEnumerable<MerchantViewModel>> GetMerchantsByCountry(string country);
     }
 }

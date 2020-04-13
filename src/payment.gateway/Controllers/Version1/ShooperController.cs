@@ -37,7 +37,7 @@
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> Post([FromBody]ShopperDTO shopperDTO)
+        public async Task<IActionResult> Post([FromBody]ShopperViewModel shopperDTO)
         {
             try
             {

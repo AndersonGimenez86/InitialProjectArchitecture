@@ -9,7 +9,8 @@
     using AG.PaymentApp.application.services.Events.Interface;
     using AG.PaymentApp.application.services.Interface;
     using AG.PaymentApp.crosscutting.kafka.Messaging.Producers.Interface;
-    using AG.PaymentApp.Domain.commands.Interface;
+    using AG.PaymentApp.Domain.Commands.Interface;
+    using AG.PaymentApp.Domain.Commands.Payments;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.Enum;
     using AG.PaymentApp.Domain.Query.Interface;
@@ -25,7 +26,7 @@
         private readonly ITopicProducer<CreatePaymentEvent> topicProducer;
         private readonly IPaymentService paymentDomainService;
         private readonly IMapper typeMapper;
-        private readonly IAdaptEntityToDTO<Payment, PaymentDTO> paymentAdapter;
+        private readonly IAdaptEntityToViewModel<Payment, PaymentViewModel> paymentAdapter;
 
         public PaymentApplicationService(
             IFindPaymentQueryHandler findPaymentQueryHandler,
@@ -34,7 +35,7 @@
             ITopicProducer<CreatePaymentEvent> topicProducer,
             IPaymentService paymentDomainService,
             IMapper typeMapper,
-            IAdaptEntityToDTO<Payment, PaymentDTO> paymentAdapter
+            IAdaptEntityToViewModel<Payment, PaymentViewModel> paymentAdapter
             )
         {
             this.paymentCommand = paymentCommand;
@@ -46,7 +47,7 @@
             this.paymentAdapter = paymentAdapter;
         }
 
-        public async Task<PaymentProcessingResponseDTO> CreateAsync(PaymentProcessingDTO paymentProcessingDTO)
+        public async Task<PaymentProcessingResponseViewModel> CreateAsync(PaymentProcessingViewModel paymentProcessingDTO)
         {
             var payment = GetPaymentFilled(paymentProcessingDTO);
 
@@ -70,7 +71,7 @@
                 await this.paymentCommand.UpdateAsync(payment);
             }
 
-            var paymentProcessingResponseDTO = new PaymentProcessingResponseDTO
+            var paymentProcessingResponseDTO = new PaymentProcessingResponseViewModel
             {
                 PaymentID = payment.ID,
                 PaymentStatus = payment.Status
@@ -79,7 +80,7 @@
             return paymentProcessingResponseDTO;
         }
 
-        public async Task<PaymentDTO> GetAsync(Guid paymentID)
+        public async Task<PaymentViewModel> GetAsync(Guid paymentID)
         {
             var findMerchantQuery = new FindPaymentQuery(paymentID);
 
@@ -87,7 +88,7 @@
 
             return paymentAdapter.Adapt(payment, typeMapper);
         }
-        public async Task<IEnumerable<PaymentDTO>> GetAllAsync()
+        public async Task<IEnumerable<PaymentViewModel>> GetAllAsync()
         {
             var findPaymentQuery = new FindPaymentQuery();
 
@@ -96,7 +97,7 @@
             return paymentAdapter.Adapt(payments, typeMapper);
         }
 
-        public async Task<PaymentDTO> GetLastPaymentReceivedAsync(Guid shopperID)
+        public async Task<PaymentViewModel> GetLastPaymentReceivedAsync(Guid shopperID)
         {
             var findPaymentQuery = new FindPaymentQuery(Guid.Empty, Guid.Empty, shopperID);
 
@@ -105,7 +106,7 @@
             return paymentAdapter.Adapt(payment, typeMapper);
         }
 
-        private Payment GetPaymentFilled(PaymentProcessingDTO paymentProcessingDTO)
+        private PaymentCommand GetPaymentFilled(PaymentProcessingViewModel paymentProcessingDTO)
         {
             var payment = this.typeMapper.Map<Payment>(paymentProcessingDTO);
             payment.ID = payment.ID != Guid.Empty ? payment.ID : Guid.NewGuid();

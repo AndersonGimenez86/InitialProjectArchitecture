@@ -4,7 +4,7 @@
     using AutoMapper;
     using AG.PaymentApp.application.services.Adapter.Interface;
     using AG.PaymentApp.Domain.Entity.Bases;
-    public class AdaptEntityToDTO<Entity, DTO> : IAdaptEntityToDTO<Entity, DTO> where Entity : BaseEvent
+    public class AdaptEntityToViewModel<Entity, DTO> : IAdaptEntityToViewModel<Entity, DTO> where Entity : BaseEvent
     {
         public DTO Adapt(Entity entity, IMapper typeMapper)
         {

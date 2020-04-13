@@ -36,7 +36,7 @@
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> Post([FromBody]MerchantDTO merchantDTO)
+        public async Task<IActionResult> Post([FromBody]MerchantViewModel merchantDTO)
         {
             try
             {

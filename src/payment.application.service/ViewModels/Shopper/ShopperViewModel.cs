@@ -7,7 +7,7 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public class ShopperDTO
+    public class ShopperViewModel
     {
         public Guid ShopperID { get; set; }
 

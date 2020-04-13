@@ -8,7 +8,7 @@ namespace AG.PaymentApp.application.services.Mapper
     {
         public PaymentProfile()
         {
-            this.CreateMap<PaymentDTO, Payment>()
+            this.CreateMap<PaymentViewModel, Payment>()
                 .ForMember(p => p.ID, opt => opt.MapFrom(mm => mm.PaymentID))
                 .ForMember(p => p.CreditCard, opt => opt.MapFrom(mm => mm.CreditCard))
                 .ForMember(p => p.Amount, opt => opt.MapFrom(mm => mm.Amount))

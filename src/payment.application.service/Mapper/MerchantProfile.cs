@@ -8,7 +8,7 @@ namespace AG.PaymentApp.application.services.Mapper
     {
         public MerchantProfile()
         {
-            this.CreateMap<MerchantDTO, Merchant>()
+            this.CreateMap<MerchantViewModel, Merchant>()
                 .ForMember(m => m.Country, opt => opt.MapFrom(mm => mm.Country))
                 .ForMember(m => m.Currency, opt => opt.MapFrom(mm => mm.Currency))
                 .ForMember(m => m.ID, opt => opt.MapFrom(mm => mm.MerchantID))

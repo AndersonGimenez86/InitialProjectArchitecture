@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using AG.PaymentApp.Domain.commands.Payments;
+    using AG.PaymentApp.Domain.Commands.Payments;
     using AG.PaymentApp.Domain.events;
     using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
@@ -23,13 +23,13 @@
             this.eventPaymentRepositoryStartup = eventPaymentRepositoryStartup;
             this.paymentEvents = this.GetPaymentCollection();
         }
-        public async Task SaveAsync(PaymentDataCommand paymentDataCommand)
+        public async Task SaveAsync(PaymentCommand paymentDataCommand)
         {
             paymentDataCommand.PaymentMongo.DateCreated = DateTime.Now;
             await this.paymentEvents.InsertOneAsync(paymentDataCommand.PaymentMongo).ConfigureAwait(false);
         }
 
-        public async Task UpdateAsync(PaymentDataCommand paymentDataCommand)
+        public async Task UpdateAsync(PaymentCommand paymentDataCommand)
         {
             var options = new FindOneAndReplaceOptions<PaymentMongo>
             {

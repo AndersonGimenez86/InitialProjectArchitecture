@@ -13,7 +13,7 @@ namespace AG.PaymentApp.application.services.tests.Validations
         {
             //ARRANGE
 
-            var paymentProcessingDTO = new PaymentProcessingDTO
+            var paymentProcessingDTO = new PaymentProcessingViewModel
             {
                 Amount = new Money(null, 150)
             };
@@ -37,7 +37,7 @@ namespace AG.PaymentApp.application.services.tests.Validations
         {
             //ARRANGE
 
-            var paymentProcessingDTO = new PaymentProcessingDTO
+            var paymentProcessingDTO = new PaymentProcessingViewModel
             {
                 Amount = new Money(null, 0)
             };

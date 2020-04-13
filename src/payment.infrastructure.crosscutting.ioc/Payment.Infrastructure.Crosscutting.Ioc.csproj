@@ -12,11 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\checkout.com.payment.application.messaging\Payment.Application.Messaging.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.application.service\Payment.Application.Services.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.crosscutting.kafka\Payment.Infrastructure.Crosscutting.Kafka.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.infrastructure.crosscutting.logging\Payment.Infrastructure.Crosscutting.Logging.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.infrastructure.crosscutting\Payment.Infrastructure.Crosscutting.csproj" />
+    <ProjectReference Include="..\payment.application.messaging\Payment.Application.Messaging.csproj" />
+    <ProjectReference Include="..\payment.application.service\Payment.Application.Services.csproj" />
+    <ProjectReference Include="..\payment.crosscutting.kafka\Payment.Infrastructure.Crosscutting.Kafka.csproj" />
+    <ProjectReference Include="..\payment.infrastructure.crosscutting.logging\Payment.Infrastructure.Crosscutting.Logging.csproj" />
+    <ProjectReference Include="..\payment.infrastructure.crosscutting\Payment.Infrastructure.Crosscutting.csproj" />
   </ItemGroup>
 
 </Project>

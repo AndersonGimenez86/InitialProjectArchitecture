@@ -4,7 +4,7 @@
     using AG.PaymentApp.Domain.Enum;
     using AG.PaymentApp.Domain.ValueObject;
 
-    public class PaymentDTO
+    public class PaymentViewModel
     {
         public Guid PaymentID { get; set; }
         public Money Amount { get; set; }

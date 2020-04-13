@@ -1,11 +1,11 @@
 ﻿namespace AG.PaymentApp.repository.commands.Interface
 {
     using System.Threading.Tasks;
-    using AG.PaymentApp.Domain.commands.Payments;
+    using AG.PaymentApp.Domain.Commands.Payments;
 
-    public interface IPaymentEventRepository : IEventRepository<PaymentDataCommand>
+    public interface IPaymentEventRepository : IEventRepository<PaymentCommand>
     {
-        Task SaveAsync(PaymentDataCommand eventData);
-        Task UpdateAsync(PaymentDataCommand eventData);
+        Task SaveAsync(PaymentCommand eventData);
+        Task UpdateAsync(PaymentCommand eventData);
     }
 }
