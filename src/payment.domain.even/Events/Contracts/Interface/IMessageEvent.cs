@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.Domain.events.Contracts.Interface
+﻿namespace AG.PaymentApp.Domain.Events.Contracts.Interface
 {
     public interface IMessageEvent
     {

@@ -10,8 +10,6 @@
     using AG.PaymentApp.Domain.Query.Merchants;
     using AG.PaymentApp.Domain.Query.Payments;
     using AG.PaymentApp.Domain.Query.Shoppers;
-    using AG.PaymentApp.Domain.Services.Validations.Interface;
-    using AG.PaymentApp.Domain.Services.Validations.PreConditions.Merchant;
     using Microsoft.Extensions.DependencyInjection;
     public static class DomainQueryDependencyInjection
     {
@@ -24,9 +22,7 @@
                     .AddSingleton<IFindShopperQueryHandler, FindShopperQueryHandler>()
                     .AddSingleton<IAdaptMongoEntityToEntity<PaymentMongo, Payment>, AdaptMongoEntityToEntity<PaymentMongo, Payment>>()
                     .AddSingleton<IAdaptMongoEntityToEntity<MerchantMongo, Merchant>, AdaptMongoEntityToEntity<MerchantMongo, Merchant>>()
-                    .AddSingleton<IAdaptMongoEntityToEntity<ShopperMongo, Shopper>, AdaptMongoEntityToEntity<ShopperMongo, Shopper>>()
-                    .AddSingleton<IPreCondition<Merchant>, MerchantUniqueIDPreCondition>()
-                    .AddSingleton<IPreCondition<Merchant>, MerchantUniqueNamePreCondition>();
+                    .AddSingleton<IAdaptMongoEntityToEntity<ShopperMongo, Shopper>, AdaptMongoEntityToEntity<ShopperMongo, Shopper>>();
         }
     }
 }

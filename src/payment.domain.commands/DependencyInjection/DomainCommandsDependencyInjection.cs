@@ -1,10 +1,9 @@
 ﻿namespace AG.PaymentApp.Domain.commands.DependencyInjection
 {
     using System.Diagnostics.CodeAnalysis;
-    using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.commands.Merchants;
-    using AG.PaymentApp.Domain.Commands.Payments;
     using AG.PaymentApp.Domain.commands.Shoopers;
+    using AG.PaymentApp.Domain.Commands.Payments;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class DomainCommandsDependencyInjection
@@ -16,6 +15,7 @@
                     .AddSingleton<IPaymentCommandHandler, PaymentCommandHandler>()
                     .AddSingleton<IShopperCommandHandler, ShopperCommandHandler>()
                     .AddSingleton<IMerchantCommandHandler, MerchantCommandHandler>();
+     
         }
     }
 }

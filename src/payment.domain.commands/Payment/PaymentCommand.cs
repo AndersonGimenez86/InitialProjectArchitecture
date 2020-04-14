@@ -1,27 +1,19 @@
 ﻿namespace AG.PaymentApp.Domain.Commands.Payments
 {
-    using AG.PaymentApp.Domain.events;
+    using System;
+    using AG.PaymentApp.Domain.Enum;
+    using AG.PaymentApp.Domain.ValueObject;
+    using Payment.Domain.Core.Commands;
 
-    public class PaymentCommand
+    public abstract class PaymentCommand : Command
     {
-        public PaymentCommand(PaymentMongo payment)
-        {
-            this.PaymentMongo = payment;
-        }
+        public Guid ShopperID { get; set; }
 
-        public override Guid PaymentID { get; set; }
-
-        public override Guid ShopperID { get; set; }
-
-        public override Guid MerchantID { get; set; }
+        public Guid MerchantID { get; set; }
 
         public Guid TransactionID { get; set; }
 
         public Money Amount { get; set; }
-
-        public CreditCardProtected CreditCard { get; set; }
-
-        public string Reference { get; set; }
 
         public PaymentStatus Status { get; set; }
     }

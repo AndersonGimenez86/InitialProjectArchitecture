@@ -7,12 +7,18 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
+
 
 namespace Payment.Domain.Core.Commands
 {
-    public abstract class Command
+    using System;
+    using AG.PaymentApp.Domain.Core.Events;
+    using FluentValidation.Results;
+
+    public abstract class Command : Message
     {
+        public Guid Id { get; set; }
+
         public DateTime Timestamp { get; private set; }
         public ValidationResult ValidationResult { get; set; }
 
@@ -21,6 +27,6 @@ namespace Payment.Domain.Core.Commands
             Timestamp = DateTime.Now;
         }
 
-        public abstract bool IsValid();
+        public abstract void IsValid();
     }
 }

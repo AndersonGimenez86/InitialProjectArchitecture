@@ -3,14 +3,13 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
-    using AutoMapper;
     using AG.PaymentApp.Domain.commands.Mapper;
     using AG.PaymentApp.Domain.Commands.Payments;
-    using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.Enum;
     using AG.PaymentApp.Domain.events;
     using AG.PaymentApp.Domain.ValueObject;
     using AG.PaymentApp.repository.commands.Interface;
+    using AutoMapper;
     using FluentAssertions;
     using Moq;
     using Xunit;
@@ -40,22 +39,10 @@
                 MerchantID = merchantID
             };
 
-            var payment = new Payment
-            {
-                Amount = default(Money),
-                CreditCard = default(CreditCardProtected),
-                ID = paymentID,
-                Reference = null,
-                ShopperID = shopperID,
-                Status = PaymentStatus.Approved,
-                DateCreated = DateTime.Now,
-                MerchantID = merchantID
-            };
-
-            var paymentDataCommand = new PaymentCommand(paymentMongo);
+            var newPaymentCommand = new NewPaymentCommand(paymentID, shopperID, merchantID, default(CreditCard), default(Money), null);
 
             var mockIPaymentEventRepository = new Mock<IPaymentEventRepository>();
-            mockIPaymentEventRepository.Setup(r => r.SaveAsync(paymentDataCommand));
+            mockIPaymentEventRepository.Setup(r => r.SaveAsync(newPaymentCommand));
 
             var mapperConfiguration = new MapperConfiguration(c => c.AddProfile(new PaymentProfile()));
             var mapper = mapperConfiguration.CreateMapper();
@@ -63,7 +50,7 @@
             var paymentCommandHandler = new PaymentCommandHandler(mockIPaymentEventRepository.Object, mapper);
 
             //ACT
-            var result = paymentCommandHandler.ExecuteAsync(payment);
+            var result = paymentCommandHandler.Handle(newPaymentCommand);
 
             //ASSERT
             result.Exception.Should().BeNull();
