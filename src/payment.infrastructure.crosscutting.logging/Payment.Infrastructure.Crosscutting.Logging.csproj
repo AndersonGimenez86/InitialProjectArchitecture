@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\checkout.com.payment.infrastructure.crosscutting\Payment.Infrastructure.Crosscutting.csproj" />
+    <ProjectReference Include="..\payment.infrastructure.crosscutting\Payment.Infrastructure.Crosscutting.csproj" />
   </ItemGroup>
 
 </Project>

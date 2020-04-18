@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\checkout.com.payment.crosscutting.kafka\Payment.Infrastructure.Crosscutting.Kafka.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.domain.even\Payment.Domain.Core.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.domain\Payment.Domain.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.infrastructure.crosscutting\Payment.Infrastructure.Crosscutting.csproj" />
+    <ProjectReference Include="..\payment.crosscutting.kafka\Payment.Infrastructure.Crosscutting.Kafka.csproj" />
+    <ProjectReference Include="..\payment.domain.even\Payment.Domain.Core.csproj" />
+    <ProjectReference Include="..\payment.domain\Payment.Domain.csproj" />
+    <ProjectReference Include="..\payment.infrastructure.crosscutting\Payment.Infrastructure.Crosscutting.csproj" />
   </ItemGroup>
 
 </Project>

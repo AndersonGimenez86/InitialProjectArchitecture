@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\checkout.com.payment.application.service\Payment.Application.Services.csproj" />
+    <ProjectReference Include="..\payment.application.service\Payment.Application.Services.csproj" />
   </ItemGroup>
 
 </Project>

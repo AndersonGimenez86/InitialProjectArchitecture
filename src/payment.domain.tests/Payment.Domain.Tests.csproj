@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\checkout.com.payment.domain.commands\Payment.Domain.Commands.csproj" />
-    <ProjectReference Include="..\checkout.com.payment.domain.query.model\Payment.Domain.Query.csproj" />
+    <ProjectReference Include="..\payment.domain.commands\Payment.Domain.Commands.csproj" />
+    <ProjectReference Include="..\payment.domain.query.model\Payment.Domain.Query.csproj" />
   </ItemGroup>
 
 </Project>
