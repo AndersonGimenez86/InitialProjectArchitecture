@@ -1,15 +1,13 @@
 ﻿namespace AG.PaymentApp.application.services.DependencyInjection
 {
     using System.Diagnostics.CodeAnalysis;
-    using AG.PaymentApp.application.messaging.Events;
     using AG.PaymentApp.application.services.Adapter;
     using AG.PaymentApp.application.services.Adapter.Interface;
     using AG.PaymentApp.application.services.DTO.Merchants;
     using AG.PaymentApp.application.services.DTO.Payments;
     using AG.PaymentApp.application.services.DTO.Shoppers;
-    using AG.PaymentApp.application.services.Events;
-    using AG.PaymentApp.application.services.Events.Interface;
     using AG.PaymentApp.application.services.Interface;
+    using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.Domain.Entity.Merchants;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.Entity.Shoppers;
@@ -41,7 +39,7 @@
                     .AddTransient<IPaymentApplicationService, PaymentApplicationService>()
                     .AddTransient<IMerchantApplicationService, MerchantApplicationService>()
                     .AddTransient<IShopperApplicationService, ShopperApplicationService>()
-                    .AddTransient<IEventCommandHandler<CreatePaymentEvent, Payment>, ProcessEventBeforePaymentCommand>()
+                    //.AddTransient<IEventCommandHandler<CreatePaymentEvent, Payment>, ProcessEventBeforePaymentCommand>()
                     .AddSingleton<IAdaptEntityToViewModel<Payment, PaymentViewModel>, AdaptEntityToViewModel<Payment, PaymentViewModel>>()
                     .AddSingleton<IAdaptEntityToViewModel<Merchant, MerchantViewModel>, AdaptEntityToViewModel<Merchant, MerchantViewModel>>()
                     .AddSingleton<IAdaptEntityToViewModel<Shopper, ShopperViewModel>, AdaptEntityToViewModel<Shopper, ShopperViewModel>>()

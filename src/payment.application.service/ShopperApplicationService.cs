@@ -36,7 +36,7 @@
         public async Task CreateAsync(ShopperViewModel shopperDTO)
         {
             var shopper = this.typeMapper.Map<Shopper>(shopperDTO);
-            shopper.ID = shopper.ID != Guid.Empty ? shopper.ID : Guid.NewGuid();
+            shopper.Id = shopper.Id != Guid.Empty ? shopper.Id : Guid.NewGuid();
             shopper.DateCreated = DateTime.Now;
 
             shopper.SetAddress(shopper.Address);

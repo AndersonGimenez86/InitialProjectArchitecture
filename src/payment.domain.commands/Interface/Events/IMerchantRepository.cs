@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.commands;
 
-    public interface IMerchantEventRepository : IEventRepository<MerchantDataCommand>
+    public interface IMerchantRepository : IRepository<MerchantDataCommand>
     {
         Task SaveAsync(MerchantDataCommand eventData);
     }

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="InMemoryBus.cs" company="Farfetch">
-//   Copyright (c) Farfetch. All rights reserved.
+// <copyright file="InMemoryBus.cs" company="AG Software">
+//   Copyright (c) AG. All rights reserved.
 // </copyright>
 // <summary>
 // InMemoryBus
@@ -17,15 +17,15 @@ namespace Payment.Infrastructure.Crosscutting.Bus
     using Payment.Domain.Core.Bus;
     using Payment.Domain.Core.Commands;
 
-    public sealed class InMemoryBus<T, C> : IMediatorHandler<T, C> where T : Event where C : Command
+    public sealed class InMemoryBus<E> : IMediatorHandler where E : Event
     {
         private readonly IMediator _mediator;
         private readonly IEventStore _eventStore;
-        private readonly ITopicProducer<T> topicProducer;
+        private readonly ITopicProducer<E> topicProducer;
 
         public InMemoryBus(IEventStore eventStore,
             IMediator mediator,
-            ITopicProducer<T> topicProducer
+            ITopicProducer<E> topicProducer
 
             )
         {
@@ -35,16 +35,16 @@ namespace Payment.Infrastructure.Crosscutting.Bus
 
         }
 
-        public Task SendCommand(C command)
+        public Task SendCommand<C>(C command) where C : Command
         {
             return _mediator.Send(command);
         }
 
-        public Task RaiseEvent(T @event)
+        public Task RaiseEvent<T>(T @event) where T : Event
         {
             if (!@event.MessageType.Equals("DomainNotification"))
             {
-                var deliveryMessageReport = PublishKafkaMessage(@event).Result;
+                var deliveryMessageReport = PublishKafkaMessage(@event as E).Result;
                 return _mediator.Publish(deliveryMessageReport);
 
             }
@@ -52,7 +52,7 @@ namespace Payment.Infrastructure.Crosscutting.Bus
             return _mediator.Publish(@event);
         }
 
-        private async Task<DeliveryMessageReport> PublishKafkaMessage(T @event)
+        private async Task<DeliveryMessageReport> PublishKafkaMessage(E @event)
         {
             //produce event for acquiring bank consumes                
             return await this.topicProducer.ProduceAsync(@event);

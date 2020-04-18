@@ -72,7 +72,7 @@
             var merchant = this.typeMapper.Map<Merchant>(merchantDTO);
             merchant.IsOnline = true;
             merchant.IsVisible = true;
-            merchant.ID = merchant.ID != Guid.Empty ? merchant.ID : Guid.NewGuid();
+            merchant.Id = merchant.Id != Guid.Empty ? merchant.Id : Guid.NewGuid();
             merchant.DateCreated = DateTime.Now;
 
             return merchant;

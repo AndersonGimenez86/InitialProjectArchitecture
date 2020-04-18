@@ -11,11 +11,11 @@
 
     public class ShopperCommandHandler : IShopperCommandHandler
     {
-        private readonly IShopperEventRepository eventRepository;
+        private readonly IShopperRepository eventRepository;
         private readonly IMapper typeMapper;
 
         public ShopperCommandHandler(
-            IShopperEventRepository eventRepository,
+            IShopperRepository eventRepository,
             IMapper typeMapper)
         {
             this.eventRepository = eventRepository;

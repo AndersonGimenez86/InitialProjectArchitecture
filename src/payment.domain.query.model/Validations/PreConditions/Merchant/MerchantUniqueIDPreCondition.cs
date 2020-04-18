@@ -17,7 +17,7 @@
 
         public IOutcome Accept(Merchant newEntity)
         {
-            var findMerchantQuery = new FindMerchantQuery(newEntity.ID);
+            var findMerchantQuery = new FindMerchantQuery(newEntity.Id);
 
             var result = this.findMerchantQueryHandler.GetAsync(findMerchantQuery).GetAwaiter();
 

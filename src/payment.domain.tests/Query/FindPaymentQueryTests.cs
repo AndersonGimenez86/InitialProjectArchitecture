@@ -76,7 +76,7 @@
             result.Result.DateCreated.Should().HaveDay(DateTime.Now.Day);
             result.Result.Reference.Should().BeEquivalentTo(expectedPayment.Reference);
             result.Result.Status.Should().BeEquivalentTo(expectedPayment.Status);
-            result.Result.ID.Should().Equals(expectedPayment.PaymentID);
+            result.Result.Id.Should().Equals(expectedPayment.PaymentID);
             result.Result.ShopperID.Should().Equals(expectedPayment.ShopperID);
             result.Result.MerchantID.Should().Equals(expectedPayment.MerchantID);
             result.Result.Amount.Should().NotBeNull();

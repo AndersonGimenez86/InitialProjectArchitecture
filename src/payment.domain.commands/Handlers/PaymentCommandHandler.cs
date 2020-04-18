@@ -1,45 +1,46 @@
 ﻿namespace AG.PaymentApp.Domain.Commands.Payments
 {
-    using System;
+    using System.Threading;
     using System.Threading.Tasks;
+    using AG.PaymentApp.Domain.Core.DataProtection;
+    using AG.PaymentApp.Domain.Core.Notifications;
+    using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.repository.commands.Interface;
     using AutoMapper;
+    using MediatR;
+    using Microsoft.AspNetCore.DataProtection;
     using Payment.Domain.Commands.Handlers;
+    using Payment.Domain.Core.Bus;
+    using Payment.Domain.Interface;
 
-    public class PaymentCommandHandler : CommandHandler
+    public class PaymentCommandHandler : CommandHandler,
+        IRequestHandler<NewPaymentCommand, bool>
+        //   IRequestHandler<UpdateCustomerCommand, bool>,
+        //IRequestHandler<RemoveCustomerCommand, bool>
     {
-        private readonly IPaymentEventRepository eventRepository;
+        private readonly IRepository<Payment> paymentEventRepository;
         private readonly IMapper typeMapper;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IMediatorHandler mediatorHandler;
+        private readonly IDataProtectionProvider dataProtectionProvider;
 
         public PaymentCommandHandler(
-            IPaymentEventRepository eventRepository,
-            IMapper typeMapper)
+        IRepository<Payment> paymentEventRepository,
+        IMapper typeMapper,
+        IUnitOfWork unitOfWork,
+        IMediatorHandler mediatorHandler,
+        IDataProtectionProvider dataProtectionProvider,
+        INotificationHandler<DomainNotification> notifications) : base(unitOfWork, mediatorHandler, notifications)
         {
-            this.eventRepository = eventRepository;
+            this.paymentEventRepository = paymentEventRepository;
             this.typeMapper = typeMapper;
+            this.unitOfWork = unitOfWork;
+            this.mediatorHandler = mediatorHandler;
+            this.dataProtectionProvider = dataProtectionProvider;
         }
 
-        IRequestHandler<RegisterNewCustomerCommand, bool>,
-        IRequestHandler<UpdateCustomerCommand, bool>,
-        IRequestHandler<RemoveCustomerCommand, bool>
-    {
-        private readonly ICustomerRepository _customerRepository;
-        private readonly IMediatorHandler Bus;
-
-        public CustomerCommandHandler(ICustomerRepository customerRepository,
-                                      IUnitOfWork uow,
-                                      IMediatorHandler bus,
-                                      INotificationHandler<DomainNotification> notifications) : base(uow, bus, notifications)
+        public Task<bool> Handle(NewPaymentCommand newPaymentCommand, CancellationToken cancellationToken)
         {
-            _customerRepository = customerRepository;
-            Bus = bus;
-        }
-
-        public Task<bool> Handle(RegisterNewCustomerCommand message, CancellationToken cancellationToken)
-        {
-            {
-                //save payment in mongoDB
-                //await this.paymentCommand.ExecuteAsync(payment);
 
                 //update payment status to processing
                 //if (kafkaResponse.Success)
@@ -47,77 +48,73 @@
                 //    payment.Status = PaymentStatus.Processing;
                 //    await this.paymentCommand.UpdateAsync(payment);
                 ////}
-                if (!message.IsValid())
+            if (!newPaymentCommand.IsValid())
             {
-                NotifyValidationErrors(message);
+                NotifyValidationErrors(newPaymentCommand);
                 return Task.FromResult(false);
             }
 
-            var customer = new Customer(Guid.NewGuid(), message.Name, message.Email, message.BirthDate);
+            var creditCardProtected = CreditCardDataProtection.ProtectSensitiveData(dataProtectionProvider, newPaymentCommand.CreditCard);
 
-            if (_customerRepository.GetByEmail(customer.Email) != null)
-            {
-                Bus.RaiseEvent(new DomainNotification(message.MessageType, "The customer e-mail has already been taken."));
-                return Task.FromResult(false);
-            }
+            var payment = new Payment(newPaymentCommand.Id, newPaymentCommand.ShopperID, newPaymentCommand.MerchantID, creditCardProtected, newPaymentCommand.Amount, newPaymentCommand.Status);
 
-            _customerRepository.Add(customer);
+            paymentEventRepository.Add(payment);
 
             if (Commit())
             {
-                Bus.RaiseEvent(new CustomerRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
+                mediatorHandler.RaiseEvent(new CustomerRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
             }
 
             return Task.FromResult(true);
         }
 
-        public Task<bool> Handle(UpdateCustomerCommand message, CancellationToken cancellationToken)
-        {
-            if (!message.IsValid())
-            {
-                NotifyValidationErrors(message);
-                return Task.FromResult(false);
-            }
+        //public Task<bool> Handle(UpdateCustomerCommand message, CancellationToken cancellationToken)
+        //{
+        //    if (!message.IsValid())
+        //    {
+        //        NotifyValidationErrors(message);
+        //        return Task.FromResult(false);
+        //    }
 
-            var customer = new Customer(message.Id, message.Name, message.Email, message.BirthDate);
-            var existingCustomer = _customerRepository.GetByEmail(customer.Email);
+        //    var customer = new Customer(message.Id, message.Name, message.Email, message.BirthDate);
+        //    var existingCustomer = _customerRepository.GetByEmail(customer.Email);
 
-            if (existingCustomer != null && existingCustomer.Id != customer.Id)
-            {
-                if (!existingCustomer.Equals(customer))
-                {
-                    Bus.RaiseEvent(new DomainNotification(message.MessageType, "The customer e-mail has already been taken."));
-                    return Task.FromResult(false);
-                }
-            }
+        //    if (existingCustomer != null && existingCustomer.Id != customer.Id)
+        //    {
+        //        if (!existingCustomer.Equals(customer))
+        //        {
+        //            Bus.RaiseEvent(new DomainNotification(message.MessageType, "The customer e-mail has already been taken."));
+        //            return Task.FromResult(false);
+        //        }
+        //    }
 
-            _customerRepository.Update(customer);
+        //    _customerRepository.Update(customer);
 
-            if (Commit())
-            {
-                Bus.RaiseEvent(new CustomerUpdatedEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
-            }
+        //    if (Commit())
+        //    {
+        //        Bus.RaiseEvent(new CustomerUpdatedEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
+        //    }
 
-            return Task.FromResult(true);
-        }
+        //    return Task.FromResult(true);
+        //}
 
-        public Task<bool> Handle(RemoveCustomerCommand message, CancellationToken cancellationToken)
-        {
-            if (!message.IsValid())
-            {
-                NotifyValidationErrors(message);
-                return Task.FromResult(false);
-            }
+        //public Task<bool> Handle(RemoveCustomerCommand message, CancellationToken cancellationToken)
+        //{
+        //    if (!message.IsValid())
+        //    {
+        //        NotifyValidationErrors(message);
+        //        return Task.FromResult(false);
+        //    }
 
-            _customerRepository.Remove(message.Id);
+        //    _customerRepository.Remove(message.Id);
 
-            if (Commit())
-            {
-                Bus.RaiseEvent(new CustomerRemovedEvent(message.Id));
-            }
+        //    if (Commit())
+        //    {
+        //        Bus.RaiseEvent(new CustomerRemovedEvent(message.Id));
+        //    }
 
-            return Task.FromResult(true);
-        }
+        //    return Task.FromResult(true);
+        //}
 
         public void Dispose()
         {

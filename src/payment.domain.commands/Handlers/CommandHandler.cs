@@ -1,41 +1,50 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CommandHandler.cs" company="Farfetch">
-//   Copyright (c) Farfetch. All rights reserved.
+// <copyright file="CommandHandler.cs" company="AG Software">
+//   Copyright (c) AG. All rights reserved.
 // </copyright>
 // <summary>
 // CommandHandler
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using AG.PaymentApp.Domain.Core.Notifications;
+using MediatR;
+using Payment.Domain.Core.Bus;
+using Payment.Domain.Core.Commands;
+using Payment.Domain.Interface;
+
 namespace Payment.Domain.Commands.Handlers
 {
     public class CommandHandler
     {
-        private readonly IUnitOfWork _uow;
-        private readonly IMediatorHandler _bus;
-        private readonly DomainNotificationHandler _notifications;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IMediatorHandler mediatorHandler;
+        private readonly DomainNotificationHandler notifications;
 
-        public CommandHandler(IUnitOfWork uow, IMediatorHandler bus, INotificationHandler<DomainNotification> notifications)
+        public CommandHandler(IUnitOfWork unitOfWork, IMediatorHandler mediatorHandler, INotificationHandler<DomainNotification> notifications)
         {
-            _uow = uow;
-            _notifications = (DomainNotificationHandler)notifications;
-            _bus = bus;
+            this.unitOfWork = unitOfWork;
+            this.notifications = (DomainNotificationHandler)notifications;
+            this.mediatorHandler = mediatorHandler;
         }
 
         protected void NotifyValidationErrors(Command message)
         {
             foreach (var error in message.ValidationResult.Errors)
             {
-                _bus.RaiseEvent(new DomainNotification(message.MessageType, error.ErrorMessage));
+                mediatorHandler.RaiseEvent(new DomainNotification(message.MessageType, error.ErrorMessage));
             }
         }
 
         public bool Commit()
         {
-            if (_notifications.HasNotifications()) return false;
-            if (_uow.Commit()) return true;
+            if (notifications.HasNotifications())
+                return false;
 
-            _bus.RaiseEvent(new DomainNotification("Commit", "We had a problem during saving your data."));
+            if (unitOfWork.Commit())
+                return true;
+
+            mediatorHandler.RaiseEvent(new DomainNotification("Commit", "We had a problem during saving your data."));
             return false;
         }
     }

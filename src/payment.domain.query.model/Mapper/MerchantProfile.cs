@@ -10,7 +10,7 @@ namespace AG.PaymentApp.Domain.Query.Mapper
         public MerchantProfile()
         {
             this.CreateMap<MerchantMongo, Merchant>()
-                .ForMember(m => m.ID, opt => opt.MapFrom(mm => mm.MerchantID))
+                .ForMember(m => m.Id, opt => opt.MapFrom(mm => mm.MerchantID))
                 .ForMember(m => m.Country, opt => opt.MapFrom(mm => new Country { Name = mm.Country }))
                 .ForMember(m => m.Currency, opt => opt.MapFrom(mm => new Currency { Name = mm.Currency }));
         }

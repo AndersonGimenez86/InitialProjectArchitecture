@@ -3,12 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using AG.PaymentApp.application.messaging.Events;
     using AG.PaymentApp.application.services.Adapter.Interface;
     using AG.PaymentApp.application.services.DTO.Payments;
-    using AG.PaymentApp.application.services.Events.Interface;
     using AG.PaymentApp.application.services.Interface;
-    using AG.PaymentApp.crosscutting.kafka.Messaging.Producers.Interface;
     using AG.PaymentApp.Domain.Commands.Payments;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.Query.Interface;
@@ -19,23 +16,20 @@
     public class PaymentApplicationService : IPaymentApplicationService
     {
         private readonly IFindPaymentQueryHandler findPaymentQueryHandler;
-        private readonly IPaymentCommandHandler paymentCommand;
-        private readonly IEventCommandHandler<CreatePaymentEvent, Payment> paymentEventCommand;
+        //private readonly IEventCommandHandler<CreatePaymentEvent, Payment> paymentEventCommand;
         private readonly IMediatorHandler mediatorHandler;
         private readonly IMapper typeMapper;
         private readonly IAdaptEntityToViewModel<Payment, PaymentViewModel> paymentAdapter;
 
         public PaymentApplicationService(
             IFindPaymentQueryHandler findPaymentQueryHandler,
-            IPaymentCommandHandler paymentCommand,
-            IEventCommandHandler<CreatePaymentEvent, Payment> paymentEventCommand,
+            //IEventCommandHandler<CreatePaymentEvent, Payment> paymentEventCommand,
             IMediatorHandler mediatorHandler,
             IMapper typeMapper,
             IAdaptEntityToViewModel<Payment, PaymentViewModel> paymentAdapter
             )
         {
-            this.paymentCommand = paymentCommand;
-            this.paymentEventCommand = paymentEventCommand;
+            //this.paymentEventCommand = paymentEventCommand;
             this.findPaymentQueryHandler = findPaymentQueryHandler;
             this.mediatorHandler = mediatorHandler;
             this.typeMapper = typeMapper;
@@ -48,13 +42,15 @@
 
             await mediatorHandler.SendCommand<NewPaymentCommand>(newPaymentCommand);
 
-            var paymentProcessingResponseDTO = new PaymentProcessingResponseViewModel
-            {
-                PaymentID = payment.ID,
-                PaymentStatus = payment.Status
-            };
+            //var paymentProcessingResponseDTO = new PaymentProcessingResponseViewModel
+            //{
+            //    PaymentID = payment.ID,
+            //    PaymentStatus = payment.Status
+            //};
 
-            return paymentProcessingResponseDTO;
+            //return paymentProcessingResponseDTO;
+
+            return null;
         }
 
         public async Task<PaymentViewModel> GetAsync(Guid paymentID)

@@ -2,7 +2,8 @@
 {
     using AG.PaymentApp.Domain.Commands.Payments;
     using AG.PaymentApp.Domain.Core.Validations.Interface;
-    using AG.PaymentApp.Domain.Services.Exceptions;
+    using Ether.Outcomes;
+
     public class PaymentValidations
     {
         private readonly IPreConditionEvaluator<NewPaymentCommand> preConditionEvaluator;
@@ -13,14 +14,9 @@
             this.preConditionEvaluator = preConditionEvaluator;
         }
 
-        public void ValidatePayment(NewPaymentCommand payment)
+        public IOutcome ValidatePayment(NewPaymentCommand payment)
         {
-            var paymentPreConditionEvaluator = preConditionEvaluator.Evaluate(payment);
-
-            if (paymentPreConditionEvaluator.Failure)
-            {
-                throw new PreConditionEvaluatorException(paymentPreConditionEvaluator.ToMultiLine(";"));
-            }
+            return preConditionEvaluator.Evaluate(payment);
         }
     }
 }

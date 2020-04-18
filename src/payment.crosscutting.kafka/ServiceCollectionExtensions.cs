@@ -3,7 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using AG.PaymentApp.crosscutting.kafka;
-    using AG.PaymentApp.crosscutting.kafka.Messaging.Producers.Interface;
+    using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
     using AG.PaymentApp.infrastructure.crosscutting.kafka.Exceptions;
     using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config;
     using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Consumers;

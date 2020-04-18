@@ -16,11 +16,11 @@
         {
             return services
                     .AddSingleton<IMongoRepository, MongoRepository>()
-                    .AddSingleton<IMerchantEventRepository, MerchantRepository>()
+                    .AddSingleton<IMerchantRepository, MerchantRepository>()
                     .AddSingleton<IFindMerchantEventRepository, MerchantRepository>()
                     .AddSingleton<IPaymentEventRepository, PaymentRepository>()
                     .AddSingleton<IFindPaymentEventRepository, PaymentRepository>()
-                    .AddSingleton<IShopperEventRepository, ShopperRepository>()
+                    .AddSingleton<IShopperRepository, ShopperRepository>()
                     .AddSingleton<IFindShopperEventRepository, ShopperRepository>()
                     .AddSingleton<IEventPaymentRepositoryStartup, EventPaymentRepositoryStartup>()
                     .AddSingleton<IEventMerchantRepositoryStartup, EventMerchantRepositoryStartup>()

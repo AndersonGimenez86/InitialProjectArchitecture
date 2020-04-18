@@ -7,12 +7,21 @@
 
     public class Payment : BaseEvent
     {
+        public Payment(Guid paymentID, Guid shopperID, Guid merchantID, CreditCardProtected creditCard, Money amount, PaymentStatus paymentStatus)
+        {
+            this.Id = paymentID;
+            this.ShopperID = shopperID;
+            this.MerchantID = merchantID;
+            this.CreditCard = creditCard;
+            this.Amount = amount;
+            this.Status = paymentStatus;
+        }
+
         public Guid ShopperID { get; set; }
         public Guid MerchantID { get; set; }
         public Guid TransactionID { get; set; }
         public Money Amount { get; set; }
         public CreditCardProtected CreditCard { get; set; }
-        public CreditCard CreditCardNotMasked { get; set; }
         public string Reference { get; set; }
         public PaymentStatus Status { get; set; }
         public Payment LastPaymentReceived { get; private set; } = default(Payment);
@@ -20,12 +29,6 @@
         public void AddLastPaymentReceived(Payment lastPayment)
         {
             LastPaymentReceived = lastPayment;
-        }
-
-        public void TransformCreditCardInfo(CreditCardProtected creditCardProtected)
-        {
-            this.CreditCard = creditCardProtected;
-            this.CreditCardNotMasked = null;
         }
     }
 }

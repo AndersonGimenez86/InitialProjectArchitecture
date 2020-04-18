@@ -10,7 +10,7 @@ namespace AG.PaymentApp.Domain.commands.Mapper
         public ShopperProfile()
         {
             this.CreateMap<Shopper, ShopperMongo>()
-                .ConstructUsing(s => ShopperMongo.CreateNew(s.Gender, s.ID, s.FirstName, s.LastName, s.Email, null));
+                .ConstructUsing(s => ShopperMongo.CreateNew(s.Gender, s.Id, s.FirstName, s.LastName, s.Email, null));
 
             this.CreateMap<Address, AddressMongo>()
                 .ConstructUsing(a => AddressMongo.Create(a.ID, a.Street, a.Number, a.City, a.Zip, a.Country, a.DateCreated));

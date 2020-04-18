@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CancelPaymentCommand.cs" company="Farfetch">
-//   Copyright (c) Farfetch. All rights reserved.
+// <copyright file="CancelPaymentCommand.cs" company="AG Software">
+//   Copyright (c) AG. All rights reserved.
 // </copyright>
 // <summary>
 // CancelPaymentCommand

@@ -42,7 +42,7 @@
                 DateCreated = DateTime.Now,
                 IsOnline = true,
                 IsVisible = true,
-                ID = merchantID,
+                Id = merchantID,
                 Name = "Merchant Test"
             };
 
@@ -71,7 +71,7 @@
             result.Result.IsOnline.Should().BeTrue();
             result.Result.IsVisible.Should().BeTrue();
             result.Result.Name.Should().BeEquivalentTo(expectedMerchant.Name);
-            result.Result.ID.Should().Equals(expectedMerchant.ID);
+            result.Result.Id.Should().Equals(expectedMerchant.Id);
         }
     }
 }

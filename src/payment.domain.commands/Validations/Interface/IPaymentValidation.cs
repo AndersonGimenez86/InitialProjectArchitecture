@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IPaymentValidation.cs" company="Farfetch">
-//   Copyright (c) Farfetch. All rights reserved.
+// <copyright file="IPaymentValidation.cs" company="AG Software">
+//   Copyright (c) AG. All rights reserved.
 // </copyright>
 // <summary>
 // IPaymentValidation
@@ -10,9 +10,10 @@
 namespace Payment.Domain.Commands.Validations.Interface
 {
     using AG.PaymentApp.Domain.Commands.Payments;
+    using Ether.Outcomes;
 
     public interface IPaymentValidation
     {
-        void ValidatePayment(NewPaymentCommand payment);
+        IOutcome ValidatePayment(NewPaymentCommand payment);
     }
 }

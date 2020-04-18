@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Command.cs" company="Farfetch">
-//   Copyright (c) Farfetch. All rights reserved.
+// <copyright file="Command.cs" company="AG Software">
+//   Copyright (c) AG. All rights reserved.
 // </copyright>
 // <summary>
 // Command
@@ -27,6 +27,6 @@ namespace Payment.Domain.Core.Commands
             Timestamp = DateTime.Now;
         }
 
-        public abstract void IsValid();
+        public abstract bool IsValid();
     }
 }

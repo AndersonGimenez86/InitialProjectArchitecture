@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.Domain.Services
+﻿namespace AG.PaymentApp.Domain.Core.Services
 {
     using AG.PaymentApp.Domain.Entity.Merchants;
     using AG.PaymentApp.Domain.Services.Exceptions;

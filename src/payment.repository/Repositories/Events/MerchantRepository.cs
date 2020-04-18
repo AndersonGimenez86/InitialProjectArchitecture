@@ -14,7 +14,7 @@
     using MongoDB.Bson;
     using MongoDB.Driver;
 
-    public class MerchantRepository : IMerchantEventRepository, IFindMerchantEventRepository
+    public class MerchantRepository : IMerchantRepository, IFindMerchantEventRepository
     {
         private readonly IEventMerchantRepositoryStartup eventMerchantRepositoryStartup;
         private readonly IMongoCollection<MerchantMongo> merchantEvents;

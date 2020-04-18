@@ -42,7 +42,7 @@
 
             var shopperDataCommand = new ShopperDataCommand(shopperMongo);
 
-            var mockIShopperEventRepository = new Mock<IShopperEventRepository>();
+            var mockIShopperEventRepository = new Mock<IShopperRepository>();
             mockIShopperEventRepository.Setup(r => r.SaveAsync(shopperDataCommand));
 
             var mapperConfiguration = new MapperConfiguration(c => c.AddProfile(new ShopperProfile()));

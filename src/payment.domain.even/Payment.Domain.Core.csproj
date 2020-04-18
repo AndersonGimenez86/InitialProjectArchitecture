@@ -23,4 +23,9 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+    <Folder Include="Notifications\" />
+  </ItemGroup>
+
 </Project>

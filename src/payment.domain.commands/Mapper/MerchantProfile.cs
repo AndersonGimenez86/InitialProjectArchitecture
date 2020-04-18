@@ -11,7 +11,7 @@ namespace AG.PaymentApp.Domain.commands.Mapper
             this.CreateMap<Merchant, MerchantMongo>()
                 .ForMember(m => m.Country, opt => opt.MapFrom(mm => mm.Country.Name))
                 .ForMember(m => m.Currency, opt => opt.MapFrom(mm => mm.Currency.Name))
-                .ForMember(m => m.MerchantID, opt => opt.MapFrom(mm => mm.ID));
+                .ForMember(m => m.MerchantID, opt => opt.MapFrom(mm => mm.Id));
         }
     }
 }

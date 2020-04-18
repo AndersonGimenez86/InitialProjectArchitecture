@@ -11,7 +11,7 @@
         {
             var shopper = new Shopper
             {
-                ID = shopperID,
+                Id = shopperID,
                 Email = email,
                 FirstName = firstname,
                 LastName = lastname,
@@ -75,12 +75,12 @@
 
             // Your identity logic goes here.  
             // You may refactor this code to the method of an entity interface 
-            return ID == other.ID;
+            return Id == other.Id;
         }
 
         public override int GetHashCode()
         {
-            return ID.GetHashCode();
+            return Id.GetHashCode();
         }
         #endregion
     }

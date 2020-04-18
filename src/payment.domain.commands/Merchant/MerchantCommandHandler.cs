@@ -10,11 +10,11 @@
 
     public class MerchantCommandHandler : IMerchantCommandHandler
     {
-        private readonly IMerchantEventRepository eventRepository;
+        private readonly IMerchantRepository eventRepository;
         private readonly IMapper typeMapper;
 
         public MerchantCommandHandler(
-            IMerchantEventRepository eventRepository,
+            IMerchantRepository eventRepository,
             IMapper typeMapper)
         {
             this.eventRepository = eventRepository;

@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NewPaymentCommand.cs" company="Farfetch">
-//   Copyright (c) Farfetch. All rights reserved.
+// <copyright file="NewPaymentCommand.cs" company="AG Software">
+//   Copyright (c) AG. All rights reserved.
 // </copyright>
 // <summary>
 // NewPaymentCommand
@@ -27,13 +27,21 @@ namespace AG.PaymentApp.Domain.Commands.Payments
             this.Amount = amount;
             this.Status = PaymentStatus.Received;
             this.paymentValidation = paymentValidation;
-    }
+        }
         public CreditCard CreditCard { get; set; }
 
 
-        public override void IsValid()
+        public override bool IsValid()
         {
-            paymentValidation.ValidatePayment(this);
+            var paymentPreConditionEvaluator = paymentValidation.ValidatePayment(this);
+
+            if (paymentPreConditionEvaluator.Failure)
+            {
+                this.ValidationResult.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, paymentPreConditionEvaluator.ToMultiLine()));
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace AG.PaymentApp.application.services.Mapper
         public ShopperProfile()
         {
             this.CreateMap<ShopperViewModel, Shopper>()
-                .ForMember(m => m.ID, opt => opt.MapFrom(mm => mm.ShopperID))
+                .ForMember(m => m.Id, opt => opt.MapFrom(mm => mm.ShopperID))
                 .ForMember(s => s.Gender, opt => opt.MapFrom(mm => mm.Gender))
                 .ReverseMap();
         }

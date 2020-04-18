@@ -65,7 +65,7 @@
             result.Result.Email.Should().BeEquivalentTo(expectedShopper.Email);
             result.Result.FirstName.Should().BeEquivalentTo(expectedShopper.FirstName);
             result.Result.LastName.Should().BeEquivalentTo(expectedShopper.LastName);
-            result.Result.ID.Should().Equals(expectedShopper.ID);
+            result.Result.Id.Should().Equals(expectedShopper.Id);
         }
     }
 }

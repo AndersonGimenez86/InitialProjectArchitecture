@@ -44,13 +44,13 @@
                 DateCreated = DateTime.Now,
                 IsOnline = true,
                 IsVisible = true,
-                ID = merchantID,
+                Id = merchantID,
                 Name = "Merchant Test"
             };
 
             var merchantDataCommand = new MerchantDataCommand(merchantMongo);
 
-            var mockIMerchantEventRepository = new Mock<IMerchantEventRepository>();
+            var mockIMerchantEventRepository = new Mock<IMerchantRepository>();
             mockIMerchantEventRepository.Setup(r => r.SaveAsync(merchantDataCommand));
 
             var mapperConfiguration = new MapperConfiguration(c => c.AddProfile(new MerchantProfile()));

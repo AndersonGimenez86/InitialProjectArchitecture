@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IMediatorHandler.cs" company="Farfetch">
-//   Copyright (c) Farfetch. All rights reserved.
+// <copyright file="IMediatorHandler.cs" company="AG Software">
+//   Copyright (c) AG. All rights reserved.
 // </copyright>
 // <summary>
 // IMediatorHandler
@@ -13,9 +13,9 @@ namespace Payment.Domain.Core.Bus
     using AG.PaymentApp.Domain.Core.Events;
     using Payment.Domain.Core.Commands;
 
-    public interface IMediatorHandler<T, C> where T : Event where C : Command
+    public interface IMediatorHandler
     {
-        Task SendCommand(C command);
-        Task RaiseEvent(T @event);
+        Task SendCommand<C>(C command) where C : Command;
+        Task RaiseEvent<T>(T @event) where T : Event;
     }
 }
