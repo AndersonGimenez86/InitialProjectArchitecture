@@ -24,7 +24,7 @@
             this.eventShopperRepositoryStartup = eventShopperRepositoryStartup;
             this.shopperEvents = this.GetShopperCollection();
         }
-        public async Task SaveAsync(ShopperDataCommand shopperDataCommand)
+        public async Task SaveAsync(ShopperCommand shopperDataCommand)
         {
             await this.shopperEvents.InsertOneAsync(shopperDataCommand.ShopperMongo);
         }
@@ -64,6 +64,41 @@
         private IMongoCollection<ShopperMongo> GetShopperCollection()
         {
             return this.eventShopperRepositoryStartup.GetMongoCollection();
+        }
+
+        public void Add(ShopperCommand obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ShopperCommand GetById(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<ShopperCommand> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(ShopperCommand obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

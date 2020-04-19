@@ -1,14 +1,15 @@
-﻿namespace AG.PaymentApp.Domain.Query.Validations.PreConditions.Merchant
+﻿namespace AG.PaymentApp.Domain.Commands.Validations.PreConditions.Merchant
 {
     using System.Collections.Generic;
     using System.Linq;
+    using AG.PaymentApp.Domain.commands;
+    using AG.PaymentApp.Domain.Commands.Validations.Interface;
     using AG.PaymentApp.Domain.Entity.Merchants;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Merchants;
-    using AG.PaymentApp.Domain.Query.Validations.Interface;
     using Ether.Outcomes;
 
-    public class MerchantUniqueNamePreCondition : IPreCondition<Merchant>
+    public class MerchantUniqueNamePreCondition : IPreCondition<MerchantCommand>
     {
         private readonly IFindMerchantQueryHandler findMerchantQueryHandler;
 
@@ -17,7 +18,7 @@
             this.findMerchantQueryHandler = findMerchantQueryHandler;
         }
 
-        public IOutcome Accept(Merchant newEntity)
+        public IOutcome Accept(MerchantCommand newEntity)
         {
             var findMerchantQuery = new FindMerchantQuery(newEntity.Name);
 

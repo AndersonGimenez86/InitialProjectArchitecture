@@ -1,7 +1,7 @@
 ﻿namespace AG.PaymentApp.Domain.Query.Validations
 {
     using System.Collections.Generic;
-    using AG.PaymentApp.Domain.Query.Validations.Interface;
+    using AG.PaymentApp.Domain.Commands.Validations.Interface;
     using Ether.Outcomes;
     using Payment.Domain.Core.Commands;
 

@@ -2,19 +2,17 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using AutoMapper;
     using AG.PaymentApp.application.messaging;
     using AG.PaymentApp.application.messaging.DependencyInjection;
     using AG.PaymentApp.application.services.DependencyInjection;
-    using AG.PaymentApp.Domain.commands.DependencyInjection;
     using AG.PaymentApp.Domain.Query.DependencyInjection;
-    using AG.PaymentApp.Domain.Services.DependencyInjection;
     using AG.PaymentApp.infrastructure.crosscutting.Environment;
     using AG.PaymentApp.infrastructure.crosscutting.IoC.Extensions;
     using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging;
     using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config;
     using AG.PaymentApp.infrastructure.crosscutting.logging.DependencyInjection;
     using AG.PaymentApp.repository.DependecyInjection;
+    using AutoMapper;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -45,11 +43,10 @@
             services.SetupApplicationServices(kafkaSettingsSection)
                 .SetupInfrastructureCrosscuttingLoggingDependencyInjection()
                 .SetupApplicationMessaging()
-                .SetupDomainServices()
                 .SetupMessaging()
                 .SetupConsumers(kafkaSettingsSection)
-                .SetupDomainCommands()
                 .SetupDomainQuery()
+                .SetupDomainCommands()
                 .SetupRepository()
                 .AddAutoMapper(AppDomain.CurrentDomain.GetUserAssemblies());
 

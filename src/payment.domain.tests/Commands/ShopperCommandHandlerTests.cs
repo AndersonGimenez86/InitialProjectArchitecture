@@ -3,7 +3,6 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
-    using AutoMapper;
     using AG.PaymentApp.Domain.commands.Mapper;
     using AG.PaymentApp.Domain.commands.Shoopers;
     using AG.PaymentApp.Domain.commands.Shoppers;
@@ -12,6 +11,7 @@
     using AG.PaymentApp.Domain.events;
     using AG.PaymentApp.Domain.ValueObject;
     using AG.PaymentApp.repository.commands.Interface;
+    using AutoMapper;
     using FluentAssertions;
     using Moq;
     using Xunit;
@@ -40,7 +40,7 @@
             var shopper = Shopper.CreateNew(Gender.Men, shopperID, firstName, lastName, email);
             shopper.SetAddress(address);
 
-            var shopperDataCommand = new ShopperDataCommand(shopperMongo);
+            var shopperDataCommand = new ShopperCommand(shopperMongo);
 
             var mockIShopperEventRepository = new Mock<IShopperRepository>();
             mockIShopperEventRepository.Setup(r => r.SaveAsync(shopperDataCommand));
@@ -48,7 +48,7 @@
             var mapperConfiguration = new MapperConfiguration(c => c.AddProfile(new ShopperProfile()));
             var mapper = mapperConfiguration.CreateMapper();
 
-            var shopperCommandHandler = new ShopperCommandHandler(mockIShopperEventRepository.Object, mapper);
+            var shopperCommandHandler = new ShopperCommandHandler(mockIShopperEventRepository.Object, mapper, null, null, null);
 
             //ACT
             var result = shopperCommandHandler.ExecuteAsync(shopper);

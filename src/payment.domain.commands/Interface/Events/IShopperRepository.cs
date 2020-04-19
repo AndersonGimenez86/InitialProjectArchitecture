@@ -2,10 +2,11 @@
 {
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.commands.Shoppers;
+    using AG.PaymentApp.Domain.Interface;
 
-    public interface IShopperRepository : IRepository<ShopperDataCommand>
+    public interface IShopperRepository : IRepository<ShopperCommand>
     {
-        Task SaveAsync(ShopperDataCommand eventData);
+        Task SaveAsync(ShopperCommand eventData);
 
     }
 }

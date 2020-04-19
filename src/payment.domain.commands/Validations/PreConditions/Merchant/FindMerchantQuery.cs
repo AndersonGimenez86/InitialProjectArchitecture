@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AG.PaymentApp.Domain.Query.Validations.PreConditions.Merchant
+namespace AG.PaymentApp.Domain.Commands.Validations.PreConditions.Merchant
 {
     internal class FindMerchantQueryValidation
     {

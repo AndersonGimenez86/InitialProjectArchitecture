@@ -3,7 +3,6 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
-    using AutoMapper;
     using AG.PaymentApp.Domain.commands;
     using AG.PaymentApp.Domain.commands.Mapper;
     using AG.PaymentApp.Domain.commands.Merchants;
@@ -11,6 +10,7 @@
     using AG.PaymentApp.Domain.events;
     using AG.PaymentApp.Domain.ValueObject;
     using AG.PaymentApp.repository.commands.Interface;
+    using AutoMapper;
     using FluentAssertions;
     using Moq;
     using Xunit;
@@ -48,7 +48,7 @@
                 Name = "Merchant Test"
             };
 
-            var merchantDataCommand = new MerchantDataCommand(merchantMongo);
+            var merchantDataCommand = new MerchantCommand(merchantMongo);
 
             var mockIMerchantEventRepository = new Mock<IMerchantRepository>();
             mockIMerchantEventRepository.Setup(r => r.SaveAsync(merchantDataCommand));
@@ -56,7 +56,7 @@
             var mapperConfiguration = new MapperConfiguration(c => c.AddProfile(new MerchantProfile()));
             var mapper = mapperConfiguration.CreateMapper();
 
-            var merchantCommandHandler = new MerchantCommandHandler(mockIMerchantEventRepository.Object, mapper);
+            var merchantCommandHandler = new MerchantCommandHandler(mockIMerchantEventRepository.Object, null, null, mapper, null);
 
             //ACT
             var result = merchantCommandHandler.ExecuteAsync(merchant);

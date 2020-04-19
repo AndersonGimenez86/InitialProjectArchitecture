@@ -24,7 +24,7 @@
             this.eventMerchantRepositoryStartup = eventMerchantRepositoryStartup;
             this.merchantEvents = this.GetMerchantCollection();
         }
-        public async Task SaveAsync(MerchantDataCommand merchantDataCommand)
+        public async Task SaveAsync(MerchantCommand merchantDataCommand)
         {
             await this.merchantEvents.InsertOneAsync(merchantDataCommand.MerchantMongo);
         }
@@ -70,6 +70,41 @@
             BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
 
             return this.eventMerchantRepositoryStartup.GetMongoCollection();
+        }
+
+        public void Add(MerchantCommand obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public MerchantCommand GetById(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<MerchantCommand> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(MerchantCommand obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

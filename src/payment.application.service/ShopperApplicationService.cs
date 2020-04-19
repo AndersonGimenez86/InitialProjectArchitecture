@@ -3,31 +3,27 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using AutoMapper;
     using AG.PaymentApp.application.services.Adapter.Interface;
     using AG.PaymentApp.application.services.DTO.Shoppers;
     using AG.PaymentApp.application.services.Interface;
-    using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Entity.Shoppers;
     using AG.PaymentApp.Domain.Enum;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Shoppers;
+    using AutoMapper;
 
     public class ShopperApplicationService : IShopperApplicationService
     {
-        private readonly IShopperCommandHandler shopperCommand;
         private readonly IFindShopperQueryHandler findShopperQueryHandler;
         private readonly IMapper typeMapper;
         private readonly IAdaptEntityToViewModel<Shopper, ShopperViewModel> shopperAdapter;
 
         public ShopperApplicationService(
-            IShopperCommandHandler shopperCommand,
             IFindShopperQueryHandler findShopperQueryHandler,
             IMapper typeMapper,
             IAdaptEntityToViewModel<Shopper, ShopperViewModel> shopperAdapter
             )
         {
-            this.shopperCommand = shopperCommand;
             this.findShopperQueryHandler = findShopperQueryHandler;
             this.typeMapper = typeMapper;
             this.shopperAdapter = shopperAdapter;
@@ -41,7 +37,7 @@
 
             shopper.SetAddress(shopper.Address);
 
-            await shopperCommand.ExecuteAsync(shopper);
+            //await shopperCommand.ExecuteAsync(shopper);
         }
 
         public async Task<ShopperViewModel> GetAsync(Guid shopperID)

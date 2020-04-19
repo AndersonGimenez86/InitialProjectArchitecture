@@ -1,14 +1,21 @@
 ﻿namespace AG.PaymentApp.Domain.commands
 {
     using AG.PaymentApp.Domain.events;
+    using Payment.Domain.Core.Commands;
 
-    public class MerchantDataCommand
+    public class MerchantCommand : Command
     {
-        public MerchantDataCommand(MerchantMongo merchant)
+        public MerchantCommand(MerchantMongo merchant)
         {
             this.MerchantMongo = merchant;
         }
 
+        public string Name { get; set; }
         public MerchantMongo MerchantMongo { get; }
+
+        public override bool IsValid()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

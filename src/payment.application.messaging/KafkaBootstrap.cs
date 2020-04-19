@@ -3,8 +3,8 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
-    using AG.PaymentApp.application.messaging.Events;
     using AG.PaymentApp.application.messaging.Handlers;
+    using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging;
     using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config;
     using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Consumers;

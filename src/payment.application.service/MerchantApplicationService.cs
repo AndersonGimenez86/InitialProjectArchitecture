@@ -3,35 +3,30 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using AutoMapper;
     using AG.PaymentApp.application.services.Adapter.Interface;
     using AG.PaymentApp.application.services.DTO.Merchants;
     using AG.PaymentApp.application.services.Interface;
-    using AG.PaymentApp.Domain.Commands.Interface;
+    using AG.PaymentApp.Domain.commands.Merchants;
     using AG.PaymentApp.Domain.Entity.Merchants;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Merchants;
-    using AG.PaymentApp.Domain.Services.Interface;
+    using AutoMapper;
 
     public class MerchantApplicationService : IMerchantApplicationService
     {
-        private readonly IMerchantCommandHandler merchantCommand;
+        private readonly MerchantCommandHandler merchantCommand;
         private readonly IFindMerchantQueryHandler findMerchantQueryHandler;
-        private readonly IMerchantService merchantDomainService;
         private readonly IMapper typeMapper;
         private readonly IAdaptEntityToViewModel<Merchant, MerchantViewModel> merchantAdapter;
 
         public MerchantApplicationService(
-            IMerchantCommandHandler merchantCommand,
             IFindMerchantQueryHandler findMerchantQueryHandler,
-            IMerchantService merchantDomainService,
             IMapper typeMapper,
             IAdaptEntityToViewModel<Merchant, MerchantViewModel> merchantAdapter
             )
         {
             this.merchantCommand = merchantCommand;
             this.findMerchantQueryHandler = findMerchantQueryHandler;
-            this.merchantDomainService = merchantDomainService;
             this.typeMapper = typeMapper;
             this.merchantAdapter = merchantAdapter;
         }
@@ -40,7 +35,7 @@
         {
             var merchant = ReturnMerchantFilled(merchantDTO);
 
-            this.merchantDomainService.ValidateMerchant(merchant);
+            //this.merchantDomainService.ValidateMerchant(merchant);
 
             await this.merchantCommand.ExecuteAsync(merchant);
         }

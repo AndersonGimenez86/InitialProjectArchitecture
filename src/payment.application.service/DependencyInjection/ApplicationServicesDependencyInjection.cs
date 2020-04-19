@@ -46,50 +46,6 @@
                     .AddSingleton<IMessageSerializer<CreatePaymentEvent>, JsonMessageSerializer<CreatePaymentEvent>>()
                     .AddSingleton<IMessageSerializer<CreateTransactionEvent>, JsonMessageSerializer<CreateTransactionEvent>>();
 
-            //services.RegisterAllTypes<IInvoicingService>(new[] { typeof(Startup).Assembly });
         }
-
-        //public static void RegisterAllTypes<T>(this IServiceCollection services, Assembly[] assemblies,
-        //        ServiceLifetime lifetime = ServiceLifetime.Transient)
-        //{
-        //    var typesFromAssemblies = assemblies.SelectMany(a => a.DefinedTypes.Where(x => x.GetInterfaces().Contains(typeof(T))));
-        //    foreach (var type in typesFromAssemblies)
-        //        services.Add(new ServiceDescriptor(typeof(T), type, lifetime));
-        //}
-
-        //    Adding CQRS command handlers
-
-        //        var commandHandlers = typeof(Startup).Assembly.GetTypes()
-        //         .Where(t => t.GetInterfaces().Any(i a => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICommandHandler<>))
-        //     );  
-
-        //     foreach (var handler in commandHandlers)  
-        //     {  
-        //         services.AddScoped(handler.GetInterfaces().First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICommandHandler<>)), handler);  
-        //     }
-
-        //Adding CQRS query handlers
-
-        //    var queryHandlers = typeof(Startup).Assembly.GetTypes()
-        //         .Where(t => t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IQueryHandler<,>))
-        //     );  
-
-        //     foreach (var handler in queryHandlers)  
-        //     {  
-        //         services.AddScoped(handler.GetInterfaces().First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IQueryHandler<,>)), handler);  
-        //     }  
-
-        //private static void AddCommandQueryHandlers(this IServiceCollection services, Type handlerInterface)
-        //{
-        //    var handlers = typeof(ServiceExtensions).Assembly.GetTypes()
-        //        .Where(t => t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterface)
-        //    );
-
-        //    foreach (var handler in handlers)
-        //    {
-        //        services.AddScoped(handler.GetInterfaces().First(i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterface), handler);
-        //    }
-        //}
-
     }
 }

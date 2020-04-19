@@ -5,7 +5,7 @@
     using AG.PaymentApp.Domain.Core.DataProtection;
     using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Entity.Payments;
-    using AG.PaymentApp.repository.commands.Interface;
+    using AG.PaymentApp.Domain.Interface;
     using AutoMapper;
     using MediatR;
     using Microsoft.AspNetCore.DataProtection;
@@ -15,8 +15,8 @@
 
     public class PaymentCommandHandler : CommandHandler,
         IRequestHandler<NewPaymentCommand, bool>
-        //   IRequestHandler<UpdateCustomerCommand, bool>,
-        //IRequestHandler<RemoveCustomerCommand, bool>
+    //   IRequestHandler<UpdateCustomerCommand, bool>,
+    //IRequestHandler<RemoveCustomerCommand, bool>
     {
         private readonly IRepository<Payment> paymentEventRepository;
         private readonly IMapper typeMapper;
@@ -42,12 +42,12 @@
         public Task<bool> Handle(NewPaymentCommand newPaymentCommand, CancellationToken cancellationToken)
         {
 
-                //update payment status to processing
-                //if (kafkaResponse.Success)
-                //{
-                //    payment.Status = PaymentStatus.Processing;
-                //    await this.paymentCommand.UpdateAsync(payment);
-                ////}
+            //update payment status to processing
+            //if (kafkaResponse.Success)
+            //{
+            //    payment.Status = PaymentStatus.Processing;
+            //    await this.paymentCommand.UpdateAsync(payment);
+            ////}
             if (!newPaymentCommand.IsValid())
             {
                 NotifyValidationErrors(newPaymentCommand);
@@ -62,7 +62,7 @@
 
             if (Commit())
             {
-                mediatorHandler.RaiseEvent(new CustomerRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
+                //mediatorHandler.RaiseEvent(new CustomerRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
             }
 
             return Task.FromResult(true);
@@ -118,8 +118,7 @@
 
         public void Dispose()
         {
-            _customerRepository.Dispose();
+            paymentEventRepository.Dispose();
         }
     }
-}
 }

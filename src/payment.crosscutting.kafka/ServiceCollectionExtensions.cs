@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using AG.PaymentApp.crosscutting.kafka;
+    using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
     using AG.PaymentApp.infrastructure.crosscutting.kafka.Exceptions;
     using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config;
@@ -34,13 +35,13 @@
         }
 
         public static IServiceCollection AddTopicProducer<TMessage>(this IServiceCollection serviceCollection, string producerName)
-            where TMessage : class
+            where TMessage : Event
         {
             return serviceCollection.AddSingleton(sp => sp.CreateProducer<TMessage>(producerName));
         }
 
         private static ITopicProducer<TMessage> CreateProducer<TMessage>(this IServiceProvider serviceProvider, string producerName)
-          where TMessage : class
+          where TMessage : Event
         {
             var kafkaSettings = serviceProvider.GetRequiredService<IOptions<KafkaSettings>>();
             var producerFactory = serviceProvider.GetRequiredService<KafkaProducerFactory>();

@@ -1,14 +1,14 @@
-﻿namespace AG.PaymentApp.Domain.Query.Validations.PreConditions.Payment
+﻿namespace AG.PaymentApp.Domain.Commands.Validations.PreConditions.Payments
 {
     using System;
     using System.Threading.Tasks;
-    using AG.PaymentApp.Domain.Entity.Payments;
+    using AG.PaymentApp.Domain.Commands.Payments;
+    using AG.PaymentApp.Domain.Commands.Validations.Interface;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Merchants;
-    using AG.PaymentApp.Domain.Query.Validations.Interface;
     using Ether.Outcomes;
 
-    public class PaymentExistsMerchantAssociatedPreCondition : IPreCondition<Payment>
+    public class PaymentExistsMerchantAssociatedPreCondition : IPreCondition<PaymentCommand>
     {
         private readonly IFindMerchantQueryHandler merchantQuery;
 
@@ -17,7 +17,7 @@
             this.merchantQuery = merchantQuery;
         }
 
-        public IOutcome Accept(Payment payment)
+        public IOutcome Accept(PaymentCommand payment)
         {
             var merchantExists = FindMerchantByID(payment.MerchantID).GetAwaiter();
 
