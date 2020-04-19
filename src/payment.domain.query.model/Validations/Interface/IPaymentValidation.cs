@@ -7,13 +7,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Payment.Domain.Commands.Validations.Interface
+namespace Payment.Domain.Query.Validations.Interface
 {
-    using AG.PaymentApp.Domain.Commands.Payments;
+    using AG.PaymentApp.Domain.Entity.Payments;
     using Ether.Outcomes;
 
     public interface IPaymentValidation
     {
-        IOutcome ValidatePayment(NewPaymentCommand payment);
+        IOutcome ValidatePayment(Payment payment);
     }
 }

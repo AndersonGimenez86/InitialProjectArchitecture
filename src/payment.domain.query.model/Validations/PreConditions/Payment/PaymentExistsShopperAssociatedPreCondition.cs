@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.Domain.Services.Validations.PreConditions.Payment
+﻿namespace AG.PaymentApp.Domain.Query.Validations.PreConditions.Payment
 {
     using System;
     using System.Threading.Tasks;
@@ -6,7 +6,7 @@
     using AG.PaymentApp.Domain.Enum;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Shoppers;
-    using AG.PaymentApp.Domain.Services.Validations.Interface;
+    using AG.PaymentApp.Domain.Query.Validations.Interface;
     using Ether.Outcomes;
 
     public class PaymentExistsShopperAssociatedPreCondition : IPreCondition<Payment>

@@ -1,15 +1,14 @@
 ﻿namespace AG.PaymentApp.Domain.Core.Services
 {
     using AG.PaymentApp.Domain.Entity.Merchants;
+    using AG.PaymentApp.Domain.Query.Validations.Interface;
     using AG.PaymentApp.Domain.Services.Exceptions;
-    using AG.PaymentApp.Domain.Services.Interface;
-    using AG.PaymentApp.Domain.Services.Validations.Interface;
 
-    public class MerchantService : IMerchantService
+    public class MerchantValidation
     {
         private readonly IPreConditionEvaluator<Merchant> preConditionEvaluator;
 
-        public MerchantService(IPreConditionEvaluator<Merchant> preConditionEvaluator)
+        public MerchantValidation(IPreConditionEvaluator<Merchant> preConditionEvaluator)
         {
             this.preConditionEvaluator = preConditionEvaluator;
         }

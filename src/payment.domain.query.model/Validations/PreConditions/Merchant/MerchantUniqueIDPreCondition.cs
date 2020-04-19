@@ -1,9 +1,9 @@
-﻿namespace AG.PaymentApp.Domain.Services.Validations.PreConditions.Merchant
+﻿namespace AG.PaymentApp.Domain.Query.Validations.PreConditions.Merchant
 {
     using AG.PaymentApp.Domain.Entity.Merchants;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Merchants;
-    using AG.PaymentApp.Domain.Services.Validations.Interface;
+    using AG.PaymentApp.Domain.Query.Validations.Interface;
     using Ether.Outcomes;
 
     public class MerchantUniqueIDPreCondition : IPreCondition<Merchant>

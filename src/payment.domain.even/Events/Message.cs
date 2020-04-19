@@ -3,7 +3,7 @@ using MediatR;
 
 namespace AG.PaymentApp.Domain.Core.Events
 {
-    public abstract class Message : IRequest<bool>, 
+    public abstract class Message : IRequest<bool>
     {
         public string MessageType { get; protected set; }
         public Guid AggregateId { get; protected set; }

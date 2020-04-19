@@ -1,11 +1,11 @@
-﻿namespace AG.PaymentApp.Domain.Services.Validations.PreConditions.Payment
+﻿namespace AG.PaymentApp.Domain.Query.Validations.PreConditions.Payment
 {
     using System;
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Merchants;
-    using AG.PaymentApp.Domain.Services.Validations.Interface;
+    using AG.PaymentApp.Domain.Query.Validations.Interface;
     using Ether.Outcomes;
 
     public class PaymentExistsMerchantAssociatedPreCondition : IPreCondition<Payment>

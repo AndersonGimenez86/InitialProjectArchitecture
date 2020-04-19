@@ -15,11 +15,4 @@
     <ProjectReference Include="..\payment.domain\Payment.Domain.csproj" />
     <ProjectReference Include="..\payment.repository\Payment.Data.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.DataProtection.Abstractions">
-      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.dataprotection.abstractions\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.DataProtection.Abstractions.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

@@ -5,7 +5,7 @@
     using AG.PaymentApp.Domain.Enum;
     using AG.PaymentApp.Domain.ValueObject;
 
-    public class Shopper : BaseEvent
+    public class Shopper : Entity
     {
         public static Shopper CreateNew(Gender gender, Guid shopperID, string firstname, string lastname, string email)
         {

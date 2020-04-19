@@ -5,7 +5,7 @@
     using AG.PaymentApp.Domain.Enum;
     using AG.PaymentApp.Domain.ValueObject;
 
-    public class Payment : BaseEvent
+    public class Payment : Entity
     {
         public Payment(Guid paymentID, Guid shopperID, Guid merchantID, CreditCardProtected creditCard, Money amount, PaymentStatus paymentStatus)
         {
