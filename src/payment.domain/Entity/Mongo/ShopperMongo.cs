@@ -1,7 +1,7 @@
-﻿namespace AG.PaymentApp.Domain.events
+﻿namespace AG.PaymentApp.Domain.Entity.Mongo
 {
     using System;
-    using AG.PaymentApp.Domain.Enum;
+    using AG.PaymentApp.Domain.Core.Enum;
     using MongoDB.Bson.Serialization.Attributes;
     using MongoDB.Bson.Serialization.IdGenerators;
 

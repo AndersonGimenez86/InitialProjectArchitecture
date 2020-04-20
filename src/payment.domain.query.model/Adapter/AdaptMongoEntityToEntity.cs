@@ -1,8 +1,8 @@
 ﻿namespace AG.PaymentApp.Application.Services.Adapter
 {
     using System.Collections.Generic;
+    using AG.PaymentApp.Domain.Entity.Mongo;
     using AutoMapper;
-    using AG.PaymentApp.Domain.events;
 
     public class AdaptMongoEntityToEntity<MongoEntity, Entity> : IAdaptMongoEntityToEntity<MongoEntity, Entity> where MongoEntity : EventMongo
     {

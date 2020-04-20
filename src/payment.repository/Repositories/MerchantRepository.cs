@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Entity.Merchants;
-    using AG.PaymentApp.Domain.events;
+    using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Merchants;
     using AG.PaymentApp.Repository.Filters;

@@ -7,7 +7,7 @@
     using AG.PaymentApp.Application.Services.DTO.Shoppers;
     using AG.PaymentApp.Application.Services.Interface;
     using AG.PaymentApp.Domain.Entity.Shoppers;
-    using AG.PaymentApp.Domain.Enum;
+    using AG.PaymentApp.Domain.Core.Enum;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Shoppers;
     using AutoMapper;

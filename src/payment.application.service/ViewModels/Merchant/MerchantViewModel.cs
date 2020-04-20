@@ -2,7 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using AG.PaymentApp.Domain.ValueObject;
+    using AG.PaymentApp.Domain.Core.ValueObject;
 
     public class MerchantViewModel
     {

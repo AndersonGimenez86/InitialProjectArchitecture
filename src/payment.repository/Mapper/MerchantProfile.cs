@@ -1,7 +1,7 @@
 ﻿namespace AG.PaymentApp.Data.commands.Mapper
 {
     using AG.PaymentApp.Domain.Entity.Merchants;
-    using AG.PaymentApp.Domain.events;
+    using AG.PaymentApp.Domain.Entity.Mongo;
     using AutoMapper;
     public class MerchantProfile : Profile
     {

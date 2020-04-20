@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using AG.PaymentApp.Domain.Entity.Merchants;
-using AG.PaymentApp.Domain.events;
-using AG.PaymentApp.Domain.ValueObject;
+﻿using AG.PaymentApp.Domain.Entity.Merchants;
+using AG.PaymentApp.Domain.Entity.Mongo;
+using AG.PaymentApp.Domain.Core.ValueObject;
+using AutoMapper;
 
 namespace AG.PaymentApp.Domain.Query.Mapper
 {

@@ -2,8 +2,8 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using AG.PaymentApp.Domain.Enum;
-    using AG.PaymentApp.Domain.ValueObject;
+    using AG.PaymentApp.Domain.Core.Enum;
+    using AG.PaymentApp.Domain.Core.ValueObject;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 

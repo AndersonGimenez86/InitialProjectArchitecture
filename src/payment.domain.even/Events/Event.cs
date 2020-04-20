@@ -1,8 +1,8 @@
-﻿using System;
-using MediatR;
-
-namespace AG.PaymentApp.Domain.Core.Events
+﻿namespace AG.PaymentApp.Domain.Core.Events
 {
+    using System;
+    using MediatR;
+
     public abstract class Event : Message, INotification
     {
         public DateTime Timestamp { get; private set; }

@@ -1,7 +1,8 @@
-﻿namespace AG.PaymentApp.Domain.Core.Events
+﻿namespace AG.PaymentApp.Domain.Events
 {
     using System;
-    using AG.PaymentApp.Domain.ValueObject;
+    using AG.PaymentApp.Domain.Core.Events;
+    using AG.PaymentApp.Domain.Core.ValueObject;
 
     public class CreatePaymentEvent : Event
     {

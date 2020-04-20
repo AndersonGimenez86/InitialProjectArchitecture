@@ -1,6 +1,6 @@
 ﻿namespace AG.PaymentApp.Application.Services.DTO.CreditCards
 {
-    using AG.PaymentApp.Domain.Enum;
+    using AG.PaymentApp.Domain.Core.Enum;
     public class CreditCardViewModelcs
     {
         public string Number { get; set; }

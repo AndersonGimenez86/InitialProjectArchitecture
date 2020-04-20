@@ -1,7 +1,7 @@
 ﻿namespace AG.PaymentApp.Domain.Query.Mapper
 {
+    using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.Entity.Payments;
-    using AG.PaymentApp.Domain.events;
     using AutoMapper;
     public class PaymentProfile : Profile
     {

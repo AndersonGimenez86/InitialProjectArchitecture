@@ -11,6 +11,7 @@ namespace Payment.Infrastructure.Crosscutting.Bus
 {
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Core.Events;
+    using AG.PaymentApp.Domain.Core.Events.Interface;
     using AG.PaymentApp.Domain.Core.Kafka.Producers;
     using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
     using MediatR;

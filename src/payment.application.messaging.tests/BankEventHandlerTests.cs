@@ -4,10 +4,10 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
     using AG.PaymentApp.Application.Messaging.Handlers;
-    using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.Domain.Core.Kafka.Producers;
     using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
-    using AG.PaymentApp.Domain.ValueObject;
+    using AG.PaymentApp.Domain.Core.ValueObject;
+    using AG.PaymentApp.Domain.Events;
     using Moq;
     using Xunit;
 

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Entity.Shoppers;
-    using AG.PaymentApp.Domain.Enum;
+    using AG.PaymentApp.Domain.Core.Enum;
     using AG.PaymentApp.Domain.Query.Shoppers;
 
     public interface IFindShopperRepository

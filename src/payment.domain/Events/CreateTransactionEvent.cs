@@ -1,6 +1,7 @@
-﻿namespace AG.PaymentApp.Domain.Core.Events
+﻿namespace AG.PaymentApp.Domain.Events
 {
     using System;
+    using AG.PaymentApp.Domain.Core.Events;
 
     public class CreateTransactionEvent : Event
     {

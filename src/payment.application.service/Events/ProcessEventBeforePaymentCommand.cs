@@ -3,8 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using AG.PaymentApp.Application.Services.Events.Interface;
-    using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.Domain.Entity.Payments;
+    using AG.PaymentApp.Domain.Events;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
 

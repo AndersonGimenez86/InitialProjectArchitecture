@@ -5,7 +5,7 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using AG.PaymentApp.Domain.ValueObject;
+    using AG.PaymentApp.Domain.Core.ValueObject;
 
     public class PaymentProcessingViewModel
     {

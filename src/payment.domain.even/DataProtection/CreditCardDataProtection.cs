@@ -1,5 +1,5 @@
 ﻿using System;
-using AG.PaymentApp.Domain.ValueObject;
+using AG.PaymentApp.Domain.Core.ValueObject;
 using Microsoft.AspNetCore.DataProtection;
 
 namespace AG.PaymentApp.Domain.Core.DataProtection

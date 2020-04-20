@@ -1,7 +1,7 @@
 ﻿namespace AG.PaymentApp.Application.Services.DTO.Payments
 {
     using System;
-    using AG.PaymentApp.Domain.Enum;
+    using AG.PaymentApp.Domain.Core.Enum;
 
     public class PaymentProcessingResponseViewModel
     {

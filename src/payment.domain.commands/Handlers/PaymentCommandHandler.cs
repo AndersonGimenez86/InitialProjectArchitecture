@@ -40,12 +40,6 @@
 
         public Task<bool> Handle(NewPaymentCommand newPaymentCommand, CancellationToken cancellationToken)
         {
-            //update payment status to processing
-            //if (kafkaResponse.Success)
-            //{
-            //    payment.Status = PaymentStatus.Processing;
-            //    await this.paymentCommand.UpdateAsync(payment);
-            ////}
             if (!newPaymentCommand.IsValid())
             {
                 NotifyValidationErrors(newPaymentCommand);
@@ -61,6 +55,14 @@
             if (Commit())
             {
                 //mediatorHandler.RaiseEvent(new CustomerRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
+
+                //update payment status to processing
+                //if (kafkaResponse.Success)
+                //{
+                //    payment.Status = PaymentStatus.Processing;
+                //    await this.paymentCommand.UpdateAsync(payment);
+                ////}
+
             }
 
             return Task.FromResult(true);

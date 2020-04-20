@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.Domain.events
+﻿namespace AG.PaymentApp.Domain.Entity.Mongo
 {
     using System;
     using MongoDB.Bson.Serialization.Attributes;

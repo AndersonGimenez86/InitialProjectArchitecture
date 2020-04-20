@@ -4,7 +4,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
     using AG.PaymentApp.Application.Messaging.Handlers;
-    using AG.PaymentApp.Domain.Core.Events;
+    using AG.PaymentApp.Domain.Events;
     using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
     using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config;
     using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Consumers;

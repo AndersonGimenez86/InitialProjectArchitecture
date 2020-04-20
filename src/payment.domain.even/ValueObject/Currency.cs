@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.Domain.ValueObject
+﻿namespace AG.PaymentApp.Domain.Core.ValueObject
 {
     using System;
     public class Currency

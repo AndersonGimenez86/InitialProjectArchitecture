@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace AG.PaymentApp.Domain.ValueObject
+﻿namespace AG.PaymentApp.Domain.Core.ValueObject
 {
+    using System;
+
     public sealed class Money
     {
         public static Money Zero = new Money(Currency.Default, 0);

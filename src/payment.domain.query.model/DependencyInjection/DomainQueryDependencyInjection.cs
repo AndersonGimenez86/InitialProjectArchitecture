@@ -3,9 +3,9 @@
     using System.Diagnostics.CodeAnalysis;
     using AG.PaymentApp.Application.Services.Adapter;
     using AG.PaymentApp.Domain.Entity.Merchants;
+    using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.Entity.Shoppers;
-    using AG.PaymentApp.Domain.events;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Merchants;
     using AG.PaymentApp.Domain.Query.Payments;

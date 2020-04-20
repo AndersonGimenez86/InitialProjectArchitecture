@@ -2,8 +2,8 @@
 {
     using System;
     using AG.PaymentApp.Domain.Entity.Bases;
-    using AG.PaymentApp.Domain.Enum;
-    using AG.PaymentApp.Domain.ValueObject;
+    using AG.PaymentApp.Domain.Core.Enum;
+    using AG.PaymentApp.Domain.Core.ValueObject;
 
     public class Shopper : Entity
     {

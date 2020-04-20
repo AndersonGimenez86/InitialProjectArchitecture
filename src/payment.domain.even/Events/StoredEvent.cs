@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace AG.PaymentApp.Domain.Core.Events
+﻿namespace AG.PaymentApp.Domain.Core.Events
 {
+    using System;
+
     public class StoredEvent : Event
     {
         public StoredEvent(Event theEvent, string data, string user)

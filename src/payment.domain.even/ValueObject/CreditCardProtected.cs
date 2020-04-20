@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AG.PaymentApp.Domain.ValueObject
+namespace AG.PaymentApp.Domain.Core.ValueObject
 {
     public class CreditCardProtected
     {

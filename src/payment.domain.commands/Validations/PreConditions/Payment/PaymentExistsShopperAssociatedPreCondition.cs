@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Commands.Payments;
     using AG.PaymentApp.Domain.Commands.Validations.Interface;
-    using AG.PaymentApp.Domain.Enum;
+    using AG.PaymentApp.Domain.Core.Enum;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Shoppers;
     using Ether.Outcomes;

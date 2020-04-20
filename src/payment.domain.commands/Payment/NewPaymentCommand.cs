@@ -8,8 +8,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using AG.PaymentApp.Domain.Enum;
-using AG.PaymentApp.Domain.ValueObject;
+using AG.PaymentApp.Domain.Core.Enum;
+using AG.PaymentApp.Domain.Core.ValueObject;
 using Payment.Domain.Commands.Validations.Interface;
 
 namespace AG.PaymentApp.Domain.Commands.Payments

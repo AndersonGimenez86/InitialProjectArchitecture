@@ -7,10 +7,10 @@
     using AG.PaymentApp.Application.Services.DTO.Payments;
     using AG.PaymentApp.Application.Services.DTO.Shoppers;
     using AG.PaymentApp.Application.Services.Interface;
-    using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.Domain.Entity.Merchants;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.Entity.Shoppers;
+    using AG.PaymentApp.Domain.Events;
     using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
     using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config;
     using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Serialization;

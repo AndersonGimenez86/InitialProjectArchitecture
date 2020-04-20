@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using AG.PaymentApp.Application.Services.DTO.Payments;
-using AG.PaymentApp.Domain.ValueObject;
+using AG.PaymentApp.Domain.Core.ValueObject;
 using Xunit;
 
 namespace AG.PaymentApp.Application.Services.tests.Validations

@@ -1,8 +1,8 @@
 ﻿namespace AG.PaymentApp.Application.Services.DTO.Payments
 {
     using System;
-    using AG.PaymentApp.Domain.Enum;
-    using AG.PaymentApp.Domain.ValueObject;
+    using AG.PaymentApp.Domain.Core.Enum;
+    using AG.PaymentApp.Domain.Core.ValueObject;
 
     public class PaymentViewModel
     {

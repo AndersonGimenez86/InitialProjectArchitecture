@@ -1,7 +1,7 @@
-﻿namespace AG.PaymentApp.Domain.ValueObject
+﻿namespace AG.PaymentApp.Domain.Core.ValueObject
 {
     using System;
-    using AG.PaymentApp.Domain.Enum;
+    using AG.PaymentApp.Domain.Core.Enum;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 

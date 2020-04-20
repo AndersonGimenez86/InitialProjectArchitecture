@@ -2,8 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
+    using AG.PaymentApp.Domain.Events;
     using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
 
     public class BankEventHandler : IMessageHandler<CreatePaymentEvent>

@@ -5,8 +5,8 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Commands.Interface;
+    using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.Entity.Payments;
-    using AG.PaymentApp.Domain.events;
     using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
     using AG.PaymentApp.Repository.Filters;

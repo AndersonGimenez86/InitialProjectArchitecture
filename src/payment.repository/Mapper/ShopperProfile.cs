@@ -1,8 +1,8 @@
 ﻿namespace AG.PaymentApp.Data.Mapper
 {
+    using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.Entity.Shoppers;
-    using AG.PaymentApp.Domain.events;
-    using AG.PaymentApp.Domain.ValueObject;
+    using AG.PaymentApp.Domain.Core.ValueObject;
     using AutoMapper;
     public class ShopperProfile : Profile
     {

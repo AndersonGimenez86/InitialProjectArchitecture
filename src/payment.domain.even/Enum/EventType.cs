@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.Domain.Enum
+﻿namespace AG.PaymentApp.Domain.Core.Enum
 {
     public enum EventType
     {

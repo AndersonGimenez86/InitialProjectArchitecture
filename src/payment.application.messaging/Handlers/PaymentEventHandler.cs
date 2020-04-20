@@ -2,8 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using AG.PaymentApp.Domain.Core.Events;
-    using AG.PaymentApp.Domain.Enum;
+    using AG.PaymentApp.Domain.Core.Enum;
+    using AG.PaymentApp.Domain.Events;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
     using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
