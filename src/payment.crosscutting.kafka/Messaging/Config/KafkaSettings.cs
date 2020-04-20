@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config
 {
     using System;
     using System.Collections.Generic;

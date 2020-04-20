@@ -1,6 +1,6 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Compression
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Compression
 {
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Serializers;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Serializers;
 
     internal interface ICompressionHandler : IKafkaSerializationHandler<byte[]>
     {

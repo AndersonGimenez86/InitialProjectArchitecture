@@ -1,7 +1,7 @@
-﻿using AutoMapper;
+﻿using AG.PaymentApp.Domain.Entity.Mongo;
 using AG.PaymentApp.Domain.Entity.Shoppers;
-using AG.PaymentApp.Domain.events;
-using AG.PaymentApp.Domain.ValueObject;
+using AG.PaymentApp.Domain.Core.ValueObject;
+using AutoMapper;
 
 namespace AG.PaymentApp.Domain.Query.Mapper
 {
@@ -11,7 +11,7 @@ namespace AG.PaymentApp.Domain.Query.Mapper
         {
             this.CreateMap<ShopperMongo, Shopper>()
                 .ConstructUsing(s => Shopper.CreateNew(s.Gender, s.ShopperID, s.FirstName, s.LastName, s.Email))
-                .ForMember(m => m.ID, opt => opt.MapFrom(mm => mm.ShopperID))
+                .ForMember(m => m.Id, opt => opt.MapFrom(mm => mm.ShopperID))
                 .ForMember(s => s.Address, opt => opt.MapFrom(mm => mm.Address));
 
             this.CreateMap<AddressMongo, Address>()

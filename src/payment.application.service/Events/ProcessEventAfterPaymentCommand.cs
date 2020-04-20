@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.application.services.Events
+﻿namespace AG.PaymentApp.Application.Services.Events
 {
     public class ProcessEventAfterPaymentCommand /*: Command*/
     {

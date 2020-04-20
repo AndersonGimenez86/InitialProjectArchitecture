@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AG.PaymentApp.application.services.DTO.Shoppers;
-using AG.PaymentApp.Domain.Enum;
+using AG.PaymentApp.Application.Services.DTO.Shoppers;
+using AG.PaymentApp.Domain.Core.Enum;
 
-namespace AG.PaymentApp.application.services.Interface
+namespace AG.PaymentApp.Application.Services.Interface
 {
     public interface IShopperApplicationService
     {
-        Task CreateAsync(ShopperDTO shopperDTO);
-        Task<ShopperDTO> GetAsync(Guid shopperID);
-        Task<IEnumerable<ShopperDTO>> GetShoppersByGender(Gender gender);
-        Task<IEnumerable<ShopperDTO>> GetAllAsync();
+        Task CreateAsync(ShopperViewModel shopperDTO);
+        Task<ShopperViewModel> GetAsync(Guid shopperID);
+        Task<IEnumerable<ShopperViewModel>> GetShoppersByGender(Gender gender);
+        Task<IEnumerable<ShopperViewModel>> GetAllAsync();
     }
 }

@@ -1,26 +1,25 @@
 ﻿using System;
-using AG.PaymentApp.Domain.Entity.Payments;
-using AG.PaymentApp.Domain.ValueObject;
+using AG.PaymentApp.Domain.Core.ValueObject;
 using Microsoft.AspNetCore.DataProtection;
 
-namespace AG.PaymentApp.Domain.Services.DataProtection
+namespace AG.PaymentApp.Domain.Core.DataProtection
 {
     public static class CreditCardDataProtection
     {
-        public static void ProtectSensitiveData(IDataProtectionProvider dataProtectionProvider, Payment payment)
+        public static CreditCardProtected ProtectSensitiveData(IDataProtectionProvider dataProtectionProvider, CreditCard creditCard)
         {
             var protector = dataProtectionProvider.CreateProtector("AG.Gateway.Payment");
 
             var creditCardProtected = new CreditCardProtected();
 
             creditCardProtected.CreditCardID = Guid.NewGuid();
-            creditCardProtected.CreditCardType = protector.Protect(payment.CreditCardNotMasked.CreditCardType.ToString());
-            creditCardProtected.CVV = protector.Protect(payment.CreditCardNotMasked.CVV.ToString());
-            creditCardProtected.ExpireDate = protector.Protect(payment.CreditCardNotMasked.ExpireDate.ToString());
-            creditCardProtected.Number = protector.Protect(payment.CreditCardNotMasked.Number);
-            creditCardProtected.Owner = protector.Protect(payment.CreditCardNotMasked.Owner);
+            creditCardProtected.CreditCardType = protector.Protect(creditCard.CreditCardType.ToString());
+            creditCardProtected.CVV = protector.Protect(creditCard.CVV.ToString());
+            creditCardProtected.ExpireDate = protector.Protect(creditCard.ExpireDate.ToString());
+            creditCardProtected.Number = protector.Protect(creditCard.Number);
+            creditCardProtected.Owner = protector.Protect(creditCard.Owner);
 
-            payment.TransformCreditCardInfo(creditCardProtected);
+            return creditCardProtected;
         }
     }
 }

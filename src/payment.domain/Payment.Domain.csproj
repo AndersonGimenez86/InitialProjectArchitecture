@@ -7,7 +7,12 @@
 
   <ItemGroup>
     <PackageReference Include="Ether.Outcomes" Version="2.9.5" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\payment.domain.even\Payment.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>

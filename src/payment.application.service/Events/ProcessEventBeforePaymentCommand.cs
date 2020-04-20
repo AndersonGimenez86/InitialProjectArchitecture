@@ -1,10 +1,10 @@
-﻿namespace AG.PaymentApp.application.services.Events
+﻿namespace AG.PaymentApp.Application.Services.Events
 {
     using System;
     using System.Threading.Tasks;
-    using AG.PaymentApp.application.messaging.Events;
-    using AG.PaymentApp.application.services.Events.Interface;
+    using AG.PaymentApp.Application.Services.Events.Interface;
     using AG.PaymentApp.Domain.Entity.Payments;
+    using AG.PaymentApp.Domain.Events;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
 

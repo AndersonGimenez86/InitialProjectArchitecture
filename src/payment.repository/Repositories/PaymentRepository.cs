@@ -1,59 +1,65 @@
-﻿namespace AG.PaymentApp.repository.Repositories
+﻿namespace AG.PaymentApp.Repository.Repositories
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using AG.PaymentApp.Domain.commands.Payments;
-    using AG.PaymentApp.Domain.events;
+    using AG.PaymentApp.Domain.Commands.Interface;
+    using AG.PaymentApp.Domain.Entity.Mongo;
+    using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
-    using AG.PaymentApp.repository.commands.Interface;
-    using AG.PaymentApp.repository.Filters;
-    using AG.PaymentApp.repository.Interface;
+    using AG.PaymentApp.Repository.Filters;
+    using AG.PaymentApp.Repository.Interface;
+    using AutoMapper;
     using MongoDB.Driver;
 
-    public class PaymentRepository : IPaymentEventRepository, IFindPaymentEventRepository
+    public class PaymentRepository : IPaymentRepository, IFindPaymentRepository
     {
-        private readonly IEventPaymentRepositoryStartup eventPaymentRepositoryStartup;
+        private readonly IPaymentRepositoryStartup eventPaymentRepositoryStartup;
         private readonly IMongoCollection<PaymentMongo> paymentEvents;
+        private readonly IMapper typeMapper;
 
-        public PaymentRepository(IEventPaymentRepositoryStartup eventPaymentRepositoryStartup)
+        public PaymentRepository(IPaymentRepositoryStartup eventPaymentRepositoryStartup,
+            IMapper typeMapper)
         {
             this.eventPaymentRepositoryStartup = eventPaymentRepositoryStartup;
+            this.typeMapper = typeMapper;
             this.paymentEvents = this.GetPaymentCollection();
         }
-        public async Task SaveAsync(PaymentDataCommand paymentDataCommand)
+        public async Task SaveAsync(Payment payment)
         {
-            paymentDataCommand.PaymentMongo.DateCreated = DateTime.Now;
-            await this.paymentEvents.InsertOneAsync(paymentDataCommand.PaymentMongo).ConfigureAwait(false);
+            var paymentMongo = this.typeMapper.Map<PaymentMongo>(payment);
+            await this.paymentEvents.InsertOneAsync(paymentMongo).ConfigureAwait(false);
         }
 
-        public async Task UpdateAsync(PaymentDataCommand paymentDataCommand)
+        public async Task UpdateAsync(Payment payment)
         {
+            var paymentMongo = this.typeMapper.Map<PaymentMongo>(payment);
+
             var options = new FindOneAndReplaceOptions<PaymentMongo>
             {
                 IsUpsert = true
             };
 
-            var paymentFilter = EventFiltersDefinition<PaymentMongo>.ApplyPaymentIDFilter(paymentDataCommand.PaymentMongo.PaymentID);
+            var paymentFilter = EventFiltersDefinition<PaymentMongo>.ApplyPaymentIDFilter(paymentMongo.PaymentID);
 
-            paymentDataCommand.PaymentMongo.DateModified = DateTime.Now;
-            await this.paymentEvents.FindOneAndReplaceAsync(paymentFilter, paymentDataCommand.PaymentMongo, options).ConfigureAwait(false);
+            paymentMongo.DateModified = DateTime.Now;
+            await this.paymentEvents.FindOneAndReplaceAsync(paymentFilter, paymentMongo, options).ConfigureAwait(false);
         }
 
-        public async Task<PaymentMongo> GetLastPaymentReceivedAsync(FindPaymentQuery findPaymentQuery)
+        public async Task<Payment> GetLastPaymentReceivedAsync(FindPaymentQuery findPaymentQuery)
         {
-            return (await GetAllAsync(findPaymentQuery)).FirstOrDefault<PaymentMongo>();
+            return (await GetAllAsync(findPaymentQuery)).FirstOrDefault<Payment>();
         }
 
-        public async Task<PaymentMongo> GetAsync(Guid paymentID)
+        public async Task<Payment> GetAsync(Guid paymentID)
         {
             var findPaymentQuery = new FindPaymentQuery(paymentID);
-            return (await GetAllAsync(findPaymentQuery)).FirstOrDefault<PaymentMongo>();
+            return (await GetAllAsync(findPaymentQuery)).FirstOrDefault<Payment>();
         }
 
-        public async Task<IEnumerable<PaymentMongo>> GetAllAsync(FindPaymentQuery findPaymentQuery)
+        public async Task<IEnumerable<Payment>> GetAllAsync(FindPaymentQuery findPaymentQuery)
         {
             var paymentFilter = EventFiltersDefinition<PaymentMongo>.ApplyPaymentIDFilter(findPaymentQuery.PaymentID);
 
@@ -71,7 +77,7 @@
                 .Result.ToListAsync()
                 .ConfigureAwait(false);
 
-            return payments;
+            return this.typeMapper.Map<IEnumerable<Payment>>(payments);
         }
 
         private IMongoCollection<PaymentMongo> GetPaymentCollection()
@@ -79,5 +85,4 @@
             return this.eventPaymentRepositoryStartup.GetMongoCollection();
         }
     }
-
 }

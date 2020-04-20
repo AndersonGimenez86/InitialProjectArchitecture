@@ -1,10 +1,11 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Consumers
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Consumers
 {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Consumers.Interface;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Serialization;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Consumers.Interface;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Serialization;
     using Confluent.Kafka;
 
     internal class TopicPartitionConsumer<TMessage> : ITopicPartitionConsumer

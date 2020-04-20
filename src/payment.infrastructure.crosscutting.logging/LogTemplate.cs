@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.logging
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Logging
 {
     public abstract class LogTemplate<TData>
     {

@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using AG.PaymentApp.application.services.DTO.Payments;
-using AG.PaymentApp.Domain.ValueObject;
+using AG.PaymentApp.Application.Services.DTO.Payments;
+using AG.PaymentApp.Domain.Core.ValueObject;
 using Xunit;
 
-namespace AG.PaymentApp.application.services.tests.Validations
+namespace AG.PaymentApp.Application.Services.tests.Validations
 {
     [ExcludeFromCodeCoverage]
     public class PaymentPreConditionEvaluatorTests
@@ -13,7 +13,7 @@ namespace AG.PaymentApp.application.services.tests.Validations
         {
             //ARRANGE
 
-            var paymentProcessingDTO = new PaymentProcessingDTO
+            var paymentProcessingDTO = new PaymentProcessingViewModel
             {
                 Amount = new Money(null, 150)
             };
@@ -37,7 +37,7 @@ namespace AG.PaymentApp.application.services.tests.Validations
         {
             //ARRANGE
 
-            var paymentProcessingDTO = new PaymentProcessingDTO
+            var paymentProcessingDTO = new PaymentProcessingViewModel
             {
                 Amount = new Money(null, 0)
             };

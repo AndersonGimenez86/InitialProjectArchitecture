@@ -1,50 +1,46 @@
-﻿namespace AG.PaymentApp.application.services
+﻿namespace AG.PaymentApp.Application.Services
 {
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using AutoMapper;
-    using AG.PaymentApp.application.services.Adapter.Interface;
-    using AG.PaymentApp.application.services.DTO.Shoppers;
-    using AG.PaymentApp.application.services.Interface;
-    using AG.PaymentApp.Domain.commands.Interface;
+    using AG.PaymentApp.Application.Services.Adapter.Interface;
+    using AG.PaymentApp.Application.Services.DTO.Shoppers;
+    using AG.PaymentApp.Application.Services.Interface;
     using AG.PaymentApp.Domain.Entity.Shoppers;
-    using AG.PaymentApp.Domain.Enum;
+    using AG.PaymentApp.Domain.Core.Enum;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Shoppers;
+    using AutoMapper;
 
     public class ShopperApplicationService : IShopperApplicationService
     {
-        private readonly IShopperCommandHandler shopperCommand;
         private readonly IFindShopperQueryHandler findShopperQueryHandler;
         private readonly IMapper typeMapper;
-        private readonly IAdaptEntityToDTO<Shopper, ShopperDTO> shopperAdapter;
+        private readonly IAdaptEntityToViewModel<Shopper, ShopperViewModel> shopperAdapter;
 
         public ShopperApplicationService(
-            IShopperCommandHandler shopperCommand,
             IFindShopperQueryHandler findShopperQueryHandler,
             IMapper typeMapper,
-            IAdaptEntityToDTO<Shopper, ShopperDTO> shopperAdapter
+            IAdaptEntityToViewModel<Shopper, ShopperViewModel> shopperAdapter
             )
         {
-            this.shopperCommand = shopperCommand;
             this.findShopperQueryHandler = findShopperQueryHandler;
             this.typeMapper = typeMapper;
             this.shopperAdapter = shopperAdapter;
         }
 
-        public async Task CreateAsync(ShopperDTO shopperDTO)
+        public async Task CreateAsync(ShopperViewModel shopperDTO)
         {
             var shopper = this.typeMapper.Map<Shopper>(shopperDTO);
-            shopper.ID = shopper.ID != Guid.Empty ? shopper.ID : Guid.NewGuid();
+            shopper.Id = shopper.Id != Guid.Empty ? shopper.Id : Guid.NewGuid();
             shopper.DateCreated = DateTime.Now;
 
             shopper.SetAddress(shopper.Address);
 
-            await shopperCommand.ExecuteAsync(shopper);
+            //await shopperCommand.ExecuteAsync(shopper);
         }
 
-        public async Task<ShopperDTO> GetAsync(Guid shopperID)
+        public async Task<ShopperViewModel> GetAsync(Guid shopperID)
         {
             var findShopperQuery = new FindShopperQuery(shopperID, Gender.None);
 
@@ -53,7 +49,7 @@
             return shopperAdapter.Adapt(shopper, typeMapper);
         }
 
-        public async Task<IEnumerable<ShopperDTO>> GetAllAsync()
+        public async Task<IEnumerable<ShopperViewModel>> GetAllAsync()
         {
             var findShopperQuery = new FindShopperQuery(Guid.Empty, Gender.None);
 
@@ -62,7 +58,7 @@
             return shopperAdapter.Adapt(shoppers, typeMapper);
         }
 
-        public async Task<IEnumerable<ShopperDTO>> GetShoppersByGender(Gender gender)
+        public async Task<IEnumerable<ShopperViewModel>> GetShoppersByGender(Gender gender)
         {
             var findShopperQuery = new FindShopperQuery(Guid.Empty, gender);
 

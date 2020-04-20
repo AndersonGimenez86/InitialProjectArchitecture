@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting
 {
     public static class SectionDefinitons
     {

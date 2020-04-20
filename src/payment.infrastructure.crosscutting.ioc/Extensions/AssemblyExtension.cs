@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.IoC.Extensions
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.IoC.Extensions
 {
     using System;
     using System.Collections.Generic;

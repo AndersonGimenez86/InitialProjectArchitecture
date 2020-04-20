@@ -1,40 +1,45 @@
-﻿namespace AG.PaymentApp.repository.Repositories
+﻿namespace AG.PaymentApp.Repository.Repositories
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using AG.PaymentApp.Domain.commands;
-    using AG.PaymentApp.Domain.events;
+    using AG.PaymentApp.Domain.Commands.Interface;
+    using AG.PaymentApp.Domain.Entity.Merchants;
+    using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Merchants;
-    using AG.PaymentApp.repository.commands.Interface;
-    using AG.PaymentApp.repository.Filters;
-    using AG.PaymentApp.repository.Interface;
+    using AG.PaymentApp.Repository.Filters;
+    using AG.PaymentApp.Repository.Interface;
+    using AutoMapper;
     using MongoDB.Bson;
     using MongoDB.Driver;
 
-    public class MerchantRepository : IMerchantEventRepository, IFindMerchantEventRepository
+    public class MerchantRepository : IMerchantRepository, IFindMerchantRepository
     {
-        private readonly IEventMerchantRepositoryStartup eventMerchantRepositoryStartup;
-        private readonly IMongoCollection<MerchantMongo> merchantEvents;
+        private readonly IMerchantRepositoryStartup eventMerchantRepositoryStartup;
+        private readonly IMongoCollection<MerchantMongo> merchantRepository;
+        private readonly IMapper typeMapper;
 
-        public MerchantRepository(IEventMerchantRepositoryStartup eventMerchantRepositoryStartup)
+        public MerchantRepository(IMerchantRepositoryStartup eventMerchantRepositoryStartup,
+            IMapper typeMapper)
         {
             this.eventMerchantRepositoryStartup = eventMerchantRepositoryStartup;
-            this.merchantEvents = this.GetMerchantCollection();
+            this.merchantRepository = this.GetMerchantCollection();
+            this.typeMapper = typeMapper;
         }
-        public async Task SaveAsync(MerchantDataCommand merchantDataCommand)
+        public async Task SaveAsync(Merchant merchant)
         {
-            await this.merchantEvents.InsertOneAsync(merchantDataCommand.MerchantMongo);
+            var merchantMongo = this.typeMapper.Map<MerchantMongo>(merchant);
+            await this.merchantRepository.InsertOneAsync(merchantMongo);
         }
 
-        public async Task<MerchantMongo> GetAsync(FindMerchantQuery findMerchantQuery)
+        public async Task<Merchant> GetAsync(FindMerchantQuery findMerchantQuery)
         {
-            return (await GetAllAsync(findMerchantQuery)).FirstOrDefault<MerchantMongo>();
+            return (await GetAllAsync(findMerchantQuery)).FirstOrDefault<Merchant>();
         }
 
-        public async Task<IEnumerable<MerchantMongo>> GetAllAsync(FindMerchantQuery findMerchantQuery)
+        public async Task<IEnumerable<Merchant>> GetAllAsync(FindMerchantQuery findMerchantQuery)
         {
             var filters = EventFiltersDefinition<MerchantMongo>.ApplyMerchantIDFilter(findMerchantQuery.MerchantID);
 
@@ -53,14 +58,14 @@
                 Sort = Builders<MerchantMongo>.Sort.Descending(p => p.DateCreated)
             };
 
-            var merchants = await this.merchantEvents
+            var merchants = await this.merchantRepository
                 .FindAsync(filters, options)
                 .Result.ToListAsync()
                 .ConfigureAwait(false);
 
-            return merchants;
+            return this.typeMapper.Map<IEnumerable<Merchant>>(merchants);
         }
-        public async Task<IEnumerable<MerchantMongo>> GetMerchantsByCountry(string country)
+        public async Task<IEnumerable<Merchant>> GetMerchantsByCountry(string country)
         {
             var findMerchantQuery = new FindMerchantQuery(Guid.Empty, country, string.Empty);
             return await GetAllAsync(findMerchantQuery);
@@ -70,6 +75,11 @@
             BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
 
             return this.eventMerchantRepositoryStartup.GetMongoCollection();
+        }
+
+        public Task UpdateAsync(Merchant entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

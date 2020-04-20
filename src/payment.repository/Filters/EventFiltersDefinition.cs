@@ -1,7 +1,7 @@
-﻿namespace AG.PaymentApp.repository.Filters
+﻿namespace AG.PaymentApp.Repository.Filters
 {
     using System;
-    using AG.PaymentApp.Domain.events;
+    using AG.PaymentApp.Domain.Entity.Mongo;
     using MongoDB.Driver;
 
     internal static class EventFiltersDefinition<TFilter>

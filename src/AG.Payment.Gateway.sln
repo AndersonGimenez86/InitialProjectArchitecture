@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Gateway", "payment.gateway\Payment.Gateway.csproj", "{AA6E82B6-DEC4-48BA-90DD-BE48C4501C55}"
 EndProject
@@ -47,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Bank", "payment.ban
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Domain.Core", "payment.domain.even\Payment.Domain.Core.csproj", "{DA651BB6-6737-471D-AEBD-95BE20B2A19D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8EDBF44E-33FC-4DC2-9845-C2B9BBC0EE51}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.0.Tests", "3.0.Tests", "{8EDBF44E-33FC-4DC2-9845-C2B9BBC0EE51}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Domain.Tests", "payment.domain.tests\Payment.Domain.Tests.csproj", "{7D1C385B-8E2A-41E9-9EB9-B1A860601E84}"
 EndProject

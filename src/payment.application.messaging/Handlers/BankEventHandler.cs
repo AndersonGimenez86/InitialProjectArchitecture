@@ -1,10 +1,10 @@
-﻿namespace AG.PaymentApp.application.messaging.Handlers
+﻿namespace AG.PaymentApp.Application.Messaging.Handlers
 {
     using System;
     using System.Threading.Tasks;
-    using AG.PaymentApp.application.messaging.Events;
-    using AG.PaymentApp.crosscutting.kafka.Messaging.Producers.Interface;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging;
+    using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
+    using AG.PaymentApp.Domain.Events;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
 
     public class BankEventHandler : IMessageHandler<CreatePaymentEvent>
     {
@@ -29,7 +29,7 @@
 
             var createTransactionEvent = new CreateTransactionEvent(message.EventID, newTransactionID, transactionStatus);
 
-            var response = await this.topicProducer.ProduceAsync(newTransactionID.ToString(), createTransactionEvent);
+            var response = await this.topicProducer.ProduceAsync(createTransactionEvent);
 
             //TODO: Log response
         }

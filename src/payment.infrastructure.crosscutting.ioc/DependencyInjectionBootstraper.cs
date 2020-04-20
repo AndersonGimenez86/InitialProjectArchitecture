@@ -1,20 +1,19 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.IoC
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.IoC
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using AutoMapper;
-    using AG.PaymentApp.application.messaging;
-    using AG.PaymentApp.application.messaging.DependencyInjection;
-    using AG.PaymentApp.application.services.DependencyInjection;
-    using AG.PaymentApp.Domain.commands.DependencyInjection;
+    using AG.PaymentApp.Application.Messaging;
+    using AG.PaymentApp.Application.Messaging.DependencyInjection;
+    using AG.PaymentApp.Application.Services.DependencyInjection;
     using AG.PaymentApp.Domain.Query.DependencyInjection;
-    using AG.PaymentApp.Domain.Services.DependencyInjection;
-    using AG.PaymentApp.infrastructure.crosscutting.Environment;
-    using AG.PaymentApp.infrastructure.crosscutting.IoC.Extensions;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config;
-    using AG.PaymentApp.infrastructure.crosscutting.logging.DependencyInjection;
-    using AG.PaymentApp.repository.DependecyInjection;
+    using AG.PaymentApp.Infrastructure.Crosscutting;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Environment;
+    using AG.PaymentApp.Infrastructure.Crosscutting.IoC.Extensions;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Logging.DependencyInjection;
+    using AG.PaymentApp.Repository.DependecyInjection;
+    using AutoMapper;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -45,7 +44,6 @@
             services.SetupApplicationServices(kafkaSettingsSection)
                 .SetupInfrastructureCrosscuttingLoggingDependencyInjection()
                 .SetupApplicationMessaging()
-                .SetupDomainServices()
                 .SetupMessaging()
                 .SetupConsumers(kafkaSettingsSection)
                 .SetupDomainCommands()

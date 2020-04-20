@@ -1,9 +1,9 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Serializers
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Serializers
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Serializers;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Serializers;
     using Confluent.Kafka;
 
     [ExcludeFromCodeCoverage]

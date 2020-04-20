@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Serializers
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Serializers
 {
     using Confluent.Kafka;
 

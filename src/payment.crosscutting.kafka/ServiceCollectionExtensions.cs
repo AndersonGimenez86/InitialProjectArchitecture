@@ -1,15 +1,16 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using AG.PaymentApp.crosscutting.kafka;
-    using AG.PaymentApp.crosscutting.kafka.Messaging.Producers.Interface;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Exceptions;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Consumers;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Consumers.Interface;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Producers;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Serialization;
+    using AG.PaymentApp.Domain.Core.Events;
+    using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
+    using AG.PaymentApp.Infrastructure.Crosscutting.kafka.Exceptions;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Consumers;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Consumers.Interface;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Producers;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Serialization;
     using Confluent.Kafka;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
@@ -34,13 +35,13 @@
         }
 
         public static IServiceCollection AddTopicProducer<TMessage>(this IServiceCollection serviceCollection, string producerName)
-            where TMessage : class
+            where TMessage : Event
         {
             return serviceCollection.AddSingleton(sp => sp.CreateProducer<TMessage>(producerName));
         }
 
         private static ITopicProducer<TMessage> CreateProducer<TMessage>(this IServiceProvider serviceProvider, string producerName)
-          where TMessage : class
+          where TMessage : Event
         {
             var kafkaSettings = serviceProvider.GetRequiredService<IOptions<KafkaSettings>>();
             var producerFactory = serviceProvider.GetRequiredService<KafkaProducerFactory>();

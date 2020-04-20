@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Exceptions
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.kafka.Exceptions
 {
     using System;
 

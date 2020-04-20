@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
-using AG.PaymentApp.application.services.DTO.Merchants;
+using AG.PaymentApp.Application.Services.DTO.Merchants;
 using AG.PaymentApp.Domain.Entity.Merchants;
 
-namespace AG.PaymentApp.application.services.Mapper
+namespace AG.PaymentApp.Application.Services.Mapper
 {
     public class MerchantProfile : Profile
     {
         public MerchantProfile()
         {
-            this.CreateMap<MerchantDTO, Merchant>()
+            this.CreateMap<MerchantViewModel, Merchant>()
                 .ForMember(m => m.Country, opt => opt.MapFrom(mm => mm.Country))
                 .ForMember(m => m.Currency, opt => opt.MapFrom(mm => mm.Currency))
-                .ForMember(m => m.ID, opt => opt.MapFrom(mm => mm.MerchantID))
+                .ForMember(m => m.Id, opt => opt.MapFrom(mm => mm.MerchantID))
                 .ReverseMap();
         }
     }

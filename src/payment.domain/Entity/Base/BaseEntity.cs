@@ -2,9 +2,9 @@
 {
     using System;
 
-    public class BaseEvent
+    public class Entity
     {
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
     }

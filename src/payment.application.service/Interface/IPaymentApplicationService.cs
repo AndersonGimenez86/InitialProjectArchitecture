@@ -1,15 +1,15 @@
-﻿namespace AG.PaymentApp.application.services.Interface
+﻿namespace AG.PaymentApp.Application.Services.Interface
 {
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using AG.PaymentApp.application.services.DTO.Payments;
+    using AG.PaymentApp.Application.Services.DTO.Payments;
 
     public interface IPaymentApplicationService
     {
-        Task<PaymentProcessingResponseDTO> CreateAsync(PaymentProcessingDTO paymentProcessingDTO);
-        Task<PaymentDTO> GetAsync(Guid paymentID);
-        Task<IEnumerable<PaymentDTO>> GetAllAsync();
-        Task<PaymentDTO> GetLastPaymentReceivedAsync(Guid shopperID);
+        Task<PaymentProcessingResponseViewModel> CreateAsync(PaymentProcessingViewModel paymentProcessingDTO);
+        Task<PaymentViewModel> GetAsync(Guid paymentID);
+        Task<IEnumerable<PaymentViewModel>> GetAllAsync();
+        Task<PaymentViewModel> GetLastPaymentReceivedAsync(Guid shopperID);
     }
 }

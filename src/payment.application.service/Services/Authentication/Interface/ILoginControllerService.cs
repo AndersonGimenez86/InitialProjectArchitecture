@@ -1,6 +1,6 @@
-﻿namespace AG.PaymentApp.application.services.Authentication
+﻿namespace AG.PaymentApp.Application.Services.Authentication
 {
-    using AG.PaymentApp.application.services.DTO.Login;
+    using AG.PaymentApp.Application.Services.DTO.Login;
     using AG.PaymentApp.Domain.Entity.Shoppers;
 
     public interface ILoginControllerService

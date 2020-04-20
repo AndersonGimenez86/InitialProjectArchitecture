@@ -1,16 +1,18 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Producers
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Producers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using AG.PaymentApp.crosscutting.kafka.Messaging.Producers.Interface;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Serialization;
+    using AG.PaymentApp.Domain.Core.Events;
+    using AG.PaymentApp.Domain.Core.Kafka.Producers;
+    using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Serialization;
     using Confluent.Kafka;
 
     public class TopicProducer<TMessage> : ITopicProducer<TMessage>
-        where TMessage : class
+        where TMessage : Event
     {
         private static readonly Encoding HeaderSerializer = Encoding.UTF8;
 
@@ -35,7 +37,7 @@
 
         public string Name { get; protected set; }
 
-        public async Task<DeliveryMessageReport> ProduceAsync(string key, TMessage message)
+        public async Task<DeliveryMessageReport> ProduceAsync(TMessage message)
         {
             var messageDateTime = DateTime.UtcNow;
             var deliveryReport = new DeliveryMessageReport(this.topicName, messageDateTime);
@@ -49,7 +51,7 @@
 
                 var messageContent = this.messageSerializer.Serialize(message);
 
-                var kafkaMessage = this.CreateKafkaMessage(messageDateTime, key, message, messageContent);
+                var kafkaMessage = this.CreateKafkaMessage(messageDateTime, Guid.NewGuid().ToString(), message, messageContent);
 
                 deliveryReport.UpdateMessage(kafkaMessage.Key, GetHeadersContent(kafkaMessage.Headers));
 
@@ -84,11 +86,11 @@
             var headersDict = new Dictionary<string, string>
             {
                 ["Type"] = $"{t.FullName}, {t.Assembly.GetName().Name}",
-                ["X-FF-MessageId"] = Guid.NewGuid().ToString(),
-                ["X-FF-Timestamp"] = dateTime.ToString(DateTimeFormat),
-                ["X-FF-Serialization"] = this.messageSerializer.Name,
-                ["X-FF-Compression"] = this.compressionType,
-                ["X-FF-ContractType"] = t.FullName + ", " + t.Assembly.GetName().Name
+                ["X-AG-MessageId"] = Guid.NewGuid().ToString(),
+                ["X-AG-Timestamp"] = dateTime.ToString(DateTimeFormat),
+                ["X-AG-Serialization"] = this.messageSerializer.Name,
+                ["X-AG-Compression"] = this.compressionType,
+                ["X-AG-ContractType"] = t.FullName + ", " + t.Assembly.GetName().Name
             };
 
             var headers = new Headers();

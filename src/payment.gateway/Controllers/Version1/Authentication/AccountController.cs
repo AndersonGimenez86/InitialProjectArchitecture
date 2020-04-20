@@ -1,6 +1,6 @@
 ﻿namespace AG.PaymentApp.Controllers.Authentication
 {
-    using AG.PaymentApp.application.services.Authentication;
+    using AG.PaymentApp.Application.Services.Authentication;
 
     public class AccountController
     {

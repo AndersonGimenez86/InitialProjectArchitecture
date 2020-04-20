@@ -2,16 +2,16 @@
 {
     using System;
     using AG.PaymentApp.Domain.Entity.Bases;
-    using AG.PaymentApp.Domain.Enum;
-    using AG.PaymentApp.Domain.ValueObject;
+    using AG.PaymentApp.Domain.Core.Enum;
+    using AG.PaymentApp.Domain.Core.ValueObject;
 
-    public class Shopper : BaseEvent
+    public class Shopper : Entity
     {
         public static Shopper CreateNew(Gender gender, Guid shopperID, string firstname, string lastname, string email)
         {
             var shopper = new Shopper
             {
-                ID = shopperID,
+                Id = shopperID,
                 Email = email,
                 FirstName = firstname,
                 LastName = lastname,
@@ -75,12 +75,12 @@
 
             // Your identity logic goes here.  
             // You may refactor this code to the method of an entity interface 
-            return ID == other.ID;
+            return Id == other.Id;
         }
 
         public override int GetHashCode()
         {
-            return ID.GetHashCode();
+            return Id.GetHashCode();
         }
         #endregion
     }

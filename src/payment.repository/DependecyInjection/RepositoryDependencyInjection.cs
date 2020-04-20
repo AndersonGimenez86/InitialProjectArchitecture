@@ -1,11 +1,12 @@
-﻿namespace AG.PaymentApp.repository.DependecyInjection
+﻿namespace AG.PaymentApp.Repository.DependecyInjection
 {
     using System.Diagnostics.CodeAnalysis;
+    using AG.PaymentApp.Domain.Commands.Interface;
+    using AG.PaymentApp.Domain.Interface;
     using AG.PaymentApp.Domain.queries.Interface;
-    using AG.PaymentApp.repository.commands.Interface;
-    using AG.PaymentApp.repository.Interface;
-    using AG.PaymentApp.repository.Repositories;
-    using AG.PaymentApp.repository.Startup;
+    using AG.PaymentApp.Repository.Interface;
+    using AG.PaymentApp.Repository.Repositories;
+    using AG.PaymentApp.Repository.Startup;
     using Microsoft.Extensions.DependencyInjection;
 
 
@@ -16,15 +17,15 @@
         {
             return services
                     .AddSingleton<IMongoRepository, MongoRepository>()
-                    .AddSingleton<IMerchantEventRepository, MerchantRepository>()
-                    .AddSingleton<IFindMerchantEventRepository, MerchantRepository>()
-                    .AddSingleton<IPaymentEventRepository, PaymentRepository>()
-                    .AddSingleton<IFindPaymentEventRepository, PaymentRepository>()
-                    .AddSingleton<IShopperEventRepository, ShopperRepository>()
-                    .AddSingleton<IFindShopperEventRepository, ShopperRepository>()
-                    .AddSingleton<IEventPaymentRepositoryStartup, EventPaymentRepositoryStartup>()
-                    .AddSingleton<IEventMerchantRepositoryStartup, EventMerchantRepositoryStartup>()
-                    .AddSingleton<IEventShopperRepositoryStartup, EventShopperRepositoryStartup>();
+                    .AddSingleton<IMerchantRepository, MerchantRepository>()
+                    .AddSingleton<IFindMerchantRepository, MerchantRepository>()
+                    .AddSingleton<IPaymentRepository, PaymentRepository>()
+                    .AddSingleton<IFindPaymentRepository, PaymentRepository>()
+                    .AddSingleton<IShopperRepository, ShopperRepository>()
+                    .AddSingleton<IFindShopperRepository, ShopperRepository>()
+                    .AddSingleton<IPaymentRepositoryStartup, EventPaymentRepositoryStartup>()
+                    .AddSingleton<IMerchantRepositoryStartup, EventMerchantRepositoryStartup>()
+                    .AddSingleton<IShopperRepositoryStartup, EventShopperRepositoryStartup>();
 
         }
     }

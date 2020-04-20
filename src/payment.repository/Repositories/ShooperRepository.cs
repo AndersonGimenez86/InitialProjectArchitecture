@@ -1,41 +1,49 @@
-﻿namespace AG.PaymentApp.repository.Repositories
+﻿namespace AG.PaymentApp.Repository.Repositories
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using AG.PaymentApp.Domain.commands.Shoppers;
-    using AG.PaymentApp.Domain.Enum;
-    using AG.PaymentApp.Domain.events;
+    using AG.PaymentApp.Domain.Commands.Interface;
+    using AG.PaymentApp.Domain.Entity.Mongo;
+    using AG.PaymentApp.Domain.Entity.Shoppers;
+    using AG.PaymentApp.Domain.Core.Enum;
     using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Shoppers;
-    using AG.PaymentApp.repository.commands.Interface;
-    using AG.PaymentApp.repository.Filters;
-    using AG.PaymentApp.repository.Interface;
+    using AG.PaymentApp.Repository.Filters;
+    using AG.PaymentApp.Repository.Interface;
+    using AutoMapper;
     using MongoDB.Driver;
 
-    public class ShopperRepository : IShopperEventRepository, IFindShopperEventRepository
+    public class ShopperRepository : IShopperRepository, IFindShopperRepository
     {
-        private readonly IEventShopperRepositoryStartup eventShopperRepositoryStartup;
-        private readonly IMongoCollection<ShopperMongo> shopperEvents;
+        private readonly IShopperRepositoryStartup eventShopperRepositoryStartup;
+        private readonly IMongoCollection<ShopperMongo> shopperRepository;
+        private readonly IMapper typeMapper;
 
-        public ShopperRepository(IEventShopperRepositoryStartup eventShopperRepositoryStartup)
+        public ShopperRepository(IShopperRepositoryStartup eventShopperRepositoryStartup, IMapper typeMapper)
         {
             this.eventShopperRepositoryStartup = eventShopperRepositoryStartup;
-            this.shopperEvents = this.GetShopperCollection();
+            this.typeMapper = typeMapper;
+            this.shopperRepository = this.GetShopperCollection();
         }
-        public async Task SaveAsync(ShopperDataCommand shopperDataCommand)
+        public async Task SaveAsync(Shopper shopper)
         {
-            await this.shopperEvents.InsertOneAsync(shopperDataCommand.ShopperMongo);
+            var shopperMongo = this.typeMapper.Map<ShopperMongo>(shopper);
+            await this.shopperRepository.InsertOneAsync(shopperMongo);
         }
 
-        public async Task<ShopperMongo> GetAsync(Guid shopperID)
+        public async Task<Shopper> GetAsync(Guid shopperID)
         {
             var findShopperQuery = new FindShopperQuery(shopperID, Gender.None);
-            return (await GetAllAsync(findShopperQuery)).FirstOrDefault<ShopperMongo>();
+            return (await GetAllAsync(findShopperQuery)).FirstOrDefault<Shopper>();
         }
-
-        public async Task<IEnumerable<ShopperMongo>> GetAllAsync(FindShopperQuery findShopperQuery)
+        public async Task<IEnumerable<Shopper>> GetShoppersByGenderAsync(Gender gender)
+        {
+            var findShopperQuery = new FindShopperQuery(Guid.Empty, gender);
+            return await GetAllAsync(findShopperQuery);
+        }
+        public async Task<IEnumerable<Shopper>> GetAllAsync(FindShopperQuery findShopperQuery)
         {
             var filters = EventFiltersDefinition<ShopperMongo>.ApplyShooperIDFilter(findShopperQuery.ShopperID);
 
@@ -49,21 +57,22 @@
                 Sort = Builders<ShopperMongo>.Sort.Descending(p => p.DateCreated)
             };
 
-            var shoppers = await this.shopperEvents
+            var shoppers = await this.shopperRepository
                 .FindAsync(filters, options)
                 .Result.ToListAsync()
                 .ConfigureAwait(false);
 
-            return shoppers;
+            return this.typeMapper.Map<IEnumerable<Shopper>>(shoppers);
         }
-        public async Task<IEnumerable<ShopperMongo>> GetShoppersByGenderAsync(Gender gender)
-        {
-            var findShopperQuery = new FindShopperQuery(Guid.Empty, gender);
-            return await GetAllAsync(findShopperQuery);
-        }
+
         private IMongoCollection<ShopperMongo> GetShopperCollection()
         {
             return this.eventShopperRepositoryStartup.GetMongoCollection();
+        }
+
+        public Task UpdateAsync(Shopper entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

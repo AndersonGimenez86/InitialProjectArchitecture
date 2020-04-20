@@ -2,8 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using AG.PaymentApp.application.services.DTO.Merchants;
-    using AG.PaymentApp.application.services.Interface;
+    using AG.PaymentApp.Application.Services.DTO.Merchants;
+    using AG.PaymentApp.Application.Services.Interface;
     using AG.PaymentApp.gateway.Extensions;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -36,7 +36,7 @@
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> Post([FromBody]MerchantDTO merchantDTO)
+        public async Task<IActionResult> Post([FromBody]MerchantViewModel merchantDTO)
         {
             try
             {

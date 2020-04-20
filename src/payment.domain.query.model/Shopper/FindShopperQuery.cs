@@ -1,7 +1,7 @@
 ﻿namespace AG.PaymentApp.Domain.Query.Shoppers
 {
     using System;
-    using AG.PaymentApp.Domain.Enum;
+    using AG.PaymentApp.Domain.Core.Enum;
     using AG.PaymentApp.Domain.Query.Interface;
 
     public class FindShopperQuery : IQuery

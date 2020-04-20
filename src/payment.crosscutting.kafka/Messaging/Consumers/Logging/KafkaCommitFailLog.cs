@@ -1,7 +1,7 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Consumers.Logging
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Consumers.Logging
 {
     using System;
-    using AG.PaymentApp.infrastructure.crosscutting.logging;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Logging;
 
     internal class KafkaCommitFailLog : LogTemplate<KafkaCommitFailLogData>
     {

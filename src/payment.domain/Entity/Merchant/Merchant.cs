@@ -1,8 +1,8 @@
 ﻿namespace AG.PaymentApp.Domain.Entity.Merchants
 {
     using AG.PaymentApp.Domain.Entity.Bases;
-    using AG.PaymentApp.Domain.ValueObject;
-    public class Merchant : BaseEvent
+    using AG.PaymentApp.Domain.Core.ValueObject;
+    public class Merchant : Entity
     {
         public string Name { get; set; }
 

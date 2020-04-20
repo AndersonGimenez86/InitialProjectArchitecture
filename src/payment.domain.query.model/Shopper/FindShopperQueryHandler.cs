@@ -2,21 +2,21 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using AutoMapper;
-    using AG.PaymentApp.application.services.Adapter;
+    using AG.PaymentApp.Application.Services.Adapter;
+    using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.Entity.Shoppers;
-    using AG.PaymentApp.Domain.events;
     using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Interface;
+    using AutoMapper;
 
     public class FindShopperQueryHandler : IFindShopperQueryHandler
     {
-        private readonly IFindShopperEventRepository repository;
+        private readonly IFindShopperRepository repository;
         private readonly IAdaptMongoEntityToEntity<ShopperMongo, Shopper> shopperAdapter;
         private readonly IMapper typeMapper;
 
         public FindShopperQueryHandler(
-            IFindShopperEventRepository repository,
+            IFindShopperRepository repository,
             IAdaptMongoEntityToEntity<ShopperMongo, Shopper> shopperAdapter,
             IMapper typeMapper)
         {
@@ -27,21 +27,17 @@
 
         public async Task<Shopper> GetAsync(FindShopperQuery query)
         {
-            var shopperMongo = await this.repository.GetAsync(query.ShopperID);
-            return this.shopperAdapter.Adapt(shopperMongo, typeMapper);
+            return await this.repository.GetAsync(query.ShopperID);
         }
 
         public async Task<IEnumerable<Shopper>> GetShoppersByGender(FindShopperQuery query)
         {
-            var shoppersMongo = await this.repository.GetShoppersByGenderAsync(query.Gender);
-            return this.shopperAdapter.Adapt(shoppersMongo, typeMapper);
-
+            return await this.repository.GetShoppersByGenderAsync(query.Gender);
         }
 
         public async Task<IEnumerable<Shopper>> GetAllAsync(FindShopperQuery query)
         {
-            var shoppersMongo = await this.repository.GetAllAsync(query);
-            return this.shopperAdapter.Adapt(shoppersMongo, typeMapper);
+            return await this.repository.GetAllAsync(query);
         }
     }
 }

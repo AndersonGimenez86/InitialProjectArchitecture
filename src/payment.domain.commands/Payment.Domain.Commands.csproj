@@ -6,8 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\payment.crosscutting.kafka\Payment.Infrastructure.Crosscutting.Kafka.csproj" />
     <ProjectReference Include="..\payment.domain.even\Payment.Domain.Core.csproj" />
+    <ProjectReference Include="..\payment.domain.query.model\Payment.Domain.Query.csproj" />
     <ProjectReference Include="..\payment.domain\Payment.Domain.csproj" />
     <ProjectReference Include="..\payment.infrastructure.crosscutting\Payment.Infrastructure.Crosscutting.csproj" />
   </ItemGroup>
