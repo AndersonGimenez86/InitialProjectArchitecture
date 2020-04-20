@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging
 {
     using System.Threading.Tasks;
 

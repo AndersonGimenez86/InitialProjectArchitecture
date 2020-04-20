@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Serialization
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Serialization
 {
     public interface IMessageSerializer<TMessage>
           where TMessage : class

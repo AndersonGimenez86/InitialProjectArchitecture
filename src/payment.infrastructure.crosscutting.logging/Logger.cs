@@ -1,6 +1,6 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.logging
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Logging
 {
-    using AG.PaymentApp.infrastructure.crosscutting.logging.Interface;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Logging.Interface;
 
     internal class Logger : ILogger
     {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AG.PaymentApp.Domain.Commands.Interface;
-using AG.PaymentApp.infrastructure.crosscutting.Environment;
+using AG.PaymentApp.Domain.Interface;
+using AG.PaymentApp.Infrastructure.Crosscutting.Environment;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
-namespace AG.PaymentApp.repository.Repositories
+namespace AG.PaymentApp.Repository.Repositories
 {
     class MongoRepository : IMongoRepository
     {

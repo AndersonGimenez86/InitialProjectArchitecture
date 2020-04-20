@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Producers
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Producers
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@
     using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.Domain.Core.Kafka.Producers;
     using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Serialization;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Serialization;
     using Confluent.Kafka;
 
     public class TopicProducer<TMessage> : ITopicProducer<TMessage>

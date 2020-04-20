@@ -1,15 +1,15 @@
-﻿namespace AG.PaymentApp.application.messaging
+﻿namespace AG.PaymentApp.Application.Messaging
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
-    using AG.PaymentApp.application.messaging.Handlers;
+    using AG.PaymentApp.Application.Messaging.Handlers;
     using AG.PaymentApp.Domain.Core.Events;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Consumers;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Consumers.Interface;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Serialization;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Consumers;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Consumers.Interface;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Serialization;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 

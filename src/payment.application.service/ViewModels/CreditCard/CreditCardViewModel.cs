@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.application.services.DTO.CreditCards
+﻿namespace AG.PaymentApp.Application.Services.DTO.CreditCards
 {
     using AG.PaymentApp.Domain.Enum;
     public class CreditCardViewModelcs

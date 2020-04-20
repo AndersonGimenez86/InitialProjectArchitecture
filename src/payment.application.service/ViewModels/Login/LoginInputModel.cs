@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.application.services.DTO.Login
+﻿namespace AG.PaymentApp.Application.Services.DTO.Login
 {
     public class LoginInputModel
     {

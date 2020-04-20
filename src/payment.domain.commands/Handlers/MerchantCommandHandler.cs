@@ -6,7 +6,6 @@
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Entity.Merchants;
-    using AG.PaymentApp.Domain.events;
     using AutoMapper;
     using MediatR;
     using Payment.Domain.Core.Bus;
@@ -35,9 +34,9 @@
         {
             try
             {
-                var merchantMongo = this.typeMapper.Map<MerchantMongo>(merchant);
+                //var merchantMongo = this.typeMapper.Map<MerchantMongo>(merchant);
 
-                var merchantDataCommand = new MerchantCommand(merchantMongo);
+                //var merchantDataCommand = new MerchantCommand(merchantMongo);
 
                 //save merchant event into mongoDB
                 //await this.eventRepository.Add(merchantDataCommand);

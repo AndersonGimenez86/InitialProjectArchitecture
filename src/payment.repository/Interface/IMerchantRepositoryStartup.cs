@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.repository.Interface
+﻿namespace AG.PaymentApp.Repository.Interface
 {
     using AG.PaymentApp.Domain.events;
 

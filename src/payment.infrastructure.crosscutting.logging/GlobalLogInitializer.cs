@@ -1,8 +1,8 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.logging
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Logging
 {
     using System.Runtime.CompilerServices;
-    using AG.PaymentApp.infrastructure.crosscutting.logging.Interface;
-    using AG.PaymentApp.infrastructure.crosscutting.Settings.Logging;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Logging.Interface;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Settings.Logging;
 
     public static class GlobalLogInitializer
     {

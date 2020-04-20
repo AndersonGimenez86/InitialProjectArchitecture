@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.Settings.Logging
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Settings.Logging
 {
     public class LoggingSettings
     {

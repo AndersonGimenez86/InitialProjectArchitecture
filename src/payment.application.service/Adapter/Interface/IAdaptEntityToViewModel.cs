@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.application.services.Adapter.Interface
+﻿namespace AG.PaymentApp.Application.Services.Adapter.Interface
 {
     using System.Collections.Generic;
     using AG.PaymentApp.Domain.Entity.Bases;

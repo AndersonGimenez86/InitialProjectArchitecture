@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.application.services.DTO.Shoppers
+﻿namespace AG.PaymentApp.Application.Services.DTO.Shoppers
 {
     using System;
     using System.ComponentModel.DataAnnotations;

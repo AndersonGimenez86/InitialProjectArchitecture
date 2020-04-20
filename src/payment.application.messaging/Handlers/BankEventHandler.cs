@@ -1,10 +1,10 @@
-﻿namespace AG.PaymentApp.application.messaging.Handlers
+﻿namespace AG.PaymentApp.Application.Messaging.Handlers
 {
     using System;
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
 
     public class BankEventHandler : IMessageHandler<CreatePaymentEvent>
     {

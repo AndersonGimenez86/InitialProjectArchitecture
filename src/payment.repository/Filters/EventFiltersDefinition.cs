@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.repository.Filters
+﻿namespace AG.PaymentApp.Repository.Filters
 {
     using System;
     using AG.PaymentApp.Domain.events;

@@ -1,8 +1,8 @@
-﻿namespace AG.PaymentApp.application.services.Adapter
+﻿namespace AG.PaymentApp.Application.Services.Adapter
 {
     using System.Collections.Generic;
     using AutoMapper;
-    using AG.PaymentApp.application.services.Adapter.Interface;
+    using AG.PaymentApp.Application.Services.Adapter.Interface;
     using AG.PaymentApp.Domain.Entity.Bases;
     public class AdaptEntityToViewModel<Entity, DTO> : IAdaptEntityToViewModel<Entity, DTO> where Entity : Domain.Entity.Bases.Entity
     {

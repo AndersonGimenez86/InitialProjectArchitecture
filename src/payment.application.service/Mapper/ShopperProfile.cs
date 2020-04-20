@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using AG.PaymentApp.application.services.DTO.Shoppers;
+using AG.PaymentApp.Application.Services.DTO.Shoppers;
 using AG.PaymentApp.Domain.Entity.Shoppers;
 
-namespace AG.PaymentApp.application.services.Mapper
+namespace AG.PaymentApp.Application.Services.Mapper
 {
     public class ShopperProfile : Profile
     {

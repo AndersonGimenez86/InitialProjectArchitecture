@@ -1,12 +1,12 @@
-﻿using AG.PaymentApp.infrastructure.crosscutting.IoC;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace AG.PaymentApp.bank
+﻿namespace AG.PaymentApp.bank
 {
+    using AG.PaymentApp.Infrastructure.Crosscutting.IoC;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)

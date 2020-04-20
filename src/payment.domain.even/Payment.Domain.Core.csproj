@@ -10,7 +10,6 @@
     <PackageReference Include="FluentValidation" Version="8.6.2" />
     <PackageReference Include="MediatR" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
-    <PackageReference Include="MongoDB.Bson" Version="2.10.2" />
   </ItemGroup>
 
   <ItemGroup>

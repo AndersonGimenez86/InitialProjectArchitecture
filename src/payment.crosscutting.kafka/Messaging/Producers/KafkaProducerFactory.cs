@@ -1,9 +1,9 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Producers
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Producers
 {
     using System;
     using System.Collections.Generic;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Compression;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config.Serializers;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Compression;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config.Serializers;
     using Confluent.Kafka;
 
     public class KafkaProducerFactory : IDisposable

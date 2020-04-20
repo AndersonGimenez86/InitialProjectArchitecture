@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.application.services.Events.Interface
+﻿namespace AG.PaymentApp.Application.Services.Events.Interface
 {
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Core.Events;

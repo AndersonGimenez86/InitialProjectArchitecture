@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.application.messaging.Handlers
+﻿namespace AG.PaymentApp.Application.Messaging.Handlers
 {
     using System;
     using System.Threading.Tasks;
@@ -6,7 +6,7 @@
     using AG.PaymentApp.Domain.Enum;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
 
     internal class PaymentEventHandler : IMessageHandler<CreateTransactionEvent>
     {

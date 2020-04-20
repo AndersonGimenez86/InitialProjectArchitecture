@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.application.messaging.DependencyInjection
+﻿namespace AG.PaymentApp.Application.Messaging.DependencyInjection
 {
     using System.Diagnostics.CodeAnalysis;
     using Microsoft.Extensions.DependencyInjection;

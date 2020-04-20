@@ -1,19 +1,19 @@
-﻿namespace AG.PaymentApp.application.services.DependencyInjection
+﻿namespace AG.PaymentApp.Application.Services.DependencyInjection
 {
     using System.Diagnostics.CodeAnalysis;
-    using AG.PaymentApp.application.services.Adapter;
-    using AG.PaymentApp.application.services.Adapter.Interface;
-    using AG.PaymentApp.application.services.DTO.Merchants;
-    using AG.PaymentApp.application.services.DTO.Payments;
-    using AG.PaymentApp.application.services.DTO.Shoppers;
-    using AG.PaymentApp.application.services.Interface;
+    using AG.PaymentApp.Application.Services.Adapter;
+    using AG.PaymentApp.Application.Services.Adapter.Interface;
+    using AG.PaymentApp.Application.Services.DTO.Merchants;
+    using AG.PaymentApp.Application.Services.DTO.Payments;
+    using AG.PaymentApp.Application.Services.DTO.Shoppers;
+    using AG.PaymentApp.Application.Services.Interface;
     using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.Domain.Entity.Merchants;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.Entity.Shoppers;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Config;
-    using AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Serialization;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Serialization;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     public static class ApplicationServicesDependencyInjection

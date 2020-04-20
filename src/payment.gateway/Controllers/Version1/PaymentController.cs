@@ -2,8 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using AG.PaymentApp.application.services.DTO.Payments;
-    using AG.PaymentApp.application.services.Interface;
+    using AG.PaymentApp.Application.Services.DTO.Payments;
+    using AG.PaymentApp.Application.Services.Interface;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;

@@ -1,9 +1,9 @@
-﻿namespace AG.PaymentApp.application.messaging.tests
+﻿namespace AG.PaymentApp.Application.Messaging.tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
-    using AG.PaymentApp.application.messaging.Handlers;
+    using AG.PaymentApp.Application.Messaging.Handlers;
     using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.Domain.Core.Kafka.Producers;
     using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;

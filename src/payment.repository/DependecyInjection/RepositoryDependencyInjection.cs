@@ -1,11 +1,12 @@
-﻿namespace AG.PaymentApp.repository.DependecyInjection
+﻿namespace AG.PaymentApp.Repository.DependecyInjection
 {
     using System.Diagnostics.CodeAnalysis;
     using AG.PaymentApp.Domain.Commands.Interface;
+    using AG.PaymentApp.Domain.Interface;
     using AG.PaymentApp.Domain.queries.Interface;
-    using AG.PaymentApp.repository.Interface;
-    using AG.PaymentApp.repository.Repositories;
-    using AG.PaymentApp.repository.Startup;
+    using AG.PaymentApp.Repository.Interface;
+    using AG.PaymentApp.Repository.Repositories;
+    using AG.PaymentApp.Repository.Startup;
     using Microsoft.Extensions.DependencyInjection;
 
 

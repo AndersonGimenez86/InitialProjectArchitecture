@@ -1,7 +1,7 @@
 ﻿namespace AG.PaymentApp.Domain.Query.DependencyInjection
 {
     using System.Diagnostics.CodeAnalysis;
-    using AG.PaymentApp.application.services.Adapter;
+    using AG.PaymentApp.Application.Services.Adapter;
     using AG.PaymentApp.Domain.Entity.Merchants;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.Entity.Shoppers;

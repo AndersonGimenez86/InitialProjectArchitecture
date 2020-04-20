@@ -1,9 +1,9 @@
-﻿namespace AG.PaymentApp.application.services.Interface
+﻿namespace AG.PaymentApp.Application.Services.Interface
 {
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using AG.PaymentApp.application.services.DTO.Merchants;
+    using AG.PaymentApp.Application.Services.DTO.Merchants;
 
     public interface IMerchantApplicationService
     {

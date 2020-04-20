@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.infrastructure.crosscutting.kafka.Messaging.Compression
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Compression
 {
     using System;
     using System.Collections.Generic;

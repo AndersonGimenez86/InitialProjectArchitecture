@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace AG.PaymentApp.infrastructure.crosscutting.Environment
+namespace AG.PaymentApp.Infrastructure.Crosscutting.Environment
 {
     [ExcludeFromCodeCoverage]
     public static class SectionNames

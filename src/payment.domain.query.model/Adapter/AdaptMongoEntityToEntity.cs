@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.application.services.Adapter
+﻿namespace AG.PaymentApp.Application.Services.Adapter
 {
     using System.Collections.Generic;
     using AutoMapper;

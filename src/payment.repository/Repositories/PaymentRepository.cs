@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.repository.Repositories
+﻿namespace AG.PaymentApp.Repository.Repositories
 {
     using System;
     using System.Collections.Generic;
@@ -9,8 +9,8 @@
     using AG.PaymentApp.Domain.events;
     using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
-    using AG.PaymentApp.repository.Filters;
-    using AG.PaymentApp.repository.Interface;
+    using AG.PaymentApp.Repository.Filters;
+    using AG.PaymentApp.Repository.Interface;
     using AutoMapper;
     using MongoDB.Driver;
 

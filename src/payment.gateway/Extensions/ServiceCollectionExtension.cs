@@ -1,6 +1,6 @@
 ﻿namespace AG.PaymentApp.gateway.Extensions
 {
-    using AG.PaymentApp.infrastructure.crosscutting.Environment;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Environment;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.OpenApi.Models;
 

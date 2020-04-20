@@ -1,7 +1,7 @@
 ﻿namespace AG.PaymentApp.Domain.Query.DependencyInjection
 {
     using System.Diagnostics.CodeAnalysis;
-    using AG.PaymentApp.Domain.commands;
+    using AG.PaymentApp.Domain.Commands;
     using AG.PaymentApp.Domain.Commands.Payments;
     using AG.PaymentApp.Domain.Commands.Validations.Interface;
     using AG.PaymentApp.Domain.Commands.Validations.PreConditions.Payments;

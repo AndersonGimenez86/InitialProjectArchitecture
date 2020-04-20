@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AG.PaymentApp.application.services.DTO.Shoppers;
+using AG.PaymentApp.Application.Services.DTO.Shoppers;
 using AG.PaymentApp.Domain.Enum;
 
-namespace AG.PaymentApp.application.services.Interface
+namespace AG.PaymentApp.Application.Services.Interface
 {
     public interface IShopperApplicationService
     {

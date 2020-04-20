@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using AG.PaymentApp.application.services.Adapter;
+    using AG.PaymentApp.Application.Services.Adapter;
     using AG.PaymentApp.Domain.Entity.Shoppers;
     using AG.PaymentApp.Domain.events;
     using AG.PaymentApp.Domain.queries.Interface;

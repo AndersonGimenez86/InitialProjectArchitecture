@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.application.services.DTO.Payments
+﻿namespace AG.PaymentApp.Application.Services.DTO.Payments
 {
     using System;
     using System.Collections.Generic;

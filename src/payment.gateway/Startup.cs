@@ -1,6 +1,6 @@
 ﻿using AG.PaymentApp.gateway.Extensions;
-using AG.PaymentApp.infrastructure.crosscutting.Environment;
-using AG.PaymentApp.infrastructure.crosscutting.IoC;
+using AG.PaymentApp.Infrastructure.Crosscutting.Environment;
+using AG.PaymentApp.Infrastructure.Crosscutting.IoC;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -84,7 +84,7 @@ namespace AG.PaymentApp.gateway
             app.UseSwaggerUI(c =>
             {
 
-                c.DocumentTitle = "aG API";
+                c.DocumentTitle = "AG API";
                 c.SwaggerEndpoint(environmentSettings.Value.SwaggerPath, "AG.com API V1");
                 c.OAuthClientId("AG.com-privacy");
                 c.OAuthAppName("AG.com-privacy");

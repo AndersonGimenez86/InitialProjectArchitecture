@@ -1,11 +1,11 @@
-﻿namespace AG.PaymentApp.application.services
+﻿namespace AG.PaymentApp.Application.Services
 {
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using AG.PaymentApp.application.services.Adapter.Interface;
-    using AG.PaymentApp.application.services.DTO.Shoppers;
-    using AG.PaymentApp.application.services.Interface;
+    using AG.PaymentApp.Application.Services.Adapter.Interface;
+    using AG.PaymentApp.Application.Services.DTO.Shoppers;
+    using AG.PaymentApp.Application.Services.Interface;
     using AG.PaymentApp.Domain.Entity.Shoppers;
     using AG.PaymentApp.Domain.Enum;
     using AG.PaymentApp.Domain.Query.Interface;

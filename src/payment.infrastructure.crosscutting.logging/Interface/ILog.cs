@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AG.PaymentApp.infrastructure.crosscutting.logging.Interface
+namespace AG.PaymentApp.Infrastructure.Crosscutting.Logging.Interface
 {
     public interface ILog
     {
