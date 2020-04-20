@@ -27,20 +27,17 @@
 
         public async Task<Merchant> GetAsync(FindMerchantQuery query)
         {
-            var merchantMongo = await this.repository.GetAsync(query);
-            return this.merchantAdapter.Adapt(merchantMongo, typeMapper);
+            return await this.repository.GetAsync(query);
         }
 
         public async Task<IEnumerable<Merchant>> GetMerchantsByCountry(FindMerchantQuery query)
         {
-            var merchantsMongo = await this.repository.GetMerchantsByCountry(query.Country);
-            return this.merchantAdapter.Adapt(merchantsMongo, typeMapper);
+            return await this.repository.GetMerchantsByCountry(query.Country);
         }
 
         public async Task<IEnumerable<Merchant>> GetAllAsync(FindMerchantQuery query)
         {
-            var merchantsMongo = await this.repository.GetAllAsync(query);
-            return this.merchantAdapter.Adapt(merchantsMongo, typeMapper);
+            return await this.repository.GetAllAsync(query);
         }
     }
 }
