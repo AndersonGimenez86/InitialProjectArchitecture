@@ -1,6 +1,6 @@
 # InitialProjectArchitecture
 
-P.S. At this moment refactoring CQRS implementation.
+CQRS implementation is being refactored.
 For more details, take a look at the documentation.
 
 Base project for new entreprise softwares \ applications. Project is using most part of best practices, patterns, concepts, etc.
