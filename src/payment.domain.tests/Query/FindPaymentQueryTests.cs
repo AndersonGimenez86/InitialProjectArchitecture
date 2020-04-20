@@ -54,7 +54,7 @@
                 MerchantID = merchantID
             };
 
-            var mockIFindPaymentEventRepository = new Mock<IFindPaymentEventRepository>();
+            var mockIFindPaymentEventRepository = new Mock<IFindPaymentRepository>();
             mockIFindPaymentEventRepository.Setup(r => r.GetAsync(paymentID))
                 .ReturnsAsync(paymentMongo);
 

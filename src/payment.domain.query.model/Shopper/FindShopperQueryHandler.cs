@@ -11,12 +11,12 @@
 
     public class FindShopperQueryHandler : IFindShopperQueryHandler
     {
-        private readonly IFindShopperEventRepository repository;
+        private readonly IFindShopperRepository repository;
         private readonly IAdaptMongoEntityToEntity<ShopperMongo, Shopper> shopperAdapter;
         private readonly IMapper typeMapper;
 
         public FindShopperQueryHandler(
-            IFindShopperEventRepository repository,
+            IFindShopperRepository repository,
             IAdaptMongoEntityToEntity<ShopperMongo, Shopper> shopperAdapter,
             IMapper typeMapper)
         {

@@ -2,37 +2,36 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Ag.PaymentApp.Domain.Commands.Handlers;
+    using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Core.DataProtection;
     using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Entity.Payments;
-    using AG.PaymentApp.Domain.Interface;
     using AutoMapper;
     using MediatR;
     using Microsoft.AspNetCore.DataProtection;
-    using Payment.Domain.Commands.Handlers;
     using Payment.Domain.Core.Bus;
-    using Payment.Domain.Interface;
 
     public class PaymentCommandHandler : CommandHandler,
         IRequestHandler<NewPaymentCommand, bool>
     //   IRequestHandler<UpdateCustomerCommand, bool>,
     //IRequestHandler<RemoveCustomerCommand, bool>
     {
-        private readonly IRepository<Payment> paymentEventRepository;
+        private readonly IPaymentRepository repository;
         private readonly IMapper typeMapper;
         private readonly IUnitOfWork unitOfWork;
         private readonly IMediatorHandler mediatorHandler;
         private readonly IDataProtectionProvider dataProtectionProvider;
 
         public PaymentCommandHandler(
-        IRepository<Payment> paymentEventRepository,
+        IPaymentRepository paymentEventRepository,
         IMapper typeMapper,
         IUnitOfWork unitOfWork,
         IMediatorHandler mediatorHandler,
         IDataProtectionProvider dataProtectionProvider,
         INotificationHandler<DomainNotification> notifications) : base(unitOfWork, mediatorHandler, notifications)
         {
-            this.paymentEventRepository = paymentEventRepository;
+            this.repository = paymentEventRepository;
             this.typeMapper = typeMapper;
             this.unitOfWork = unitOfWork;
             this.mediatorHandler = mediatorHandler;
@@ -41,7 +40,6 @@
 
         public Task<bool> Handle(NewPaymentCommand newPaymentCommand, CancellationToken cancellationToken)
         {
-
             //update payment status to processing
             //if (kafkaResponse.Success)
             //{
@@ -58,7 +56,7 @@
 
             var payment = new Payment(newPaymentCommand.Id, newPaymentCommand.ShopperID, newPaymentCommand.MerchantID, creditCardProtected, newPaymentCommand.Amount, newPaymentCommand.Status);
 
-            paymentEventRepository.Add(payment);
+            repository.SaveAsync(payment);
 
             if (Commit())
             {
@@ -115,10 +113,5 @@
 
         //    return Task.FromResult(true);
         //}
-
-        public void Dispose()
-        {
-            paymentEventRepository.Dispose();
-        }
     }
 }

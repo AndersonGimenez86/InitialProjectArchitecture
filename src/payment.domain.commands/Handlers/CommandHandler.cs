@@ -1,20 +1,11 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CommandHandler.cs" company="AG Software">
-//   Copyright (c) AG. All rights reserved.
-// </copyright>
-// <summary>
-// CommandHandler
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-using AG.PaymentApp.Domain.Core.Notifications;
-using MediatR;
-using Payment.Domain.Core.Bus;
-using Payment.Domain.Core.Commands;
-using Payment.Domain.Interface;
-
-namespace Payment.Domain.Commands.Handlers
+﻿namespace Ag.PaymentApp.Domain.Commands.Handlers
 {
+    using AG.PaymentApp.Domain.Commands.Interface;
+    using AG.PaymentApp.Domain.Core.Notifications;
+    using MediatR;
+    using Payment.Domain.Core.Bus;
+    using Payment.Domain.Core.Commands;
+
     public class CommandHandler
     {
         private readonly IUnitOfWork unitOfWork;

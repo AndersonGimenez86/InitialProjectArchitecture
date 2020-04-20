@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AG.PaymentApp.Domain.Commands.Interface;
 using AG.PaymentApp.infrastructure.crosscutting.Environment;
-using AG.PaymentApp.repository.Interface;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 

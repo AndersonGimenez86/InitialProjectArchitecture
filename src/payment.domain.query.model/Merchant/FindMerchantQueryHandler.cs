@@ -11,12 +11,12 @@
 
     public class FindMerchantQueryHandler : IFindMerchantQueryHandler
     {
-        private readonly IFindMerchantEventRepository repository;
+        private readonly IFindMerchantRepository repository;
         private readonly IAdaptMongoEntityToEntity<MerchantMongo, Merchant> merchantAdapter;
         private readonly IMapper typeMapper;
 
         public FindMerchantQueryHandler(
-            IFindMerchantEventRepository repository,
+            IFindMerchantRepository repository,
             IAdaptMongoEntityToEntity<MerchantMongo, Merchant> merchantAdapter,
             IMapper typeMapper)
         {

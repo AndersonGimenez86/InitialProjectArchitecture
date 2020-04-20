@@ -4,7 +4,7 @@
     using AG.PaymentApp.repository.Interface;
     using MongoDB.Driver;
 
-    public class EventMerchantRepositoryStartup : IEventMerchantRepositoryStartup
+    public class EventMerchantRepositoryStartup : IMerchantRepositoryStartup
     {
         private readonly IMongoRepository mongoRepository;
 

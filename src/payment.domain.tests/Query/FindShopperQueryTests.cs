@@ -43,7 +43,7 @@
 
             var expectedShopper = Shopper.CreateNew(Gender.Men, shopperID, firstName, lastName, email);
 
-            var mockIFindShopperEventRepository = new Mock<IFindShopperEventRepository>();
+            var mockIFindShopperEventRepository = new Mock<IFindShopperRepository>();
             mockIFindShopperEventRepository.Setup(r => r.GetAsync(shopperID))
                 .ReturnsAsync(shopperMongo);
 

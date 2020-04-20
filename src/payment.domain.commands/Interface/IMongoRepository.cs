@@ -1,10 +1,9 @@
-﻿namespace AG.PaymentApp.Domain.Interface
+﻿namespace AG.PaymentApp.Domain.Commands.Interface
 {
     using System.Collections.Generic;
 
     public interface IMongoRepository
     {
         IDictionary<string, string> CollectionNames { get; set; }
-        //IMongoDatabase Database { get; set; }
     }
 }

@@ -11,12 +11,12 @@
 
     public class FindPaymentQueryHandler : IFindPaymentQueryHandler
     {
-        private readonly IFindPaymentEventRepository paymentRepository;
+        private readonly IFindPaymentRepository paymentRepository;
         private readonly IAdaptMongoEntityToEntity<PaymentMongo, Payment> paymentAdapter;
         private readonly IMapper typeMapper;
 
         public FindPaymentQueryHandler(
-            IFindPaymentEventRepository paymentIntentRepository,
+            IFindPaymentRepository paymentIntentRepository,
             IAdaptMongoEntityToEntity<PaymentMongo, Payment> paymentAdapter,
             IMapper typeMapper
             )

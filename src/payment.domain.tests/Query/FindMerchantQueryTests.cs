@@ -48,7 +48,7 @@
 
             var findMerchantQuery = new FindMerchantQuery(merchantID, string.Empty, string.Empty);
 
-            var mockIFindMerchantEventRepository = new Mock<IFindMerchantEventRepository>();
+            var mockIFindMerchantEventRepository = new Mock<IFindMerchantRepository>();
             mockIFindMerchantEventRepository.Setup(r => r.GetAsync(findMerchantQuery))
                 .ReturnsAsync(merchantMongo);
 

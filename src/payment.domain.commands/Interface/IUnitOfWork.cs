@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Payment.Domain.Interface
+﻿namespace AG.PaymentApp.Domain.Commands.Interface
 {
+    using System;
+
     public interface IUnitOfWork : IDisposable
     {
         bool Commit();

@@ -2,7 +2,7 @@
 {
     using AG.PaymentApp.Domain.events;
 
-    public interface IEventShopperRepositoryStartup : IEventRepositoryStartup<ShopperMongo>
+    public interface IMerchantRepositoryStartup : IRepositoryStartup<MerchantMongo>
     {
     }
 }

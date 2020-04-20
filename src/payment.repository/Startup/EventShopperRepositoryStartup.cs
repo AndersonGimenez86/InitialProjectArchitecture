@@ -4,7 +4,7 @@
     using AG.PaymentApp.repository.Interface;
     using MongoDB.Driver;
 
-    public class EventShopperRepositoryStartup : IEventShopperRepositoryStartup
+    public class EventShopperRepositoryStartup : IShopperRepositoryStartup
     {
         private readonly IMongoRepository mongoRepository;
 
