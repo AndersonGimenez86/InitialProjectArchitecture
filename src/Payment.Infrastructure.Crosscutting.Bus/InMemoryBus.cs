@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="InMemoryBus.cs" company="AG Software">
-//   Copyright (c) AG. All rights reserved.
-// </copyright>
-// <summary>
-// InMemoryBus
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Payment.Infrastructure.Crosscutting.Bus
+﻿namespace AG.Payment.Infrastructure.Crosscutting.Bus
 {
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Core.Events;
@@ -15,8 +6,8 @@ namespace Payment.Infrastructure.Crosscutting.Bus
     using AG.PaymentApp.Domain.Core.Kafka.Producers;
     using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
     using MediatR;
-    using Payment.Domain.Core.Bus;
-    using Payment.Domain.Core.Commands;
+    using AG.Payment.Domain.Core.Bus;
+    using AG.Payment.Domain.Core.Commands;
 
     public sealed class InMemoryBus<E> : IMediatorHandler where E : Event
     {

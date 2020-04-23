@@ -3,7 +3,7 @@
     using System;
     using AG.PaymentApp.Domain.Core.Enum;
     using AG.PaymentApp.Domain.Core.ValueObject;
-    using Payment.Domain.Core.Commands;
+    using AG.Payment.Domain.Core.Commands;
 
     public class ShopperCommand : Command
     {

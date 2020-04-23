@@ -5,6 +5,8 @@
     using AG.PaymentApp.Application.Messaging;
     using AG.PaymentApp.Application.Messaging.DependencyInjection;
     using AG.PaymentApp.Application.Services.DependencyInjection;
+    using AG.PaymentApp.Crosscutting.Bus.DependencyInjection;
+    using AG.PaymentApp.Domain.Commands.DependencyInjection;
     using AG.PaymentApp.Domain.Query.DependencyInjection;
     using AG.PaymentApp.Infrastructure.Crosscutting;
     using AG.PaymentApp.Infrastructure.Crosscutting.Environment;
@@ -46,9 +48,11 @@
                 .SetupApplicationMessaging()
                 .SetupMessaging()
                 .SetupConsumers(kafkaSettingsSection)
+                .SetupDomainEvents()
                 .SetupDomainCommands()
                 .SetupDomainQuery()
                 .SetupRepository()
+                .SetupCrosscuttingBus()
                 .AddAutoMapper(AppDomain.CurrentDomain.GetUserAssemblies());
 
             services.AddSingleton<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));

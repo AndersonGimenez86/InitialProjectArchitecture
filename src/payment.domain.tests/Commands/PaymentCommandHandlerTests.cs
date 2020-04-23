@@ -2,52 +2,79 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
-    using AG.PaymentApp.Domain.Enum;
-    using AG.PaymentApp.Domain.events;
-    using AG.PaymentApp.Domain.ValueObject;
+    using AG.Payment.Domain.Commands.Validations.Interface;
+    using AG.Payment.Domain.Core.Bus;
+    using AG.PaymentApp.Domain.Commands.Interface;
+    using AG.PaymentApp.Domain.Commands.Mapper;
+    using AG.PaymentApp.Domain.Commands.Payments;
+    using AG.PaymentApp.Domain.Core.Notifications;
+    using AG.PaymentApp.Domain.Core.ValueObject;
+    using AutoMapper;
+    using Ether.Outcomes;
+    using FluentAssertions;
+    using Microsoft.AspNetCore.DataProtection;
+    using Moq;
     using Xunit;
 
     [ExcludeFromCodeCoverage]
     public class PaymentCommandHandlerTests
     {
         [Fact]
-        public async Task ExecuteAsync_PersisteMongoDB()
+        public async Task HandleCommand_WithRaiseEvent_Success()
         {
             //ARRANGE
             var merchantID = Guid.NewGuid();
             var creditCardID = Guid.NewGuid();
             var shopperID = Guid.NewGuid();
             var paymentID = Guid.NewGuid();
-
-            var paymentMongo = new PaymentMongo
+            var money = Money.Zero;
+            var creditCard = new CreditCard()
             {
-                Amount = default(Money),
-                CreditCard = default(CreditCardProtected),
-                EventName = "Total Payment",
-                PaymentID = paymentID,
-                Reference = null,
-                ShopperID = shopperID,
-                Status = PaymentStatus.Approved,
-                DateCreated = DateTime.Now,
-                MerchantID = merchantID
+                CreditCardID = creditCardID,
+                CreditCardType = Core.Enum.CreditCardType.Amex,
+                CVV = 123,
+                ExpireDate = DateTime.Now.AddDays(10),
+                Number = "1234 5678 9012 3456",
+                Owner = "Test"
             };
 
-            //var newPaymentCommand = new NewPaymentCommand(paymentID, shopperID, merchantID, default(CreditCard), default(Money), null);
+            var mapperConfiguration = new MapperConfiguration(c => c.AddProfile(new PaymentProfile()));
+            var mockPaymentValidation = new Mock<IPaymentValidation>();
+            var mockMediatorHandler = new Mock<IMediatorHandler>();
+            var mockDataProtectionProvider = new Mock<IDataProtectionProvider>();
+            var mockDataProtector = new Mock<IDataProtector>();
+            var mapper = mapperConfiguration.CreateMapper();
+            var mockIPaymentEventRepository = new Mock<IPaymentRepository>();
+            var mockNotificationHandler = new Mock<DomainNotificationHandler>();
 
-            //var mockIPaymentEventRepository = new Mock<IPaymentEventRepository>();
-            //mockIPaymentEventRepository.Setup(r => r.SaveAsync(newPaymentCommand));
+            var newPaymentCommand = new NewPaymentCommand(paymentID, shopperID,
+                merchantID, creditCard, money,
+                mockPaymentValidation.Object);
 
-            //var mapperConfiguration = new MapperConfiguration(c => c.AddProfile(new PaymentProfile()));
-            //var mapper = mapperConfiguration.CreateMapper();
+            var paymentCommandHandler = new PaymentCommandHandler(mockIPaymentEventRepository.Object,
+                mapper, mockMediatorHandler.Object,
+                mockDataProtectionProvider.Object, mockNotificationHandler.Object);
 
-            //var paymentCommandHandler = new PaymentCommandHandler(mockIPaymentEventRepository.Object, mapper);
+            mockPaymentValidation
+                .Setup(p => p.ValidatePayment(newPaymentCommand))
+                .Returns(Outcomes.Success());
 
-            ////ACT
-            //var result = paymentCommandHandler.Handle(newPaymentCommand);
+            mockDataProtectionProvider
+                .Setup(dp => dp.CreateProtector(It.IsAny<string>()))
+                .Returns(mockDataProtector.Object);
+
+            mockDataProtector
+                .Setup(sut => sut.Protect(It.IsAny<byte[]>()))
+                .Returns(Encoding.UTF8.GetBytes("protectedText"));
+
+            //ACT
+            var result = await paymentCommandHandler.Handle(newPaymentCommand, CancellationToken.None);
 
             //ASSERT
-            //result.Exception.Should().BeNull();
+            result.Should().BeTrue();
         }
     }
 }

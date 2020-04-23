@@ -26,7 +26,6 @@
                     .AddSingleton<IPaymentRepositoryStartup, EventPaymentRepositoryStartup>()
                     .AddSingleton<IMerchantRepositoryStartup, EventMerchantRepositoryStartup>()
                     .AddSingleton<IShopperRepositoryStartup, EventShopperRepositoryStartup>();
-
         }
     }
 }

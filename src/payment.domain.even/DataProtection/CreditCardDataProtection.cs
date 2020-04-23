@@ -10,16 +10,15 @@ namespace AG.PaymentApp.Domain.Core.DataProtection
         {
             var protector = dataProtectionProvider.CreateProtector("AG.Gateway.Payment");
 
-            var creditCardProtected = new CreditCardProtected();
-
-            creditCardProtected.CreditCardID = Guid.NewGuid();
-            creditCardProtected.CreditCardType = protector.Protect(creditCard.CreditCardType.ToString());
-            creditCardProtected.CVV = protector.Protect(creditCard.CVV.ToString());
-            creditCardProtected.ExpireDate = protector.Protect(creditCard.ExpireDate.ToString());
-            creditCardProtected.Number = protector.Protect(creditCard.Number);
-            creditCardProtected.Owner = protector.Protect(creditCard.Owner);
-
-            return creditCardProtected;
+            return new CreditCardProtected
+            {
+                CreditCardID = Guid.NewGuid(),
+                CreditCardType = protector.Protect(creditCard.CreditCardType.ToString()),
+                CVV = protector.Protect(creditCard.CVV.ToString()),
+                ExpireDate = protector.Protect(creditCard.ExpireDate.ToString()),
+                Number = protector.Protect(creditCard.Number),
+                Owner = protector.Protect(creditCard.Owner)
+            };
         }
     }
 }

@@ -3,6 +3,8 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Ag.PaymentApp.Domain.Commands.Handlers;
+    using AG.Payment.Domain.Core.Bus;
+    using AG.Payment.Domain.Events;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Core.DataProtection;
     using AG.PaymentApp.Domain.Core.Notifications;
@@ -10,30 +12,26 @@
     using AutoMapper;
     using MediatR;
     using Microsoft.AspNetCore.DataProtection;
-    using Payment.Domain.Core.Bus;
 
     public class PaymentCommandHandler : CommandHandler,
         IRequestHandler<NewPaymentCommand, bool>
-    //   IRequestHandler<UpdateCustomerCommand, bool>,
+    //IRequestHandler<UpdateCustomerCommand, bool>,
     //IRequestHandler<RemoveCustomerCommand, bool>
     {
         private readonly IPaymentRepository repository;
         private readonly IMapper typeMapper;
-        private readonly IUnitOfWork unitOfWork;
         private readonly IMediatorHandler mediatorHandler;
         private readonly IDataProtectionProvider dataProtectionProvider;
 
         public PaymentCommandHandler(
         IPaymentRepository paymentEventRepository,
         IMapper typeMapper,
-        IUnitOfWork unitOfWork,
         IMediatorHandler mediatorHandler,
         IDataProtectionProvider dataProtectionProvider,
-        INotificationHandler<DomainNotification> notifications) : base(unitOfWork, mediatorHandler, notifications)
+        INotificationHandler<DomainNotification> notifications) : base(mediatorHandler, notifications)
         {
             this.repository = paymentEventRepository;
             this.typeMapper = typeMapper;
-            this.unitOfWork = unitOfWork;
             this.mediatorHandler = mediatorHandler;
             this.dataProtectionProvider = dataProtectionProvider;
         }
@@ -54,15 +52,7 @@
 
             if (Commit())
             {
-                //mediatorHandler.RaiseEvent(new CustomerRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
-
-                //update payment status to processing
-                //if (kafkaResponse.Success)
-                //{
-                //    payment.Status = PaymentStatus.Processing;
-                //    await this.paymentCommand.UpdateAsync(payment);
-                ////}
-
+                mediatorHandler.RaiseEvent(new PaymentRegisteredEvent(payment.ShopperID, payment.MerchantID, payment.TransactionID, payment.Amount, payment.CreditCard));
             }
 
             return Task.FromResult(true);

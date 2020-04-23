@@ -1,15 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Command.cs" company="AG Software">
-//   Copyright (c) AG. All rights reserved.
-// </copyright>
-// <summary>
-// Command
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-
-namespace Payment.Domain.Core.Commands
+﻿namespace AG.Payment.Domain.Core.Commands
 {
     using System;
     using AG.PaymentApp.Domain.Core.Events;

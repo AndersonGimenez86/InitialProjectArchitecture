@@ -36,9 +36,9 @@
             }
 
             return services
-                    .AddTransient<IPaymentApplicationService, PaymentApplicationService>()
-                    .AddTransient<IMerchantApplicationService, MerchantApplicationService>()
-                    .AddTransient<IShopperApplicationService, ShopperApplicationService>()
+                    .AddScoped<IPaymentApplicationService, PaymentApplicationService>()
+                    .AddScoped<IMerchantApplicationService, MerchantApplicationService>()
+                    .AddScoped<IShopperApplicationService, ShopperApplicationService>()
                     //.AddTransient<IEventCommandHandler<CreatePaymentEvent, Payment>, ProcessEventBeforePaymentCommand>()
                     .AddSingleton<IAdaptEntityToViewModel<Payment, PaymentViewModel>, AdaptEntityToViewModel<Payment, PaymentViewModel>>()
                     .AddSingleton<IAdaptEntityToViewModel<Merchant, MerchantViewModel>, AdaptEntityToViewModel<Merchant, MerchantViewModel>>()

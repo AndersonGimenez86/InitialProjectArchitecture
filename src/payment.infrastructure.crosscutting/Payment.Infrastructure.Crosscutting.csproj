@@ -13,8 +13,4 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\payment.domain.even\Payment.Domain.Core.csproj" />
-  </ItemGroup>
-
 </Project>

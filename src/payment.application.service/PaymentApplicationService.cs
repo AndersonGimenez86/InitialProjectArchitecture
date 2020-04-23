@@ -11,7 +11,7 @@
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
     using AutoMapper;
-    using Payment.Domain.Core.Bus;
+    using AG.Payment.Domain.Core.Bus;
 
     public class PaymentApplicationService : IPaymentApplicationService
     {

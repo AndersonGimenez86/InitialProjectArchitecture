@@ -8,9 +8,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using AG.Payment.Domain.Commands.Validations.Interface;
 using AG.PaymentApp.Domain.Core.Enum;
 using AG.PaymentApp.Domain.Core.ValueObject;
-using Payment.Domain.Commands.Validations.Interface;
 
 namespace AG.PaymentApp.Domain.Commands.Payments
 {
@@ -29,7 +29,6 @@ namespace AG.PaymentApp.Domain.Commands.Payments
             this.paymentValidation = paymentValidation;
         }
         public CreditCard CreditCard { get; set; }
-
 
         public override bool IsValid()
         {

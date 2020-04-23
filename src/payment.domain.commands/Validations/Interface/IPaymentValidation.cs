@@ -1,4 +1,4 @@
-﻿namespace Payment.Domain.Commands.Validations.Interface
+﻿namespace AG.Payment.Domain.Commands.Validations.Interface
 {
     using AG.PaymentApp.Domain.Commands.Payments;
     using Ether.Outcomes;
