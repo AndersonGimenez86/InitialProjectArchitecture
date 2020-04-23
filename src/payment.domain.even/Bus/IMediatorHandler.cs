@@ -10,8 +10,8 @@
 namespace AG.Payment.Domain.Core.Bus
 {
     using System.Threading.Tasks;
-    using AG.PaymentApp.Domain.Core.Events;
     using AG.Payment.Domain.Core.Commands;
+    using AG.PaymentApp.Domain.Core.Events;
 
     public interface IMediatorHandler
     {
