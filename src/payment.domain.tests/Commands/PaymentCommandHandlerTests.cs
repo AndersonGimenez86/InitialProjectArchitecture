@@ -42,11 +42,10 @@
             };
 
             var mapperConfiguration = new MapperConfiguration(c => c.AddProfile(new PaymentProfile()));
-            var mockPaymentValidation = new Mock<IPaymentValidation>();
+            var mockPaymentValidation = new Mock<ICommandValidation<PaymentCommand>>();
             var mockMediatorHandler = new Mock<IMediatorHandler>();
             var mockDataProtectionProvider = new Mock<IDataProtectionProvider>();
             var mockDataProtector = new Mock<IDataProtector>();
-            var mapper = mapperConfiguration.CreateMapper();
             var mockIPaymentEventRepository = new Mock<IPaymentRepository>();
             var mockNotificationHandler = new Mock<DomainNotificationHandler>();
 
@@ -55,11 +54,10 @@
                 mockPaymentValidation.Object);
 
             var paymentCommandHandler = new PaymentCommandHandler(mockIPaymentEventRepository.Object,
-                mapper, mockMediatorHandler.Object,
-                mockDataProtectionProvider.Object, mockNotificationHandler.Object);
+                mockMediatorHandler.Object, mockDataProtectionProvider.Object, mockNotificationHandler.Object);
 
             mockPaymentValidation
-                .Setup(p => p.ValidatePayment(newPaymentCommand))
+                .Setup(p => p.ValidateCommand(newPaymentCommand))
                 .Returns(Outcomes.Success());
 
             mockDataProtectionProvider

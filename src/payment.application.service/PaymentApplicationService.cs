@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using AG.Payment.Domain.Core.Bus;
     using AG.PaymentApp.Application.Services.Adapter.Interface;
     using AG.PaymentApp.Application.Services.DTO.Payments;
     using AG.PaymentApp.Application.Services.Interface;
@@ -11,7 +12,6 @@
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
     using AutoMapper;
-    using AG.Payment.Domain.Core.Bus;
 
     public class PaymentApplicationService : IPaymentApplicationService
     {
@@ -23,13 +23,11 @@
 
         public PaymentApplicationService(
             IFindPaymentQueryHandler findPaymentQueryHandler,
-            //IEventCommandHandler<CreatePaymentEvent, Payment> paymentEventCommand,
             IMediatorHandler mediatorHandler,
             IMapper typeMapper,
             IAdaptEntityToViewModel<Payment, PaymentViewModel> paymentAdapter
             )
         {
-            //this.paymentEventCommand = paymentEventCommand;
             this.findPaymentQueryHandler = findPaymentQueryHandler;
             this.mediatorHandler = mediatorHandler;
             this.typeMapper = typeMapper;
@@ -79,9 +77,9 @@
             return paymentAdapter.Adapt(payment, typeMapper);
         }
 
-        private NewPaymentCommand GetPaymentFilled(PaymentProcessingViewModel paymentProcessingDTO)
+        private NewPaymentCommand GetPaymentFilled(PaymentProcessingViewModel paymentProcessingViewModel)
         {
-            var newPaymentCommand = this.typeMapper.Map<NewPaymentCommand>(paymentProcessingDTO);
+            var newPaymentCommand = this.typeMapper.Map<NewPaymentCommand>(paymentProcessingViewModel);
             newPaymentCommand.Id = newPaymentCommand.Id != Guid.Empty ? newPaymentCommand.Id : Guid.NewGuid();
 
             return newPaymentCommand;

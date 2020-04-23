@@ -29,7 +29,7 @@
                 Name = "Merchant Test"
             };
 
-            var merchant = new Merchant
+            var merchant = new Merchant()
             {
                 Acronym = "Test",
                 Country = new Country.UnitedKingdom(),

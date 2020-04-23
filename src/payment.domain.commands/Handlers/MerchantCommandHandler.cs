@@ -1,47 +1,44 @@
 ﻿namespace AG.PaymentApp.Domain.commands.Merchants
 {
-    using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using Ag.PaymentApp.Domain.Commands.Handlers;
     using AG.Payment.Domain.Core.Bus;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Entity.Merchants;
-    using AutoMapper;
+    using global::Payment.Domain.Commands.Merchant;
     using MediatR;
 
     public class MerchantCommandHandler : CommandHandler
     {
         private readonly IMerchantRepository repository;
-        private readonly IMapper typeMapper;
         private readonly IMediatorHandler mediatorHandler;
 
         public MerchantCommandHandler(
             IMerchantRepository eventRepository,
             IMediatorHandler mediatorHandler,
-            IMapper typeMapper,
             INotificationHandler<DomainNotification> notifications) : base(mediatorHandler, notifications)
         {
             this.repository = eventRepository;
-            this.typeMapper = typeMapper;
             this.mediatorHandler = mediatorHandler;
         }
 
-        public async Task ExecuteAsync(Merchant merchant)
+        public Task<bool> Handle(NewMerchantCommand newMerchantCommand, CancellationToken cancellationToken)
         {
-            try
+            if (!newMerchantCommand.IsValid())
             {
-                //var merchantMongo = this.typeMapper.Map<MerchantMongo>(merchant);
-
-                //var merchantDataCommand = new MerchantCommand(merchantMongo);
-
-                //save merchant event into mongoDB
-                //await this.eventRepository.Add(merchantDataCommand);
+                NotifyValidationErrors(newMerchantCommand);
+                return Task.FromResult(false);
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+
+            var merchant = new Merchant(newMerchantCommand.Id, newMerchantCommand.Name, newMerchantCommand.Acronym,
+                newMerchantCommand.Currency, newMerchantCommand.Country, newMerchantCommand.IsVisible,
+                newMerchantCommand.IsOnline);
+
+            repository.SaveAsync(merchant);
+
+            return Task.FromResult(true);
         }
     }
 }

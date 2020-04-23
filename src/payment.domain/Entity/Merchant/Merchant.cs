@@ -1,9 +1,23 @@
 ﻿namespace AG.PaymentApp.Domain.Entity.Merchants
 {
-    using AG.PaymentApp.Domain.Entity.Bases;
+    using System;
     using AG.PaymentApp.Domain.Core.ValueObject;
+    using AG.PaymentApp.Domain.Entity.Bases;
+
     public class Merchant : Entity
     {
+        public Merchant()
+        { }
+        public Merchant(Guid id, string name, string acronym, Currency currency, Country country, bool isVisible, bool isOnline)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Acronym = acronym;
+            this.Currency = currency;
+            this.Country = country;
+            this.IsVisible = IsVisible;
+            this.IsOnline = IsOnline;
+        }
         public string Name { get; set; }
 
         public string Acronym { get; set; }

@@ -13,5 +13,7 @@
         public string Acronym { get; set; }
         public Country Country { get; set; }
         public Currency Currency { get; set; }
+        public bool IsVisible { get; set; }
+        public bool IsOnline { get; set; }
     }
 }

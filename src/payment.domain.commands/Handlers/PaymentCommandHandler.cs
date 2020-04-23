@@ -25,13 +25,11 @@
 
         public PaymentCommandHandler(
         IPaymentRepository paymentEventRepository,
-        IMapper typeMapper,
         IMediatorHandler mediatorHandler,
         IDataProtectionProvider dataProtectionProvider,
         INotificationHandler<DomainNotification> notifications) : base(mediatorHandler, notifications)
         {
             this.repository = paymentEventRepository;
-            this.typeMapper = typeMapper;
             this.mediatorHandler = mediatorHandler;
             this.dataProtectionProvider = dataProtectionProvider;
         }

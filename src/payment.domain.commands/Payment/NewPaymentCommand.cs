@@ -16,9 +16,9 @@ namespace AG.PaymentApp.Domain.Commands.Payments
 {
     public class NewPaymentCommand : PaymentCommand
     {
-        private readonly IPaymentValidation paymentValidation;
+        private readonly ICommandValidation<PaymentCommand> paymentValidation;
 
-        public NewPaymentCommand(Guid paymentID, Guid shopperID, Guid merchantID, CreditCard creditCard, Money amount, IPaymentValidation paymentValidation)
+        public NewPaymentCommand(Guid paymentID, Guid shopperID, Guid merchantID, CreditCard creditCard, Money amount, ICommandValidation<PaymentCommand> paymentValidation)
         {
             this.Id = paymentID;
             this.ShopperID = shopperID;
@@ -32,7 +32,7 @@ namespace AG.PaymentApp.Domain.Commands.Payments
 
         public override bool IsValid()
         {
-            var paymentPreConditionEvaluator = paymentValidation.ValidatePayment(this);
+            var paymentPreConditionEvaluator = paymentValidation.ValidateCommand(this);
 
             if (paymentPreConditionEvaluator.Failure)
             {

@@ -1,10 +1,10 @@
 ﻿namespace AG.PaymentApp.Domain.Commands.Services
 {
-    using AG.PaymentApp.Domain.commands;
+    using AG.Payment.Domain.Commands.Validations.Interface;
     using AG.PaymentApp.Domain.Commands.Validations.Interface;
-    using AG.PaymentApp.Domain.Services.Exceptions;
+    using Ether.Outcomes;
 
-    public class MerchantValidation
+    public class MerchantValidation : ICommandValidation<MerchantCommand>
     {
         private readonly IPreConditionEvaluator<MerchantCommand> preConditionEvaluator;
 
@@ -13,14 +13,9 @@
             this.preConditionEvaluator = preConditionEvaluator;
         }
 
-        public void ValidateMerchant(MerchantCommand merchant)
+        public IOutcome ValidateCommand(MerchantCommand merchant)
         {
-            var merchantPreConditionEvaluator = this.preConditionEvaluator.Evaluate(merchant);
-
-            if (merchantPreConditionEvaluator.Failure)
-            {
-                throw new PreConditionEvaluatorException(merchantPreConditionEvaluator.ToMultiLine(";"));
-            }
+            return preConditionEvaluator.Evaluate(merchant);
         }
     }
 }
