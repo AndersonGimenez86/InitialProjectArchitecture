@@ -9,20 +9,17 @@
     using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
     using MediatR;
 
-    public sealed class InMemoryBus<EKafka> : IMediatorHandler where EKafka : Event
+    public sealed class InMemoryBus : IMediatorHandler
     {
         private readonly IMediator _mediator;
         private readonly IEventStore _eventStore;
-        private readonly ITopicProducer<EKafka> topicProducer;
 
         public InMemoryBus(IEventStore eventStore,
-            IMediator mediator,
-            ITopicProducer<EKafka> topicProducer
+            IMediator mediator
             )
         {
             _eventStore = eventStore;
             _mediator = mediator;
-            this.topicProducer = topicProducer;
         }
 
         public Task SendCommand<C>(C command) where C : Command
@@ -30,21 +27,26 @@
             return _mediator.Send(command);
         }
 
-        public Task RaiseEvent<E>(E @event) where E : Event
+        public Task RaiseEvent<E>(E @event)
+        {
+            return _mediator.Publish(@event);
+        }
+
+        public Task RaiseEvent<E>(E @event, ITopicProducer<E> topicProducer) where E : Event
         {
             if (!@event.MessageType.Equals("DomainNotification"))
             {
-                var deliveryMessageReport = PublishKafkaMessage(@event).Result;
+                var deliveryMessageReport = PublishKafkaMessage(@event, topicProducer).Result;
                 return _mediator.Publish(deliveryMessageReport);
             }
 
             return _mediator.Publish(@event);
         }
 
-        private async Task<DeliveryMessageReport> PublishKafkaMessage(Event @event)
+        private async Task<DeliveryMessageReport> PublishKafkaMessage<E>(E @event, ITopicProducer<E> topicProducer) where E : Event
         {
             //produce event for acquiring bank consumes                
-            return await this.topicProducer.ProduceAsync(@event as EKafka);
+            return await topicProducer.ProduceAsync(@event);
         }
     }
 }

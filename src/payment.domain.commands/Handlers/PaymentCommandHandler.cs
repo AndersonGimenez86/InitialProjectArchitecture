@@ -7,6 +7,7 @@
     using AG.Payment.Domain.Events;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Core.DataProtection;
+    using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
     using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AutoMapper;
@@ -22,16 +23,19 @@
         private readonly IMapper typeMapper;
         private readonly IMediatorHandler mediatorHandler;
         private readonly IDataProtectionProvider dataProtectionProvider;
+        private readonly ITopicProducer<PaymentRegisteredEvent> topicProducer;
 
         public PaymentCommandHandler(
         IPaymentRepository paymentEventRepository,
         IMediatorHandler mediatorHandler,
         IDataProtectionProvider dataProtectionProvider,
+        ITopicProducer<PaymentRegisteredEvent> topicProducer,
         INotificationHandler<DomainNotification> notifications) : base(mediatorHandler, notifications)
         {
             this.repository = paymentEventRepository;
             this.mediatorHandler = mediatorHandler;
             this.dataProtectionProvider = dataProtectionProvider;
+            this.topicProducer = topicProducer;
         }
 
         public Task<bool> Handle(NewPaymentCommand newPaymentCommand, CancellationToken cancellationToken)
@@ -50,7 +54,8 @@
 
             if (Commit())
             {
-                mediatorHandler.RaiseEvent(new PaymentRegisteredEvent(payment.ShopperID, payment.MerchantID, payment.TransactionID, payment.Amount, payment.CreditCard));
+                var paymentRegisteredEvent = new PaymentRegisteredEvent(payment.ShopperID, payment.MerchantID, payment.TransactionID, payment.Amount, payment.CreditCard);
+                mediatorHandler.RaiseEvent(paymentRegisteredEvent, this.topicProducer);
             }
 
             return Task.FromResult(true);

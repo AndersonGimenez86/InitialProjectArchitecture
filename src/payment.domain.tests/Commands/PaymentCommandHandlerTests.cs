@@ -7,9 +7,11 @@
     using System.Threading.Tasks;
     using AG.Payment.Domain.Commands.Validations.Interface;
     using AG.Payment.Domain.Core.Bus;
+    using AG.Payment.Domain.Events;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Commands.Mapper;
     using AG.PaymentApp.Domain.Commands.Payments;
+    using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
     using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Core.ValueObject;
     using AutoMapper;
@@ -48,13 +50,15 @@
             var mockDataProtector = new Mock<IDataProtector>();
             var mockIPaymentEventRepository = new Mock<IPaymentRepository>();
             var mockNotificationHandler = new Mock<DomainNotificationHandler>();
+            var mockTopicProducer = new Mock<ITopicProducer<PaymentRegisteredEvent>>();
 
             var newPaymentCommand = new NewPaymentCommand(paymentID, shopperID,
                 merchantID, creditCard, money,
                 mockPaymentValidation.Object);
 
             var paymentCommandHandler = new PaymentCommandHandler(mockIPaymentEventRepository.Object,
-                mockMediatorHandler.Object, mockDataProtectionProvider.Object, mockNotificationHandler.Object);
+                mockMediatorHandler.Object, mockDataProtectionProvider.Object, mockTopicProducer.Object,
+                mockNotificationHandler.Object);
 
             mockPaymentValidation
                 .Setup(p => p.ValidateCommand(newPaymentCommand))
