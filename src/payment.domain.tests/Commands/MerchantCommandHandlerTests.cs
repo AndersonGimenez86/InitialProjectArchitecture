@@ -26,10 +26,10 @@
         private MerchantCommandHandler ReturnMerchantCommandHandlerObject()
         {
             var mockMediatorHandler = new Mock<IMediatorHandler>();
-            var mockIPaymentEventRepository = new Mock<IMerchantRepository>();
+            var mockIMerchantEventRepository = new Mock<IMerchantRepository>();
             var mockNotificationHandler = new Mock<DomainNotificationHandler>();
 
-            var merchantCommandHandler = new MerchantCommandHandler(mockIPaymentEventRepository.Object,
+            var merchantCommandHandler = new MerchantCommandHandler(mockIMerchantEventRepository.Object,
                 mockMediatorHandler.Object, mockNotificationHandler.Object);
 
             return merchantCommandHandler;
@@ -44,12 +44,12 @@
                 .Setup(p => p.ValidateCommand(It.IsAny<NewMerchantCommand>()))
                 .Returns(Outcomes.Success());
 
-            var newPaymentCommand = new NewMerchantCommand(merchantID, "Merchant Test", "Test", currency, country, true, true, mockMerchantValidation.Object);
+            var newMerchantCommand = new NewMerchantCommand(merchantID, "Merchant Test", "Test", currency, country, true, true, mockMerchantValidation.Object);
 
             var merchantCommandHandler = ReturnMerchantCommandHandlerObject();
 
             //ACT
-            var result = await merchantCommandHandler.Handle(newPaymentCommand, CancellationToken.None);
+            var result = await merchantCommandHandler.Handle(newMerchantCommand, CancellationToken.None);
 
             //ASSERT
             result.Should().BeTrue();
@@ -64,12 +64,12 @@
                 .Setup(p => p.ValidateCommand(It.IsAny<NewMerchantCommand>()))
                 .Returns(Outcomes.Failure());
 
-            var newPaymentCommand = new NewMerchantCommand(merchantID, "Merchant Test", "Test", currency, country, true, true, mockMerchantValidation.Object);
+            var newMerchantCommand = new NewMerchantCommand(merchantID, "Merchant Test", "Test", currency, country, true, true, mockMerchantValidation.Object);
 
             var merchantCommandHandler = ReturnMerchantCommandHandlerObject();
 
             //ACT
-            var result = await merchantCommandHandler.Handle(newPaymentCommand, CancellationToken.None);
+            var result = await merchantCommandHandler.Handle(newMerchantCommand, CancellationToken.None);
 
             //ASSERT
             result.Should().BeFalse();

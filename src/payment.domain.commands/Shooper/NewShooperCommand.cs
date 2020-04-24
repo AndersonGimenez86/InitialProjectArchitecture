@@ -12,13 +12,14 @@
         public NewShopperCommand(Guid id, string firstname, string lastname, string email, Gender gender,
             Address address, DateTime birthDate, ICommandValidation<ShopperCommand> commandValidation)
         {
-            Id = id;
-            FirstName = firstname;
-            LastName = lastname;
-            Email = email;
-            Gender = gender;
-            Address = address;
-            BirthDate = birthDate;
+            this.Id = id;
+            this.FirstName = firstname;
+            this.LastName = lastname;
+            this.Email = email;
+            this.Gender = gender;
+            this.Address = address;
+            this.BirthDate = birthDate;
+            this.commandValidation = commandValidation;
         }
 
         public override bool IsValid()
