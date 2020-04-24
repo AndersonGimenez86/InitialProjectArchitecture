@@ -2,33 +2,39 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using AG.Payment.Domain.Core.Bus;
     using AG.PaymentApp.Application.Services.Adapter.Interface;
     using AG.PaymentApp.Application.Services.DTO.Payments;
     using AG.PaymentApp.Application.Services.Interface;
     using AG.PaymentApp.Domain.Commands.Payments;
+    using AG.PaymentApp.Domain.Core.Enum;
+    using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
     using AutoMapper;
+    using MediatR;
 
     public class PaymentApplicationService : IPaymentApplicationService
     {
         private readonly IFindPaymentQueryHandler findPaymentQueryHandler;
-        //private readonly IEventCommandHandler<CreatePaymentEvent, Payment> paymentEventCommand;
+        private readonly DomainNotificationHandler notifications;
         private readonly IMediatorHandler mediatorHandler;
         private readonly IMapper typeMapper;
         private readonly IAdaptEntityToViewModel<Payment, PaymentViewModel> paymentAdapter;
 
         public PaymentApplicationService(
             IFindPaymentQueryHandler findPaymentQueryHandler,
+            INotificationHandler<DomainNotification> notifications,
             IMediatorHandler mediatorHandler,
             IMapper typeMapper,
             IAdaptEntityToViewModel<Payment, PaymentViewModel> paymentAdapter
             )
         {
             this.findPaymentQueryHandler = findPaymentQueryHandler;
+            this.notifications = (DomainNotificationHandler)notifications;
             this.mediatorHandler = mediatorHandler;
             this.typeMapper = typeMapper;
             this.paymentAdapter = paymentAdapter;
@@ -40,15 +46,16 @@
 
             await mediatorHandler.SendCommand<NewPaymentCommand>(newPaymentCommand);
 
-            //var paymentProcessingResponseDTO = new PaymentProcessingResponseViewModel
-            //{
-            //    PaymentID = payment.ID,
-            //    PaymentStatus = payment.Status
-            //};
+            var errorMessages = notifications.GetNotifications().Select(n => n.Value);
 
-            //return paymentProcessingResponseDTO;
+            var paymentProcessingResponseViewModel = new PaymentProcessingResponseViewModel
+            {
+                PaymentID = newPaymentCommand.Id,
+                PaymentStatus = errorMessages.Any() ? PaymentStatus.Rejected : PaymentStatus.Processing,
+                ErrorMessage = errorMessages
+            };
 
-            return null;
+            return paymentProcessingResponseViewModel;
         }
 
         public async Task<PaymentViewModel> GetAsync(Guid paymentID)

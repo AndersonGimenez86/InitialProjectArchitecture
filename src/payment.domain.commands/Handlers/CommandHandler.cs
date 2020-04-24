@@ -24,7 +24,7 @@
             }
         }
 
-        public bool Commit()
+        protected bool Commit()
         {
             if (notifications.HasNotifications())
                 return false;

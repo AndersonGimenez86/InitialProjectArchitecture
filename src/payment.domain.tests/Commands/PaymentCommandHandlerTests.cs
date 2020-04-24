@@ -36,9 +36,8 @@
             Owner = "Test"
         };
 
-        private PaymentCommandHandler ReturnPaymentCommandHandlerObject()
+        private PaymentCommandHandler ReturnPaymentCommandHandlerObject(Mock<IMediatorHandler> mockMediatorHandler)
         {
-            var mockMediatorHandler = new Mock<IMediatorHandler>();
             var mockDataProtectionProvider = new Mock<IDataProtectionProvider>();
             var mockDataProtector = new Mock<IDataProtector>();
             var mockIPaymentEventRepository = new Mock<IPaymentRepository>();
@@ -64,6 +63,8 @@
         public async Task HandleCommand_WithRaiseEvent_Success()
         {
             //ARRANGE
+            var mockMediatorHandler = new Mock<IMediatorHandler>();
+
             var mockPaymentValidation = new Mock<ICommandValidation<PaymentCommand>>();
             mockPaymentValidation
                 .Setup(p => p.ValidateCommand(It.IsAny<NewPaymentCommand>()))
@@ -73,19 +74,22 @@
               merchantID, creditCard, money,
               mockPaymentValidation.Object);
 
-            var paymentCommandHandler = ReturnPaymentCommandHandlerObject();
+            var paymentCommandHandler = ReturnPaymentCommandHandlerObject(mockMediatorHandler);
 
             //ACT
             var result = await paymentCommandHandler.Handle(newPaymentCommand, CancellationToken.None);
 
             //ASSERT
             result.Should().BeTrue();
+            mockMediatorHandler.Verify(m => m.RaiseEvent(It.IsAny<PaymentRegisteredEvent>(), It.IsAny<ITopicProducer<PaymentRegisteredEvent>>()));
         }
 
         [Fact]
         public async Task HandleCommand_WithRaiseEvent_Validation_Error()
         {
             //ARRANGE
+            var mockMediatorHandler = new Mock<IMediatorHandler>();
+
             var mockPaymentValidation = new Mock<ICommandValidation<PaymentCommand>>();
             mockPaymentValidation
                 .Setup(p => p.ValidateCommand(It.IsAny<NewPaymentCommand>()))
@@ -95,7 +99,7 @@
               merchantID, creditCard, money,
               mockPaymentValidation.Object);
 
-            var paymentCommandHandler = ReturnPaymentCommandHandlerObject();
+            var paymentCommandHandler = ReturnPaymentCommandHandlerObject(mockMediatorHandler);
 
             //ACT
             var result = await paymentCommandHandler.Handle(newPaymentCommand, CancellationToken.None);
