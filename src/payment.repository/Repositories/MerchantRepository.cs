@@ -34,8 +34,9 @@
             await this.merchantRepository.InsertOneAsync(merchantMongo);
         }
 
-        public async Task<Merchant> GetAsync(FindMerchantQuery findMerchantQuery)
+        public async Task<Merchant> GetAsync(Guid merchantID)
         {
+            var findMerchantQuery = new FindMerchantQuery(merchantID);
             return (await GetAllAsync(findMerchantQuery)).FirstOrDefault<Merchant>();
         }
 

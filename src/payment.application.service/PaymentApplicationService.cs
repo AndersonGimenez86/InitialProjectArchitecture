@@ -12,28 +12,28 @@
     using AG.PaymentApp.Domain.Core.Enum;
     using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Entity.Payments;
-    using AG.PaymentApp.Domain.Query.Interface;
+    using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
     using AutoMapper;
     using MediatR;
 
     public class PaymentApplicationService : IPaymentApplicationService
     {
-        private readonly IFindPaymentQueryHandler findPaymentQueryHandler;
+        private readonly IFindPaymentRepository paymentRepository;
         private readonly DomainNotificationHandler notifications;
         private readonly IMediatorHandler mediatorHandler;
         private readonly IMapper typeMapper;
         private readonly IAdaptEntityToViewModel<Payment, PaymentViewModel> paymentAdapter;
 
         public PaymentApplicationService(
-            IFindPaymentQueryHandler findPaymentQueryHandler,
+            IFindPaymentRepository paymentRepository,
             INotificationHandler<DomainNotification> notifications,
             IMediatorHandler mediatorHandler,
             IMapper typeMapper,
             IAdaptEntityToViewModel<Payment, PaymentViewModel> paymentAdapter
             )
         {
-            this.findPaymentQueryHandler = findPaymentQueryHandler;
+            this.paymentRepository = paymentRepository;
             this.notifications = (DomainNotificationHandler)notifications;
             this.mediatorHandler = mediatorHandler;
             this.typeMapper = typeMapper;
@@ -60,27 +60,20 @@
 
         public async Task<PaymentViewModel> GetAsync(Guid paymentID)
         {
-            var findMerchantQuery = new FindPaymentQuery(paymentID);
-
-            var payment = await this.findPaymentQueryHandler.GetAsync(findMerchantQuery);
-
+            var payment = await this.paymentRepository.GetAsync(paymentID);
             return paymentAdapter.Adapt(payment, typeMapper);
         }
         public async Task<IEnumerable<PaymentViewModel>> GetAllAsync()
         {
             var findPaymentQuery = new FindPaymentQuery();
-
-            var payments = await this.findPaymentQueryHandler.GetAllAsync(findPaymentQuery);
-
+            var payments = await this.paymentRepository.GetAllAsync(findPaymentQuery);
             return paymentAdapter.Adapt(payments, typeMapper);
         }
 
         public async Task<PaymentViewModel> GetLastPaymentReceivedAsync(Guid shopperID)
         {
             var findPaymentQuery = new FindPaymentQuery(Guid.Empty, Guid.Empty, shopperID);
-
-            var payment = await this.findPaymentQueryHandler.GetLastPaymentReceivedAsync(findPaymentQuery);
-
+            var payment = await this.paymentRepository.GetLastPaymentReceivedAsync(findPaymentQuery);
             return paymentAdapter.Adapt(payment, typeMapper);
         }
 
@@ -88,7 +81,6 @@
         {
             var newPaymentCommand = this.typeMapper.Map<NewPaymentCommand>(paymentProcessingViewModel);
             newPaymentCommand.Id = newPaymentCommand.Id != Guid.Empty ? newPaymentCommand.Id : Guid.NewGuid();
-
             return newPaymentCommand;
         }
     }
