@@ -8,7 +8,7 @@
     {
         public Guid Id { get; set; }
         public DateTime Timestamp { get; private set; }
-        public ValidationResult ValidationResult { get; set; }
+        public ValidationResult ValidationResult { get; set; } = new ValidationResult();
 
         protected Command()
         {

@@ -24,27 +24,23 @@
     [ExcludeFromCodeCoverage]
     public class PaymentCommandHandlerTests
     {
-        [Fact]
-        public async Task HandleCommand_WithRaiseEvent_Success()
+        private Guid merchantID = Guid.NewGuid();
+        private Guid shopperID = Guid.NewGuid();
+        private Guid paymentID = Guid.NewGuid();
+        private Money money = Money.Zero;
+        private CreditCard creditCard = new CreditCard()
         {
-            //ARRANGE
-            var merchantID = Guid.NewGuid();
-            var creditCardID = Guid.NewGuid();
-            var shopperID = Guid.NewGuid();
-            var paymentID = Guid.NewGuid();
-            var money = Money.Zero;
-            var creditCard = new CreditCard()
-            {
-                CreditCardID = creditCardID,
-                CreditCardType = Core.Enum.CreditCardType.Amex,
-                CVV = 123,
-                ExpireDate = DateTime.Now.AddDays(10),
-                Number = "1234 5678 9012 3456",
-                Owner = "Test"
-            };
+            CreditCardID = Guid.NewGuid(),
+            CreditCardType = Core.Enum.CreditCardType.Amex,
+            CVV = 123,
+            ExpireDate = DateTime.Now.AddDays(10),
+            Number = "1234 5678 9012 3456",
+            Owner = "Test"
+        };
 
+        private PaymentCommandHandler ReturnPaymentCommandHandlerObject()
+        {
             var mapperConfiguration = new MapperConfiguration(c => c.AddProfile(new PaymentProfile()));
-            var mockPaymentValidation = new Mock<ICommandValidation<PaymentCommand>>();
             var mockMediatorHandler = new Mock<IMediatorHandler>();
             var mockDataProtectionProvider = new Mock<IDataProtectionProvider>();
             var mockDataProtector = new Mock<IDataProtector>();
@@ -52,17 +48,9 @@
             var mockNotificationHandler = new Mock<DomainNotificationHandler>();
             var mockTopicProducer = new Mock<ITopicProducer<PaymentRegisteredEvent>>();
 
-            var newPaymentCommand = new NewPaymentCommand(paymentID, shopperID,
-                merchantID, creditCard, money,
-                mockPaymentValidation.Object);
-
             var paymentCommandHandler = new PaymentCommandHandler(mockIPaymentEventRepository.Object,
                 mockMediatorHandler.Object, mockDataProtectionProvider.Object, mockTopicProducer.Object,
                 mockNotificationHandler.Object);
-
-            mockPaymentValidation
-                .Setup(p => p.ValidateCommand(newPaymentCommand))
-                .Returns(Outcomes.Success());
 
             mockDataProtectionProvider
                 .Setup(dp => dp.CreateProtector(It.IsAny<string>()))
@@ -72,11 +60,51 @@
                 .Setup(sut => sut.Protect(It.IsAny<byte[]>()))
                 .Returns(Encoding.UTF8.GetBytes("protectedText"));
 
+            return paymentCommandHandler;
+        }
+
+        [Fact]
+        public async Task HandleCommand_WithRaiseEvent_Success()
+        {
+            //ARRANGE
+            var mockPaymentValidation = new Mock<ICommandValidation<PaymentCommand>>();
+            mockPaymentValidation
+                .Setup(p => p.ValidateCommand(It.IsAny<NewPaymentCommand>()))
+                .Returns(Outcomes.Success());
+
+            var newPaymentCommand = new NewPaymentCommand(paymentID, shopperID,
+              merchantID, creditCard, money,
+              mockPaymentValidation.Object);
+
+            var paymentCommandHandler = ReturnPaymentCommandHandlerObject();
+
             //ACT
             var result = await paymentCommandHandler.Handle(newPaymentCommand, CancellationToken.None);
 
             //ASSERT
             result.Should().BeTrue();
+        }
+
+        [Fact]
+        public async Task HandleCommand_WithRaiseEvent_Validation_Error()
+        {
+            //ARRANGE
+            var mockPaymentValidation = new Mock<ICommandValidation<PaymentCommand>>();
+            mockPaymentValidation
+                .Setup(p => p.ValidateCommand(It.IsAny<NewPaymentCommand>()))
+                .Returns(Outcomes.Failure());
+
+            var newPaymentCommand = new NewPaymentCommand(paymentID, shopperID,
+              merchantID, creditCard, money,
+              mockPaymentValidation.Object);
+
+            var paymentCommandHandler = ReturnPaymentCommandHandlerObject();
+
+            //ACT
+            var result = await paymentCommandHandler.Handle(newPaymentCommand, CancellationToken.None);
+
+            //ASSERT
+            result.Should().BeFalse();
         }
     }
 }
