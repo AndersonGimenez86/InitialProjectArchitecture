@@ -18,7 +18,8 @@ namespace AG.PaymentApp.Domain.Commands.Payments
     {
         private readonly ICommandValidation<PaymentCommand> paymentValidation;
 
-        public NewPaymentCommand(Guid paymentID, Guid shopperID, Guid merchantID, CreditCard creditCard, Money amount, ICommandValidation<PaymentCommand> paymentValidation)
+        public NewPaymentCommand(Guid paymentID, Guid shopperID, Guid merchantID, CreditCard creditCard,
+            Money amount, ICommandValidation<PaymentCommand> paymentValidation)
         {
             this.Id = paymentID;
             this.ShopperID = shopperID;
@@ -32,11 +33,11 @@ namespace AG.PaymentApp.Domain.Commands.Payments
 
         public override bool IsValid()
         {
-            var paymentPreConditionEvaluator = paymentValidation.ValidateCommand(this);
+            var preConditionEvaluator = paymentValidation.ValidateCommand(this);
 
-            if (paymentPreConditionEvaluator.Failure)
+            if (preConditionEvaluator.Failure)
             {
-                this.ValidationResult.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, paymentPreConditionEvaluator.ToMultiLine()));
+                this.ValidationResult.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, preConditionEvaluator.ToMultiLine()));
                 return false;
             }
 

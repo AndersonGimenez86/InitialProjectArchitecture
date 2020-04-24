@@ -1,12 +1,27 @@
 ﻿namespace AG.PaymentApp.Domain.Entity.Shoppers
 {
     using System;
-    using AG.PaymentApp.Domain.Entity.Bases;
     using AG.PaymentApp.Domain.Core.Enum;
     using AG.PaymentApp.Domain.Core.ValueObject;
+    using AG.PaymentApp.Domain.Entity.Bases;
 
     public class Shopper : Entity
     {
+        public Shopper()
+        { }
+
+        public Shopper(Guid shopperID, string firstname, string lastname, string email, Gender gender,
+            DateTime birthDate, Address address)
+        {
+            Id = shopperID;
+            Email = email;
+            FirstName = firstname;
+            LastName = lastname;
+            Gender = gender;
+            BirthDate = birthDate;
+            Address = address;
+        }
+
         public static Shopper CreateNew(Gender gender, Guid shopperID, string firstname, string lastname, string email)
         {
             var shopper = new Shopper
