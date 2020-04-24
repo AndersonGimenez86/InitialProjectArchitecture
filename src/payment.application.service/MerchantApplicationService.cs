@@ -7,11 +7,11 @@
     using AG.PaymentApp.Application.Services.Adapter.Interface;
     using AG.PaymentApp.Application.Services.DTO.Merchants;
     using AG.PaymentApp.Application.Services.Interface;
+    using AG.PaymentApp.Domain.Commands;
     using AG.PaymentApp.Domain.Entity.Merchants;
     using AG.PaymentApp.Domain.Query.Interface;
     using AG.PaymentApp.Domain.Query.Merchants;
     using AutoMapper;
-    using global::Payment.Domain.Commands.Merchant;
 
     public class MerchantApplicationService : IMerchantApplicationService
     {

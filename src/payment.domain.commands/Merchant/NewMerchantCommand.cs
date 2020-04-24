@@ -1,8 +1,7 @@
-﻿namespace Payment.Domain.Commands.Merchant
+﻿namespace AG.PaymentApp.Domain.Commands
 {
     using System;
     using AG.Payment.Domain.Commands.Validations.Interface;
-    using AG.PaymentApp.Domain.Commands;
     using AG.PaymentApp.Domain.Core.ValueObject;
     using FluentValidation.Results;
 

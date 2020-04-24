@@ -9,12 +9,10 @@
     using AG.Payment.Domain.Core.Bus;
     using AG.Payment.Domain.Events;
     using AG.PaymentApp.Domain.Commands.Interface;
-    using AG.PaymentApp.Domain.Commands.Mapper;
     using AG.PaymentApp.Domain.Commands.Payments;
     using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
     using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Core.ValueObject;
-    using AutoMapper;
     using Ether.Outcomes;
     using FluentAssertions;
     using Microsoft.AspNetCore.DataProtection;
@@ -40,7 +38,6 @@
 
         private PaymentCommandHandler ReturnPaymentCommandHandlerObject()
         {
-            var mapperConfiguration = new MapperConfiguration(c => c.AddProfile(new PaymentProfile()));
             var mockMediatorHandler = new Mock<IMediatorHandler>();
             var mockDataProtectionProvider = new Mock<IDataProtectionProvider>();
             var mockDataProtector = new Mock<IDataProtector>();

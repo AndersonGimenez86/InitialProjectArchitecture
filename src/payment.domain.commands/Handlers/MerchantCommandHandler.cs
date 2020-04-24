@@ -4,10 +4,10 @@
     using System.Threading.Tasks;
     using Ag.PaymentApp.Domain.Commands.Handlers;
     using AG.Payment.Domain.Core.Bus;
+    using AG.PaymentApp.Domain.Commands;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Entity.Merchants;
-    using global::Payment.Domain.Commands.Merchant;
     using MediatR;
 
     public class MerchantCommandHandler : CommandHandler
