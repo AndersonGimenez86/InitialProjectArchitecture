@@ -1,4 +1,4 @@
-﻿namespace AG.PaymentApp.Repository.Interface
+﻿namespace AG.Payment.Data.EventSourcing.Interface
 {
     using MongoDB.Driver;
     public interface IRepositoryStartup<T>

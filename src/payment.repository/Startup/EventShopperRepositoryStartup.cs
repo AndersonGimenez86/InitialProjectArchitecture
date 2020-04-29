@@ -1,8 +1,8 @@
-﻿namespace AG.PaymentApp.Repository.Startup
+﻿namespace AG.Payment.Data.EventSourcing.Startup
 {
     using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.Interface;
-    using AG.PaymentApp.Repository.Interface;
+    using AG.Payment.Data.EventSourcing.Interface;
     using MongoDB.Driver;
 
     public class EventShopperRepositoryStartup : IShopperRepositoryStartup

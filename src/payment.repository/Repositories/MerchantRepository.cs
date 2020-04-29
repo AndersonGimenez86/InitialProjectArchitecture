@@ -1,16 +1,16 @@
-﻿namespace AG.PaymentApp.Repository.Repositories
+﻿namespace AG.Payment.Data.EventSourcing.Repositories
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using AG.Payment.Data.EventSourcing.Filters;
+    using AG.Payment.Data.EventSourcing.Interface;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Entity.Merchants;
     using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Merchants;
-    using AG.PaymentApp.Repository.Filters;
-    using AG.PaymentApp.Repository.Interface;
     using AutoMapper;
     using MongoDB.Bson;
     using MongoDB.Driver;

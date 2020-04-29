@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Application", "2.Applicat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Infrastructure", "4.Infrastructure", "{5D0CB0EB-812D-4C2D-9832-706A759061BF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Data", "payment.repository\Payment.Data.csproj", "{77574944-27D1-45E5-91D0-DE8292646DCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Data.EventSourcing", "payment.repository\Payment.Data.EventSourcing.csproj", "{77574944-27D1-45E5-91D0-DE8292646DCC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Domain", "3.Domain", "{2EA2EF5D-A453-4347-AB8D-8AF37E4140FE}"
 EndProject
@@ -63,7 +63,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.4.Events", "3.4.Events", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Domain.Events", "Payment.Domain.Events\Payment.Domain.Events.csproj", "{675A7610-F95B-4E6A-8411-73F132840453}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.Infrastructure.Crosscutting.Bus", "Payment.Infrastructure.Crosscutting.Bus\Payment.Infrastructure.Crosscutting.Bus.csproj", "{840A1070-2F7A-4954-9B2E-CEAE98F2DC6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Infrastructure.Crosscutting.Bus", "Payment.Infrastructure.Crosscutting.Bus\Payment.Infrastructure.Crosscutting.Bus.csproj", "{840A1070-2F7A-4954-9B2E-CEAE98F2DC6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

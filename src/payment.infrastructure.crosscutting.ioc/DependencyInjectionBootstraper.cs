@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using AG.Payment.Data.EventSourcing.DependecyInjection;
     using AG.PaymentApp.Application.Messaging;
     using AG.PaymentApp.Application.Messaging.DependencyInjection;
     using AG.PaymentApp.Application.Services.DependencyInjection;
@@ -14,7 +15,6 @@
     using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
     using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config;
     using AG.PaymentApp.Infrastructure.Crosscutting.Logging.DependencyInjection;
-    using AG.PaymentApp.Repository.DependecyInjection;
     using AutoMapper;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

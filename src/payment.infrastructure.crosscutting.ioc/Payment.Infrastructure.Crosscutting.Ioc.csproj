@@ -20,7 +20,7 @@
     <ProjectReference Include="..\Payment.Infrastructure.Crosscutting.Bus\Payment.Infrastructure.Crosscutting.Bus.csproj" />
     <ProjectReference Include="..\payment.infrastructure.crosscutting.logging\Payment.Infrastructure.Crosscutting.Logging.csproj" />
     <ProjectReference Include="..\payment.infrastructure.crosscutting\Payment.Infrastructure.Crosscutting.csproj" />
-    <ProjectReference Include="..\payment.repository\Payment.Data.csproj" />
+    <ProjectReference Include="..\payment.repository\Payment.Data.EventSourcing.csproj" />
   </ItemGroup>
 
 </Project>
