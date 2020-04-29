@@ -48,7 +48,7 @@
 
             var creditCardProtected = CreditCardDataProtection.ProtectSensitiveData(dataProtectionProvider, newPaymentCommand.CreditCard);
 
-            var payment = new Payment(newPaymentCommand.Id, newPaymentCommand.ShopperID, newPaymentCommand.MerchantID, creditCardProtected, newPaymentCommand.Amount, newPaymentCommand.Status);
+            var payment = new Payment(newPaymentCommand.Id, newPaymentCommand.ShopperID, newPaymentCommand.MerchantID, creditCardProtected, newPaymentCommand.Amount);
 
             repository.SaveAsync(payment);
 

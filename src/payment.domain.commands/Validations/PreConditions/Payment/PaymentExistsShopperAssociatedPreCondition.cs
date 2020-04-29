@@ -4,18 +4,16 @@
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Commands.Payments;
     using AG.PaymentApp.Domain.Commands.Validations.Interface;
-    using AG.PaymentApp.Domain.Core.Enum;
-    using AG.PaymentApp.Domain.Query.Interface;
-    using AG.PaymentApp.Domain.Query.Shoppers;
+    using AG.PaymentApp.Domain.queries.Interface;
     using Ether.Outcomes;
 
     public class PaymentExistsShopperAssociatedPreCondition : IPreCondition<PaymentCommand>
     {
-        private readonly IFindShopperQueryHandler shopperQuery;
+        private readonly IFindShopperRepository findShopperRepository;
 
-        public PaymentExistsShopperAssociatedPreCondition(IFindShopperQueryHandler shopperQuery)
+        public PaymentExistsShopperAssociatedPreCondition(IFindShopperRepository findShopperRepository)
         {
-            this.shopperQuery = shopperQuery;
+            this.findShopperRepository = findShopperRepository;
         }
 
         public IOutcome Accept(PaymentCommand payment)
@@ -32,9 +30,7 @@
 
         private async Task<bool> FindShopperByID(Guid shopperID)
         {
-            var findShopperQuery = new FindShopperQuery(shopperID, Gender.None);
-
-            return await this.shopperQuery.GetAsync(findShopperQuery) != null;
+            return await this.findShopperRepository.GetAsync(shopperID) != null;
         }
     }
 }

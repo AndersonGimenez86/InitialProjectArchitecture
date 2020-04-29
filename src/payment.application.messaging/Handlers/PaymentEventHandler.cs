@@ -4,19 +4,19 @@
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Core.Enum;
     using AG.PaymentApp.Domain.Events;
-    using AG.PaymentApp.Domain.Query.Interface;
+    using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
     using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
 
     internal class PaymentEventHandler : IMessageHandler<CreateTransactionEvent>
     {
         //private readonly ILogger logger;        
-        private readonly IFindPaymentQueryHandler findPaymentQueryHandler;
+        private readonly IFindPaymentRepository findPaymentRepository;
 
         public PaymentEventHandler(
-            IFindPaymentQueryHandler findPaymentQueryHandler)
+            IFindPaymentRepository findPaymentRepository)
         {
-            this.findPaymentQueryHandler = findPaymentQueryHandler;
+            this.findPaymentRepository = findPaymentRepository;
         }
 
         public async Task HandleAsync(CreateTransactionEvent message)
@@ -25,13 +25,10 @@
 
             Enum.TryParse(message.TransactionStatus, out PaymentStatus status);
 
-            var payment = await this.findPaymentQueryHandler.GetAsync(findPaymentQuery);
+            var payment = await this.findPaymentRepository.GetAsync(findPaymentQuery.PaymentID);
 
             if (payment != null)
             {
-                payment.Status = status;
-                payment.TransactionID = message.TransactionID;
-
                 //TODO: Review here
                 //await new PaymentCommandHandler().UpdateAsync(payment);
             }
