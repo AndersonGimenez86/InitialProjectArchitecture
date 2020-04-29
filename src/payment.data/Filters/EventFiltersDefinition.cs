@@ -1,4 +1,4 @@
-﻿namespace AG.Payment.Data.EventSourcing.Filters
+﻿namespace AG.PaymentApp.Data.Filters
 {
     using System;
     using AG.PaymentApp.Domain.Entity.Mongo;

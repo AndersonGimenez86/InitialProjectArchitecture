@@ -1,4 +1,4 @@
-﻿namespace AG.Payment.Data.EventSourcing.Interface
+﻿namespace AG.PaymentApp.Data.Interface
 {
     using AG.PaymentApp.Domain.Entity.Mongo;
 

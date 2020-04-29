@@ -1,9 +1,9 @@
-﻿namespace AG.Payment.Data.EventSourcing.DependecyInjection
+﻿namespace AG.PaymentApp.Data.DependecyInjection
 {
     using System.Diagnostics.CodeAnalysis;
-    using AG.Payment.Data.EventSourcing.Interface;
-    using AG.Payment.Data.EventSourcing.Repositories;
-    using AG.Payment.Data.EventSourcing.Startup;
+    using AG.PaymentApp.Data.Interface;
+    using AG.PaymentApp.Data.Repositories;
+    using AG.PaymentApp.Data.Startup;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Interface;
     using AG.PaymentApp.Domain.queries.Interface;

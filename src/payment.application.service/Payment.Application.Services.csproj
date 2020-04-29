@@ -13,6 +13,5 @@
     <ProjectReference Include="..\payment.application.messaging\Payment.Application.Messaging.csproj" />
     <ProjectReference Include="..\payment.domain.query.model\Payment.Domain.Query.csproj" />
     <ProjectReference Include="..\payment.domain\Payment.Domain.csproj" />
-    <ProjectReference Include="..\payment.repository\Payment.Data.EventSourcing.csproj" />
   </ItemGroup>
 </Project>

@@ -1,11 +1,11 @@
-﻿namespace AG.Payment.Data.EventSourcing.Repositories
+﻿namespace AG.PaymentApp.Data.Repositories
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using AG.Payment.Data.EventSourcing.Filters;
-    using AG.Payment.Data.EventSourcing.Interface;
+    using AG.PaymentApp.Data.Filters;
+    using AG.PaymentApp.Data.Interface;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Entity.Merchants;
     using AG.PaymentApp.Domain.Entity.Mongo;

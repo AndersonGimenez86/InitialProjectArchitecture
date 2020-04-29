@@ -15,12 +15,12 @@
     <ProjectReference Include="..\payment.application.messaging\Payment.Application.Messaging.csproj" />
     <ProjectReference Include="..\payment.application.service\Payment.Application.Services.csproj" />
     <ProjectReference Include="..\payment.crosscutting.kafka\Payment.Infrastructure.Crosscutting.Kafka.csproj" />
+    <ProjectReference Include="..\payment.data\Payment.Data.csproj" />
     <ProjectReference Include="..\payment.domain.commands\Payment.Domain.Commands.csproj" />
     <ProjectReference Include="..\payment.domain.query.model\Payment.Domain.Query.csproj" />
     <ProjectReference Include="..\Payment.Infrastructure.Crosscutting.Bus\Payment.Infrastructure.Crosscutting.Bus.csproj" />
     <ProjectReference Include="..\payment.infrastructure.crosscutting.logging\Payment.Infrastructure.Crosscutting.Logging.csproj" />
     <ProjectReference Include="..\payment.infrastructure.crosscutting\Payment.Infrastructure.Crosscutting.csproj" />
-    <ProjectReference Include="..\payment.repository\Payment.Data.EventSourcing.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,11 +2,11 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using AG.Payment.Data.EventSourcing.DependecyInjection;
     using AG.PaymentApp.Application.Messaging;
     using AG.PaymentApp.Application.Messaging.DependencyInjection;
     using AG.PaymentApp.Application.Services.DependencyInjection;
     using AG.PaymentApp.Crosscutting.Bus.DependencyInjection;
+    using AG.PaymentApp.Data.DependecyInjection;
     using AG.PaymentApp.Domain.Commands.DependencyInjection;
     using AG.PaymentApp.Domain.Query.DependencyInjection;
     using AG.PaymentApp.Infrastructure.Crosscutting;

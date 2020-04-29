@@ -5,7 +5,7 @@ using AG.PaymentApp.Infrastructure.Crosscutting.Environment;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
-namespace AG.Payment.Data.EventSourcing.Repositories
+namespace AG.PaymentApp.Data.Repositories
 {
     class MongoRepository : IMongoRepository
     {
