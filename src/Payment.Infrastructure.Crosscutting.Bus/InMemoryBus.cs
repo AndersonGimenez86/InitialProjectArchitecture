@@ -5,8 +5,6 @@
     using AG.Payment.Domain.Core.Commands;
     using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.Domain.Core.Events.Interface;
-    using AG.PaymentApp.Domain.Core.Kafka.Producers;
-    using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
     using MediatR;
 
     public sealed class InMemoryBus : IMediatorHandler
@@ -27,26 +25,12 @@
             return _mediator.Send(command);
         }
 
-        public Task RaiseEvent<E>(E @event)
-        {
-            return _mediator.Publish(@event);
-        }
-
-        public Task RaiseEvent<E>(E @event, ITopicProducer<E> topicProducer) where E : Event
+        public Task RaiseEvent<E>(E @event) where E : Event
         {
             if (!@event.MessageType.Equals("DomainNotification"))
-            {
-                var deliveryMessageReport = PublishKafkaMessage(@event, topicProducer).Result;
-                return _mediator.Publish(deliveryMessageReport);
-            }
+                _eventStore?.Save(@event);
 
             return _mediator.Publish(@event);
-        }
-
-        private async Task<DeliveryMessageReport> PublishKafkaMessage<E>(E @event, ITopicProducer<E> topicProducer) where E : Event
-        {
-            //produce event for acquiring bank consumes                
-            return await topicProducer.ProduceAsync(@event);
         }
     }
 }
