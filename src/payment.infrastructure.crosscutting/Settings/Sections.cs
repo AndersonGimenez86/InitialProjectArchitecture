@@ -12,6 +12,5 @@ namespace AG.PaymentApp.Infrastructure.Crosscutting.Environment
         public const string KafkaSettingsSection = "Kafka";
         public const string LoggingSection = "Logging";
         public const string DataBaseSection = "EventStore";
-
     }
 }

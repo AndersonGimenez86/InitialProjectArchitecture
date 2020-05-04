@@ -1,4 +1,5 @@
-﻿using AG.PaymentApp.gateway.Extensions;
+﻿using AG.Payment.Infrastructure.Crosscutting.Settings;
+using AG.PaymentApp.gateway.Extensions;
 using AG.PaymentApp.Infrastructure.Crosscutting.Environment;
 using AG.PaymentApp.Infrastructure.Crosscutting.IoC;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -62,7 +63,8 @@ namespace AG.PaymentApp.gateway
         public void Configure(
             IApplicationBuilder app,
             IHostingEnvironment env,
-            IOptions<EnvironmentSettings> environmentSettings
+            IOptions<EnvironmentSettings> environmentSettings,
+            IOptions<EndPointCollectionSettings> endPointCollectionSettings
             )
         {
             if (env.IsDevelopment())

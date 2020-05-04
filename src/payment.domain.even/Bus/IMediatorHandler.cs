@@ -7,11 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Payment.Domain.Core.Bus
+namespace AG.Payment.Domain.Core.Bus
 {
     using System.Threading.Tasks;
+    using AG.Payment.Domain.Core.Commands;
     using AG.PaymentApp.Domain.Core.Events;
-    using Payment.Domain.Core.Commands;
 
     public interface IMediatorHandler
     {

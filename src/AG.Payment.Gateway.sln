@@ -59,6 +59,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Application.Messagi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.1.Core", "3.1.Core", "{C8507323-EBE0-438F-8B3A-9BD19723BC06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.Application.Services.ExternalClient", "Payment.Application.Services.ExternalClient\Payment.Application.Services.ExternalClient.csproj", "{1540B4A2-E952-4E8E-AD45-7812DAE89FE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,10 @@ Global
 		{841B80BC-D9DF-461C-B28A-801D00C3C424}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{841B80BC-D9DF-461C-B28A-801D00C3C424}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{841B80BC-D9DF-461C-B28A-801D00C3C424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1540B4A2-E952-4E8E-AD45-7812DAE89FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1540B4A2-E952-4E8E-AD45-7812DAE89FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1540B4A2-E952-4E8E-AD45-7812DAE89FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1540B4A2-E952-4E8E-AD45-7812DAE89FE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -162,6 +168,7 @@ Global
 		{AB64D731-569E-4B8A-B7E2-BCD7D2D64B77} = {A4D1DB47-F4AF-4979-8B12-221F1BA79A08}
 		{841B80BC-D9DF-461C-B28A-801D00C3C424} = {A4D1DB47-F4AF-4979-8B12-221F1BA79A08}
 		{C8507323-EBE0-438F-8B3A-9BD19723BC06} = {2EA2EF5D-A453-4347-AB8D-8AF37E4140FE}
+		{1540B4A2-E952-4E8E-AD45-7812DAE89FE6} = {D72FDAD0-CDC2-435F-BD02-1E28E1755710}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72FBB479-140E-48EB-A8C0-5E7FF7F2EA65}

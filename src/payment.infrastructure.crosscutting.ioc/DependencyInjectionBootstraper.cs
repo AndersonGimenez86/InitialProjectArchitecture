@@ -2,9 +2,11 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using AG.Payment.Infrastructure.Crosscutting.Settings;
     using AG.PaymentApp.Application.Messaging;
     using AG.PaymentApp.Application.Messaging.DependencyInjection;
     using AG.PaymentApp.Application.Services.DependencyInjection;
+    using AG.PaymentApp.Application.Services.ExternalClient.DependencyInjection;
     using AG.PaymentApp.Domain.Query.DependencyInjection;
     using AG.PaymentApp.Infrastructure.Crosscutting;
     using AG.PaymentApp.Infrastructure.Crosscutting.Environment;
@@ -29,7 +31,7 @@
             services.Configure<IdentitySettings>(configuration.GetSection(SectionNames.ApplicationIdentitySection));
             services.Configure<DataBaseSettings>(configuration.GetSection(SectionNames.DataBaseSection));
             services.Configure<KafkaSettings>(configuration.GetSection(SectionNames.KafkaSettingsSection));
-
+            services.Configure<EndPointCollectionSettings>(configuration.GetSection(SectionNames.EndpointsSection));
         }
 
         public static void InitializeServices(IServiceProvider applicationServices)
@@ -42,6 +44,7 @@
             var kafkaSettingsSection = configuration.GetSection(SectionNames.KafkaSettingsSection);
 
             services.SetupApplicationServices(kafkaSettingsSection)
+                .SetupApplicationServicesExternalClient(configuration)
                 .SetupInfrastructureCrosscuttingLoggingDependencyInjection()
                 .SetupApplicationMessaging()
                 .SetupMessaging()

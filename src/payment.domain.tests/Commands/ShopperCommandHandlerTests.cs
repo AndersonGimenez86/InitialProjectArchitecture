@@ -3,10 +3,10 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
+    using AG.PaymentApp.Domain.Core.Enum;
+    using AG.PaymentApp.Domain.Core.ValueObject;
+    using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.Entity.Shoppers;
-    using AG.PaymentApp.Domain.Enum;
-    using AG.PaymentApp.Domain.events;
-    using AG.PaymentApp.Domain.ValueObject;
     using Xunit;
 
     [ExcludeFromCodeCoverage]
