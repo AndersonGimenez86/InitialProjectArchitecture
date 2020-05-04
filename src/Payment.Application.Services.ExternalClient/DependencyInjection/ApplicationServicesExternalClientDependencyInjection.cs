@@ -2,6 +2,8 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using AG.Payment.Application.Services.ExternalClient;
+    using AG.Payment.Application.Services.ExternalClient.Interface;
     using AG.Payment.Infrastructure.Crosscutting.Settings;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +21,9 @@
             {
                 services.AddHttpClient(endpoint.Name, c => c.BaseAddress = new Uri(endpoint.BaseAddress));
             }
-            return services;
+
+            return services
+                .AddScoped<IClient, Client>();
         }
     }
 }
