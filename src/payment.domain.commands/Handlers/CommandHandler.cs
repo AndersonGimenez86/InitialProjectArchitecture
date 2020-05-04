@@ -1,10 +1,10 @@
 ﻿namespace Ag.PaymentApp.Domain.Commands.Handlers
 {
+    using AG.Payment.Domain.Core.Bus;
+    using AG.Payment.Domain.Core.Commands;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Core.Notifications;
     using MediatR;
-    using Payment.Domain.Core.Bus;
-    using Payment.Domain.Core.Commands;
 
     public class CommandHandler
     {

@@ -10,13 +10,13 @@
 namespace Payment.Infrastructure.Crosscutting.Bus
 {
     using System.Threading.Tasks;
+    using AG.Payment.Domain.Core.Bus;
+    using AG.Payment.Domain.Core.Commands;
     using AG.PaymentApp.Domain.Core.Events;
     using AG.PaymentApp.Domain.Core.Events.Interface;
     using AG.PaymentApp.Domain.Core.Kafka.Producers;
     using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
     using MediatR;
-    using Payment.Domain.Core.Bus;
-    using Payment.Domain.Core.Commands;
 
     public sealed class InMemoryBus<E> : IMediatorHandler where E : Event
     {
