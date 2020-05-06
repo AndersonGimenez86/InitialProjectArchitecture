@@ -3,8 +3,9 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
+    using AG.PaymentApp.Domain.Core.ValueObject;
     using AG.PaymentApp.Domain.Entity.Merchants;
-    using AG.PaymentApp.Domain.events;
+    using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.Query.Merchants;
     using Xunit;
 
@@ -31,8 +32,8 @@
             var expectedMerchant = new Merchant
             {
                 Acronym = "Test",
-                Country = ValueObject.Country.Default,
-                Currency = ValueObject.Currency.Default,
+                Country = Country.Default,
+                Currency = Currency.Default,
                 DateCreated = DateTime.Now,
                 IsOnline = true,
                 IsVisible = true,
