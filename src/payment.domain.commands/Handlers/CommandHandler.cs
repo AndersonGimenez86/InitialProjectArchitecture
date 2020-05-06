@@ -2,6 +2,7 @@
 {
     using AG.Payment.Domain.Core.Bus;
     using AG.Payment.Domain.Core.Commands;
+    using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Core.Notifications;
     using MediatR;
 

@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.1</LangVersion>
+    <AssemblyName>AG.Payment.Domain.Core</AssemblyName>
+    <RootNamespace>AG.Payment.Domain.Core</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

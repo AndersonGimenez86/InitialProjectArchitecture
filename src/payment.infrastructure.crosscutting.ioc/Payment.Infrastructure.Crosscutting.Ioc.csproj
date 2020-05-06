@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\payment.application.messaging\Payment.Application.Messaging.csproj" />
+    <ProjectReference Include="..\Payment.Application.Services.ExternalClient\Payment.Application.Services.ExternalClient.csproj" />
     <ProjectReference Include="..\payment.application.service\Payment.Application.Services.csproj" />
     <ProjectReference Include="..\payment.crosscutting.kafka\Payment.Infrastructure.Crosscutting.Kafka.csproj" />
     <ProjectReference Include="..\payment.data\Payment.Data.csproj" />

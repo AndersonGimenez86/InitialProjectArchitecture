@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.1</LangVersion>
+    <AssemblyName>AG.Payment.Infrastructure.Crosscutting</AssemblyName>
+    <RootNamespace>AG.Payment.Infrastructure.Crosscutting</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
