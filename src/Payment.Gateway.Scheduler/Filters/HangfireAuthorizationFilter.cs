@@ -7,7 +7,7 @@ namespace Payment.Gateway.Scheduler.Filters
         public bool Authorize(DashboardContext context)
         {
             var httpContext = context.GetHttpContext();​
-            return true;
+            return httpContext.User.Identity.IsAuthenticated;
         }
     }
 }

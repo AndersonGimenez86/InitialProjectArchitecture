@@ -19,6 +19,8 @@
                 BackupStrategy = MongoBackupStrategy.Collections
             };
 
+            services.AddHangfireServer();
+
             return services.AddHangfire(config =>
             {
                 config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170);
