@@ -62,6 +62,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.Gateway.Scheduler", "Payment.Gateway.Scheduler\Payment.Gateway.Scheduler.csproj", "{0AF5A7BB-F810-4495-8F3B-EEE99DB472D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.Infrastructure.Crosscutting.Scheduler", "Payment.Infrastructure.Crosscutting.Scheduler\Payment.Infrastructure.Crosscutting.Scheduler.csproj", "{EAAC33DD-5DCE-4E7B-B33B-DFAB18D57766}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.Application.Services.ExternalClient", "Payment.Application.Services.ExternalClient\Payment.Application.Services.ExternalClient.csproj", "{1540B4A2-E952-4E8E-AD45-7812DAE89FE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,6 +146,10 @@ Global
 		{EAAC33DD-5DCE-4E7B-B33B-DFAB18D57766}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAAC33DD-5DCE-4E7B-B33B-DFAB18D57766}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAAC33DD-5DCE-4E7B-B33B-DFAB18D57766}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1540B4A2-E952-4E8E-AD45-7812DAE89FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1540B4A2-E952-4E8E-AD45-7812DAE89FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1540B4A2-E952-4E8E-AD45-7812DAE89FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1540B4A2-E952-4E8E-AD45-7812DAE89FE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +181,7 @@ Global
 		{C8507323-EBE0-438F-8B3A-9BD19723BC06} = {2EA2EF5D-A453-4347-AB8D-8AF37E4140FE}
 		{0AF5A7BB-F810-4495-8F3B-EEE99DB472D5} = {398A7D01-872B-459F-9C37-40595C816ED8}
 		{EAAC33DD-5DCE-4E7B-B33B-DFAB18D57766} = {7CE04BFD-C23C-4F4C-BD2D-A6125A3AD2BC}
+		{1540B4A2-E952-4E8E-AD45-7812DAE89FE6} = {D72FDAD0-CDC2-435F-BD02-1E28E1755710}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72FBB479-140E-48EB-A8C0-5E7FF7F2EA65}

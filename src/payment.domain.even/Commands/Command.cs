@@ -9,7 +9,7 @@
 
 
 
-namespace Payment.Domain.Core.Commands
+namespace AG.Payment.Domain.Core.Commands
 {
     using System;
     using AG.PaymentApp.Domain.Core.Events;
