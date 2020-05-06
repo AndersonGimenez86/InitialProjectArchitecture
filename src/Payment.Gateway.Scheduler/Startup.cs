@@ -1,10 +1,10 @@
 ﻿using AG.Payment.Infrastructure.Crosscutting.Scheduler;
+using AG.Payment.Infrastructure.Crosscutting.Scheduler.Filters;
 using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Payment.Gateway.Scheduler.Filters;
 
 namespace Payment.Gateway.Scheduler
 {

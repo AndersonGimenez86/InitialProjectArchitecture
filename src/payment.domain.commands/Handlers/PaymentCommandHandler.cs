@@ -55,7 +55,7 @@
             if (Commit())
             {
                 var paymentRegisteredEvent = new PaymentRegisteredEvent(payment.ShopperID, payment.MerchantID, payment.TransactionID, payment.Amount, payment.CreditCard);
-                mediatorHandler.RaiseEvent(paymentRegisteredEvent, this.topicProducer);
+                mediatorHandler.RaiseEvent(paymentRegisteredEvent);
             }
 
             return Task.FromResult(true);

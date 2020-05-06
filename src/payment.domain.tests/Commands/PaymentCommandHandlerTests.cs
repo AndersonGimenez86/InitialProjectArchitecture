@@ -81,7 +81,7 @@
 
             //ASSERT
             result.Should().BeTrue();
-            mockMediatorHandler.Verify(m => m.RaiseEvent(It.IsAny<PaymentRegisteredEvent>(), It.IsAny<ITopicProducer<PaymentRegisteredEvent>>()));
+            mockMediatorHandler.Verify(m => m.RaiseEvent(It.IsAny<PaymentRegisteredEvent>()));
         }
 
         [Fact]
