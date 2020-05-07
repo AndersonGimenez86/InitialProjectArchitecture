@@ -12,7 +12,6 @@ namespace AG.Payment.Domain.Core.Bus
     using System.Threading.Tasks;
     using AG.Payment.Domain.Core.Commands;
     using AG.PaymentApp.Domain.Core.Events;
-    using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
 
     public interface IMediatorHandler
     {
