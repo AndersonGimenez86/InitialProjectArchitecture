@@ -1,46 +1,43 @@
 ﻿namespace AG.PaymentApp.Domain.commands.Shoopers
 {
-    using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using Ag.PaymentApp.Domain.Commands.Handlers;
+    using AG.Payment.Domain.Core.Bus;
     using AG.PaymentApp.Domain.commands.Shoppers;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Entity.Shoppers;
-    using AutoMapper;
     using MediatR;
-    using Payment.Domain.Core.Bus;
 
     public class ShopperCommandHandler : CommandHandler
     {
         private readonly IShopperRepository repository;
-        private readonly IMapper typeMapper;
-        private readonly IUnitOfWork unitOfWork;
         private readonly IMediatorHandler mediatorHandler;
 
         public ShopperCommandHandler(
             IShopperRepository eventRepository,
-            IMapper typeMapper,
-            IUnitOfWork unitOfWork,
             IMediatorHandler mediatorHandler,
-            INotificationHandler<DomainNotification> notifications) : base(unitOfWork, mediatorHandler, notifications)
+            INotificationHandler<DomainNotification> notifications) : base(mediatorHandler, notifications)
 
         {
             this.repository = eventRepository;
-            this.typeMapper = typeMapper;
         }
 
-        public async Task ExecuteAsync(ShopperCommand shopperCommand)
+        public Task<bool> Handle(NewShopperCommand newPaymentCommand, CancellationToken cancellationToken)
         {
-            try
+            if (!newPaymentCommand.IsValid())
             {
-                var shopper = this.typeMapper.Map<Shopper>(shopperCommand);
-                await this.repository.SaveAsync(shopper);
+                NotifyValidationErrors(newPaymentCommand);
+                return Task.FromResult(false);
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+
+            var shopper = new Shopper(newPaymentCommand.Id, newPaymentCommand.FirstName, newPaymentCommand.LastName, newPaymentCommand.Email,
+                                      newPaymentCommand.Gender, newPaymentCommand.BirthDate, newPaymentCommand.Address);
+
+            repository.SaveAsync(shopper);
+
+            return Task.FromResult(true);
         }
     }
 }

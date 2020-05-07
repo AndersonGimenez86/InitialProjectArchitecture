@@ -16,12 +16,12 @@
         private readonly IMapper typeMapper;
 
         public FindPaymentQueryHandler(
-            IFindPaymentRepository paymentIntentRepository,
+            IFindPaymentRepository paymentRepository,
             IAdaptMongoEntityToEntity<PaymentMongo, Payment> paymentAdapter,
             IMapper typeMapper
             )
         {
-            this.paymentRepository = paymentIntentRepository;
+            this.paymentRepository = paymentRepository;
             this.paymentAdapter = paymentAdapter;
             this.typeMapper = typeMapper;
         }

@@ -8,17 +8,18 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using AG.Payment.Domain.Commands.Validations.Interface;
 using AG.PaymentApp.Domain.Core.Enum;
 using AG.PaymentApp.Domain.Core.ValueObject;
-using Payment.Domain.Commands.Validations.Interface;
 
 namespace AG.PaymentApp.Domain.Commands.Payments
 {
     public class NewPaymentCommand : PaymentCommand
     {
-        private readonly IPaymentValidation paymentValidation;
+        private readonly ICommandValidation<PaymentCommand> paymentValidation;
 
-        public NewPaymentCommand(Guid paymentID, Guid shopperID, Guid merchantID, CreditCard creditCard, Money amount, IPaymentValidation paymentValidation)
+        public NewPaymentCommand(Guid paymentID, Guid shopperID, Guid merchantID, CreditCard creditCard,
+            Money amount, ICommandValidation<PaymentCommand> paymentValidation)
         {
             this.Id = paymentID;
             this.ShopperID = shopperID;
@@ -30,14 +31,13 @@ namespace AG.PaymentApp.Domain.Commands.Payments
         }
         public CreditCard CreditCard { get; set; }
 
-
         public override bool IsValid()
         {
-            var paymentPreConditionEvaluator = paymentValidation.ValidatePayment(this);
+            var preConditionEvaluator = paymentValidation.ValidateCommand(this);
 
-            if (paymentPreConditionEvaluator.Failure)
+            if (preConditionEvaluator.Failure)
             {
-                this.ValidationResult.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, paymentPreConditionEvaluator.ToMultiLine()));
+                this.ValidationResult.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, preConditionEvaluator.ToMultiLine()));
                 return false;
             }
 

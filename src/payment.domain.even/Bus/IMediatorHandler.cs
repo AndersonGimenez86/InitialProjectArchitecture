@@ -16,6 +16,7 @@ namespace AG.Payment.Domain.Core.Bus
     public interface IMediatorHandler
     {
         Task SendCommand<C>(C command) where C : Command;
-        Task RaiseEvent<T>(T @event) where T : Event;
+        Task RaiseEvent<E>(E @event);
+        Task RaiseEvent<E>(E @event, ITopicProducer<E> topicProducer) where E : Event;
     }
 }

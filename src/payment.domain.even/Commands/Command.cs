@@ -1,15 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Command.cs" company="AG Software">
-//   Copyright (c) AG. All rights reserved.
-// </copyright>
-// <summary>
-// Command
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-
-
-namespace AG.Payment.Domain.Core.Commands
+﻿namespace AG.Payment.Domain.Core.Commands
 {
     using System;
     using AG.PaymentApp.Domain.Core.Events;
@@ -19,7 +8,7 @@ namespace AG.Payment.Domain.Core.Commands
     {
         public Guid Id { get; set; }
         public DateTime Timestamp { get; private set; }
-        public ValidationResult ValidationResult { get; set; }
+        public ValidationResult ValidationResult { get; set; } = new ValidationResult();
 
         protected Command()
         {

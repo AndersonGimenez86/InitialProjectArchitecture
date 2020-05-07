@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="InMemoryBus.cs" company="AG Software">
-//   Copyright (c) AG. All rights reserved.
-// </copyright>
-// <summary>
-// InMemoryBus
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace Payment.Infrastructure.Crosscutting.Bus
+﻿namespace AG.Payment.Infrastructure.Crosscutting.Bus
 {
     using System.Threading.Tasks;
     using AG.Payment.Domain.Core.Bus;
@@ -18,22 +9,17 @@ namespace Payment.Infrastructure.Crosscutting.Bus
     using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
     using MediatR;
 
-    public sealed class InMemoryBus<E> : IMediatorHandler where E : Event
+    public sealed class InMemoryBus : IMediatorHandler
     {
         private readonly IMediator _mediator;
         private readonly IEventStore _eventStore;
-        private readonly ITopicProducer<E> topicProducer;
 
         public InMemoryBus(IEventStore eventStore,
-            IMediator mediator,
-            ITopicProducer<E> topicProducer
-
+            IMediator mediator
             )
         {
             _eventStore = eventStore;
             _mediator = mediator;
-            this.topicProducer = topicProducer;
-
         }
 
         public Task SendCommand<C>(C command) where C : Command
@@ -41,22 +27,26 @@ namespace Payment.Infrastructure.Crosscutting.Bus
             return _mediator.Send(command);
         }
 
-        public Task RaiseEvent<T>(T @event) where T : Event
+        public Task RaiseEvent<E>(E @event)
+        {
+            return _mediator.Publish(@event);
+        }
+
+        public Task RaiseEvent<E>(E @event, ITopicProducer<E> topicProducer) where E : Event
         {
             if (!@event.MessageType.Equals("DomainNotification"))
             {
-                var deliveryMessageReport = PublishKafkaMessage(@event as E).Result;
+                var deliveryMessageReport = PublishKafkaMessage(@event, topicProducer).Result;
                 return _mediator.Publish(deliveryMessageReport);
-
             }
 
             return _mediator.Publish(@event);
         }
 
-        private async Task<DeliveryMessageReport> PublishKafkaMessage(E @event)
+        private async Task<DeliveryMessageReport> PublishKafkaMessage<E>(E @event, ITopicProducer<E> topicProducer) where E : Event
         {
             //produce event for acquiring bank consumes                
-            return await this.topicProducer.ProduceAsync(@event);
+            return await topicProducer.ProduceAsync(@event);
         }
     }
 }

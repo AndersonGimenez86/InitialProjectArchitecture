@@ -1,12 +1,15 @@
 ﻿namespace AG.PaymentApp.Domain.Entity.Payments
 {
     using System;
-    using AG.PaymentApp.Domain.Entity.Bases;
     using AG.PaymentApp.Domain.Core.Enum;
     using AG.PaymentApp.Domain.Core.ValueObject;
+    using AG.PaymentApp.Domain.Entity.Bases;
 
     public class Payment : Entity
     {
+        public Payment()
+        { }
+
         public Payment(Guid paymentID, Guid shopperID, Guid merchantID, CreditCardProtected creditCard, Money amount, PaymentStatus paymentStatus)
         {
             this.Id = paymentID;

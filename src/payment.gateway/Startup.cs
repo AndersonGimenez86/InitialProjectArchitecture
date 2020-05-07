@@ -2,6 +2,7 @@
 using AG.PaymentApp.gateway.Extensions;
 using AG.PaymentApp.Infrastructure.Crosscutting.Environment;
 using AG.PaymentApp.Infrastructure.Crosscutting.IoC;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,6 +55,9 @@ namespace AG.PaymentApp.gateway
             services.AddSwagger(identitySettings);
 
             services.AddDataProtection();
+
+            // Adding MediatR for Domain Events and Notifications
+            services.AddMediatR(typeof(Startup));
 
             DependencyInjectionBootstraper.InitializeAppSettings(services, this.Configuration);
             DependencyInjectionBootstraper.RegisterServices(services, this.Configuration);

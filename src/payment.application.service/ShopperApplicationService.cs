@@ -6,25 +6,25 @@
     using AG.PaymentApp.Application.Services.Adapter.Interface;
     using AG.PaymentApp.Application.Services.DTO.Shoppers;
     using AG.PaymentApp.Application.Services.Interface;
-    using AG.PaymentApp.Domain.Entity.Shoppers;
     using AG.PaymentApp.Domain.Core.Enum;
-    using AG.PaymentApp.Domain.Query.Interface;
+    using AG.PaymentApp.Domain.Entity.Shoppers;
+    using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Shoppers;
     using AutoMapper;
 
     public class ShopperApplicationService : IShopperApplicationService
     {
-        private readonly IFindShopperQueryHandler findShopperQueryHandler;
+        private readonly IFindShopperRepository findShopperRepository;
         private readonly IMapper typeMapper;
         private readonly IAdaptEntityToViewModel<Shopper, ShopperViewModel> shopperAdapter;
 
         public ShopperApplicationService(
-            IFindShopperQueryHandler findShopperQueryHandler,
+            IFindShopperRepository findShopperRepository,
             IMapper typeMapper,
             IAdaptEntityToViewModel<Shopper, ShopperViewModel> shopperAdapter
             )
         {
-            this.findShopperQueryHandler = findShopperQueryHandler;
+            this.findShopperRepository = findShopperRepository;
             this.typeMapper = typeMapper;
             this.shopperAdapter = shopperAdapter;
         }
@@ -42,28 +42,21 @@
 
         public async Task<ShopperViewModel> GetAsync(Guid shopperID)
         {
-            var findShopperQuery = new FindShopperQuery(shopperID, Gender.None);
-
-            var shopper = await this.findShopperQueryHandler.GetAsync(findShopperQuery);
-
+            var shopper = await this.findShopperRepository.GetAsync(shopperID);
             return shopperAdapter.Adapt(shopper, typeMapper);
         }
 
         public async Task<IEnumerable<ShopperViewModel>> GetAllAsync()
         {
             var findShopperQuery = new FindShopperQuery(Guid.Empty, Gender.None);
-
-            var shoppers = await this.findShopperQueryHandler.GetAllAsync(findShopperQuery);
-
+            var shoppers = await this.findShopperRepository.GetAllAsync(findShopperQuery);
             return shopperAdapter.Adapt(shoppers, typeMapper);
         }
 
         public async Task<IEnumerable<ShopperViewModel>> GetShoppersByGender(Gender gender)
         {
             var findShopperQuery = new FindShopperQuery(Guid.Empty, gender);
-
-            var shoppers = await this.findShopperQueryHandler.GetShoppersByGender(findShopperQuery);
-
+            var shoppers = await this.findShopperRepository.GetAllAsync(findShopperQuery);
             return shopperAdapter.Adapt(shoppers, typeMapper);
         }
     }

@@ -1,7 +1,7 @@
 ﻿namespace AG.PaymentApp.Domain.Commands
 {
     using AG.PaymentApp.Domain.Core.ValueObject;
-    using Payment.Domain.Core.Commands;
+    using AG.Payment.Domain.Core.Commands;
 
     public abstract class MerchantCommand : Command
     {

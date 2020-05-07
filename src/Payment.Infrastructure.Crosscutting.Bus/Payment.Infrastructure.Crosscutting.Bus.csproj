@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\payment.domain.commands\Payment.Domain.Commands.csproj" />
+    <ProjectReference Include="..\Payment.Domain.Events\Payment.Domain.Events.csproj" />
+    <ProjectReference Include="..\payment.domain.even\Payment.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>

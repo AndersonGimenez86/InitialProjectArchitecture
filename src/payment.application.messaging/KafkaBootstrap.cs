@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
+    using AG.Payment.Domain.Events;
     using AG.PaymentApp.Application.Messaging.Handlers;
     using AG.PaymentApp.Domain.Events;
     using AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging;
@@ -40,7 +41,8 @@
                     .AddSingleton<IMessageHandler<CreateTransactionEvent>, PaymentEventHandler>()
                     .AddSingleton<IMessageHandler<CreatePaymentEvent>, BankEventHandler>()
                     .AddSingleton<IMessageSerializer<CreatePaymentEvent>, JsonMessageSerializer<CreatePaymentEvent>>()
-                    .AddSingleton<IMessageSerializer<CreateTransactionEvent>, JsonMessageSerializer<CreateTransactionEvent>>();
+                    .AddSingleton<IMessageSerializer<CreateTransactionEvent>, JsonMessageSerializer<CreateTransactionEvent>>()
+                    .AddSingleton<IMessageSerializer<PaymentRegisteredEvent>, JsonMessageSerializer<PaymentRegisteredEvent>>();
 
             return serviceCollection;
         }

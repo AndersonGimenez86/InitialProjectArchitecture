@@ -1,9 +1,9 @@
 ﻿namespace AG.PaymentApp.Domain.Commands.Payments
 {
     using System;
+    using AG.Payment.Domain.Core.Commands;
     using AG.PaymentApp.Domain.Core.Enum;
     using AG.PaymentApp.Domain.Core.ValueObject;
-    using Payment.Domain.Core.Commands;
 
     public abstract class PaymentCommand : Command
     {

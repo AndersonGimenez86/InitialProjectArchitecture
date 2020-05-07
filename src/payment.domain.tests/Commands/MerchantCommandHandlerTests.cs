@@ -2,60 +2,77 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.Threading;
     using System.Threading.Tasks;
+    using AG.Payment.Domain.Commands.Validations.Interface;
+    using AG.Payment.Domain.Core.Bus;
+    using AG.PaymentApp.Domain.commands.Merchants;
+    using AG.PaymentApp.Domain.Commands;
+    using AG.PaymentApp.Domain.Commands.Interface;
+    using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Core.ValueObject;
-    using AG.PaymentApp.Domain.Entity.Merchants;
-    using AG.PaymentApp.Domain.Entity.Mongo;
+    using Ether.Outcomes;
+    using FluentAssertions;
+    using Moq;
     using Xunit;
 
     [ExcludeFromCodeCoverage]
     public class MerchantCommandHandlerTests
     {
+        private Guid merchantID = Guid.NewGuid();
+        private Currency currency = Currency.Default;
+        private Country country = Country.Default;
+
+        private MerchantCommandHandler ReturnMerchantCommandHandlerObject()
+        {
+            var mockMediatorHandler = new Mock<IMediatorHandler>();
+            var mockIMerchantEventRepository = new Mock<IMerchantRepository>();
+            var mockNotificationHandler = new Mock<DomainNotificationHandler>();
+
+            var merchantCommandHandler = new MerchantCommandHandler(mockIMerchantEventRepository.Object,
+                mockMediatorHandler.Object, mockNotificationHandler.Object);
+
+            return merchantCommandHandler;
+        }
+
         [Fact]
-        public async Task ExecuteAsync_PersisteMongoDB()
+        public async Task HandleCommand_WithRaiseEvent_Success()
         {
             //ARRANGE
-            var merchantID = Guid.NewGuid();
+            var mockMerchantValidation = new Mock<ICommandValidation<MerchantCommand>>();
+            mockMerchantValidation
+                .Setup(p => p.ValidateCommand(It.IsAny<NewMerchantCommand>()))
+                .Returns(Outcomes.Success());
 
-            var merchantMongo = new MerchantMongo
-            {
-                Acronym = "Test",
-                Country = "United Kingdom",
-                Currency = "EUR",
-                DateCreated = DateTime.Now,
-                IsOnline = true,
-                IsVisible = true,
-                MerchantID = merchantID,
-                Name = "Merchant Test"
-            };
+            var newMerchantCommand = new NewMerchantCommand(merchantID, "Merchant Test", "Test", currency, country, true, true, mockMerchantValidation.Object);
 
-            var merchant = new Merchant
-            {
-                Acronym = "Test",
-                Country = new Country.UnitedKingdom(),
-                Currency = Currency.Default,
-                DateCreated = DateTime.Now,
-                IsOnline = true,
-                IsVisible = true,
-                Id = merchantID,
-                Name = "Merchant Test"
-            };
+            var merchantCommandHandler = ReturnMerchantCommandHandlerObject();
 
-            //var merchantDataCommand = new MerchantCommand(merchantMongo);
+            //ACT
+            var result = await merchantCommandHandler.Handle(newMerchantCommand, CancellationToken.None);
 
-            //var mockIMerchantEventRepository = new Mock<IMerchantRepository>();
-            //mockIMerchantEventRepository.Setup(r => r.SaveAsync(merchantDataCommand));
+            //ASSERT
+            result.Should().BeTrue();
+        }
 
-            //var mapperConfiguration = new MapperConfiguration(c => c.AddProfile(new MerchantProfile()));
-            //var mapper = mapperConfiguration.CreateMapper();
+        [Fact]
+        public async Task HandleCommand_WithRaiseEvent_Validation_Error()
+        {
+            //ARRANGE
+            var mockMerchantValidation = new Mock<ICommandValidation<MerchantCommand>>();
+            mockMerchantValidation
+                .Setup(p => p.ValidateCommand(It.IsAny<NewMerchantCommand>()))
+                .Returns(Outcomes.Failure());
 
-            //var merchantCommandHandler = new MerchantCommandHandler(mockIMerchantEventRepository.Object, null, null, mapper, null);
+            var newMerchantCommand = new NewMerchantCommand(merchantID, "Merchant Test", "Test", currency, country, true, true, mockMerchantValidation.Object);
 
-            ////ACT
-            //var result = merchantCommandHandler.ExecuteAsync(merchant);
+            var merchantCommandHandler = ReturnMerchantCommandHandlerObject();
 
-            ////ASSERT
-            //result.Exception.Should().BeNull();
+            //ACT
+            var result = await merchantCommandHandler.Handle(newMerchantCommand, CancellationToken.None);
+
+            //ASSERT
+            result.Should().BeFalse();
         }
     }
 }

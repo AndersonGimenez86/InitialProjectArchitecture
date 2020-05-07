@@ -8,13 +8,11 @@
 
     public class CommandHandler
     {
-        private readonly IUnitOfWork unitOfWork;
         private readonly IMediatorHandler mediatorHandler;
         private readonly DomainNotificationHandler notifications;
 
-        public CommandHandler(IUnitOfWork unitOfWork, IMediatorHandler mediatorHandler, INotificationHandler<DomainNotification> notifications)
+        public CommandHandler(IMediatorHandler mediatorHandler, INotificationHandler<DomainNotification> notifications)
         {
-            this.unitOfWork = unitOfWork;
             this.notifications = (DomainNotificationHandler)notifications;
             this.mediatorHandler = mediatorHandler;
         }
@@ -27,16 +25,12 @@
             }
         }
 
-        public bool Commit()
+        protected bool Commit()
         {
             if (notifications.HasNotifications())
                 return false;
 
-            if (unitOfWork.Commit())
-                return true;
-
-            mediatorHandler.RaiseEvent(new DomainNotification("Commit", "We had a problem during saving your data."));
-            return false;
+            return true;
         }
     }
 }

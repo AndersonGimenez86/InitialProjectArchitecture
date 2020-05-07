@@ -3,39 +3,39 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Ag.PaymentApp.Domain.Commands.Handlers;
+    using AG.Payment.Domain.Core.Bus;
+    using AG.Payment.Domain.Events;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Core.DataProtection;
+    using AG.PaymentApp.Domain.Core.Kafka.Producers.Interface;
     using AG.PaymentApp.Domain.Core.Notifications;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AutoMapper;
     using MediatR;
     using Microsoft.AspNetCore.DataProtection;
-    using Payment.Domain.Core.Bus;
 
     public class PaymentCommandHandler : CommandHandler,
         IRequestHandler<NewPaymentCommand, bool>
-    //   IRequestHandler<UpdateCustomerCommand, bool>,
+    //IRequestHandler<UpdateCustomerCommand, bool>,
     //IRequestHandler<RemoveCustomerCommand, bool>
     {
         private readonly IPaymentRepository repository;
         private readonly IMapper typeMapper;
-        private readonly IUnitOfWork unitOfWork;
         private readonly IMediatorHandler mediatorHandler;
         private readonly IDataProtectionProvider dataProtectionProvider;
+        private readonly ITopicProducer<PaymentRegisteredEvent> topicProducer;
 
         public PaymentCommandHandler(
         IPaymentRepository paymentEventRepository,
-        IMapper typeMapper,
-        IUnitOfWork unitOfWork,
         IMediatorHandler mediatorHandler,
         IDataProtectionProvider dataProtectionProvider,
-        INotificationHandler<DomainNotification> notifications) : base(unitOfWork, mediatorHandler, notifications)
+        ITopicProducer<PaymentRegisteredEvent> topicProducer,
+        INotificationHandler<DomainNotification> notifications) : base(mediatorHandler, notifications)
         {
             this.repository = paymentEventRepository;
-            this.typeMapper = typeMapper;
-            this.unitOfWork = unitOfWork;
             this.mediatorHandler = mediatorHandler;
             this.dataProtectionProvider = dataProtectionProvider;
+            this.topicProducer = topicProducer;
         }
 
         public Task<bool> Handle(NewPaymentCommand newPaymentCommand, CancellationToken cancellationToken)
@@ -54,15 +54,8 @@
 
             if (Commit())
             {
-                //mediatorHandler.RaiseEvent(new CustomerRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
-
-                //update payment status to processing
-                //if (kafkaResponse.Success)
-                //{
-                //    payment.Status = PaymentStatus.Processing;
-                //    await this.paymentCommand.UpdateAsync(payment);
-                ////}
-
+                var paymentRegisteredEvent = new PaymentRegisteredEvent(payment.ShopperID, payment.MerchantID, payment.TransactionID, payment.Amount, payment.CreditCard);
+                mediatorHandler.RaiseEvent(paymentRegisteredEvent, this.topicProducer);
             }
 
             return Task.FromResult(true);
