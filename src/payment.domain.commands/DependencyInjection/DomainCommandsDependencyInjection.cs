@@ -11,21 +11,24 @@
     using AG.PaymentApp.Domain.Query.Validations;
     using MediatR;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.DependencyInjection.Extensions;
+
     public static class DomainCommandsDependencyInjection
     {
         [ExcludeFromCodeCoverage]
         public static IServiceCollection SetupDomainCommands(this IServiceCollection services)
         {
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPreConditionEvaluator<PaymentCommand>, PreConditionEvaluator<PaymentCommand>>());
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPreConditionEvaluator<MerchantCommand>, PreConditionEvaluator<MerchantCommand>>());
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPreCondition<PaymentCommand>, PaymentAmountPreCondition>());
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPreCondition<NewPaymentCommand>, PaymentCreditCardCVVPreCondition>());
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPreCondition<NewPaymentCommand>, PaymentCreditCardExpireDatePreCondition>());
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPreCondition<NewPaymentCommand>, PaymentCreditCardNumberPreCondition>());
+
             return services
-                    .AddSingleton<IPreConditionEvaluator<PaymentCommand>, PreConditionEvaluator<PaymentCommand>>()
-                    .AddSingleton<IPreConditionEvaluator<MerchantCommand>, PreConditionEvaluator<MerchantCommand>>()
-                    .AddSingleton<IPreCondition<PaymentCommand>, PaymentAmountPreCondition>()
-                    .AddSingleton<IPreCondition<NewPaymentCommand>, PaymentCreditCardCVVPreCondition>()
-                    .AddSingleton<IPreCondition<NewPaymentCommand>, PaymentCreditCardExpireDatePreCondition>()
-                    .AddSingleton<IPreCondition<NewPaymentCommand>, PaymentCreditCardNumberPreCondition>()
-                    .AddSingleton<ICommandValidation<PaymentCommand>, PaymentValidation>()
-                    .AddSingleton<ICommandValidation<MerchantCommand>, MerchantValidation>()
-                    .AddScoped<IRequestHandler<NewPaymentCommand, bool>, PaymentCommandHandler>();
+                .AddSingleton<ICommandValidation<PaymentCommand>, PaymentValidation>()
+                .AddSingleton<ICommandValidation<MerchantCommand>, MerchantValidation>()
+                .AddScoped<IRequestHandler<NewPaymentCommand, bool>, PaymentCommandHandler>();
         }
     }
 }
