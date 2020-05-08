@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\payment.domain.commands\Payment.Domain.Commands.csproj" />
-    <ProjectReference Include="..\payment.domain.even\Payment.Domain.Core.csproj" />
+    <ProjectReference Include="..\Payment.Domain.Core\Payment.Domain.Core.csproj" />
     <ProjectReference Include="..\payment.domain.query.model\Payment.Domain.Query.csproj" />
     <ProjectReference Include="..\payment.domain\Payment.Domain.csproj" />
   </ItemGroup>
