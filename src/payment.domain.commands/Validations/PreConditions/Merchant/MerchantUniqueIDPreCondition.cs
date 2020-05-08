@@ -1,25 +1,21 @@
 ﻿namespace AG.PaymentApp.Domain.Commands.Validations.PreConditions.Merchant
 {
-    using AG.PaymentApp.Domain.commands;
     using AG.PaymentApp.Domain.Commands.Validations.Interface;
-    using AG.PaymentApp.Domain.Query.Interface;
-    using AG.PaymentApp.Domain.Query.Merchants;
+    using AG.PaymentApp.Domain.queries.Interface;
     using Ether.Outcomes;
 
     public class MerchantUniqueIDPreCondition : IPreCondition<MerchantCommand>
     {
-        private readonly IFindMerchantQueryHandler findMerchantQueryHandler;
+        private readonly IFindMerchantRepository findMerchantRepository;
 
-        public MerchantUniqueIDPreCondition(IFindMerchantQueryHandler findMerchantQueryHandler)
+        public MerchantUniqueIDPreCondition(IFindMerchantRepository findMerchantRepository)
         {
-            this.findMerchantQueryHandler = findMerchantQueryHandler;
+            this.findMerchantRepository = findMerchantRepository;
         }
 
         public IOutcome Accept(MerchantCommand newEntity)
         {
-            var findMerchantQuery = new FindMerchantQuery(newEntity.Id);
-
-            var result = this.findMerchantQueryHandler.GetAsync(findMerchantQuery).GetAwaiter();
+            var result = this.findMerchantRepository.GetAsync(newEntity.Id).GetAwaiter();
 
             var merchant = result.GetResult();
 

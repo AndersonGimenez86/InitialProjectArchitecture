@@ -4,17 +4,16 @@
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Commands.Payments;
     using AG.PaymentApp.Domain.Commands.Validations.Interface;
-    using AG.PaymentApp.Domain.Query.Interface;
-    using AG.PaymentApp.Domain.Query.Merchants;
+    using AG.PaymentApp.Domain.queries.Interface;
     using Ether.Outcomes;
 
     public class PaymentExistsMerchantAssociatedPreCondition : IPreCondition<PaymentCommand>
     {
-        private readonly IFindMerchantQueryHandler merchantQuery;
+        private readonly IFindMerchantRepository findMerchantRepository;
 
-        public PaymentExistsMerchantAssociatedPreCondition(IFindMerchantQueryHandler merchantQuery)
+        public PaymentExistsMerchantAssociatedPreCondition(IFindMerchantRepository findMerchantRepository)
         {
-            this.merchantQuery = merchantQuery;
+            this.findMerchantRepository = findMerchantRepository;
         }
 
         public IOutcome Accept(PaymentCommand payment)
@@ -31,9 +30,7 @@
 
         private async Task<bool> FindMerchantByID(Guid merchandID)
         {
-            var findMerchantQuery = new FindMerchantQuery(merchandID, string.Empty, string.Empty);
-
-            return await this.merchantQuery.GetAsync(findMerchantQuery) != null;
+            return await this.findMerchantRepository.GetAsync(merchandID) != null;
         }
     }
 }

@@ -2,27 +2,26 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using AG.PaymentApp.Domain.commands;
     using AG.PaymentApp.Domain.Commands.Validations.Interface;
     using AG.PaymentApp.Domain.Entity.Merchants;
-    using AG.PaymentApp.Domain.Query.Interface;
+    using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Merchants;
     using Ether.Outcomes;
 
     public class MerchantUniqueNamePreCondition : IPreCondition<MerchantCommand>
     {
-        private readonly IFindMerchantQueryHandler findMerchantQueryHandler;
+        private readonly IFindMerchantRepository findMerchantRepository;
 
-        public MerchantUniqueNamePreCondition(IFindMerchantQueryHandler findMerchantQueryHandler)
+        public MerchantUniqueNamePreCondition(IFindMerchantRepository findMerchantRepository)
         {
-            this.findMerchantQueryHandler = findMerchantQueryHandler;
+            this.findMerchantRepository = findMerchantRepository;
         }
 
         public IOutcome Accept(MerchantCommand newEntity)
         {
             var findMerchantQuery = new FindMerchantQuery(newEntity.Name);
 
-            var task = this.findMerchantQueryHandler.GetAllAsync(findMerchantQuery).GetAwaiter();
+            var task = this.findMerchantRepository.GetAllAsync(findMerchantQuery).GetAwaiter();
             IEnumerable<Merchant> merchant = task.GetResult();
 
             if (merchant is null || !merchant.Any())
