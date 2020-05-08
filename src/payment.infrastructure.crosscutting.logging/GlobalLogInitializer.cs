@@ -7,7 +7,7 @@
     public static class GlobalLogInitializer
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static ILog SetupLogger(LoggingSettings loggingSettings)
+        public static ILog SetupLogger(LoggingConfiguration loggingSettings)
         {
             //Log.Current = new Logger(
             //    (LogLevel)Enum.Parse(typeof(LogLevel), loggingSettings.LogLevel),

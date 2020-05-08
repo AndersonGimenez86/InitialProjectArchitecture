@@ -28,8 +28,8 @@
             SetupGlobalLogging(services, loggingConfiguration);
 
             services.Configure<EnvironmentSettings>(configuration.GetSection(SectionNames.EnvironmentSection));
-            services.Configure<IdentitySettings>(configuration.GetSection(SectionNames.ApplicationIdentitySection));
-            services.Configure<DataBaseSettings>(configuration.GetSection(SectionNames.DataBaseSection));
+            services.Configure<IdentityConfiguration>(configuration.GetSection(SectionNames.ApplicationIdentitySection));
+            services.Configure<DataBaseConfiguration>(configuration.GetSection(SectionNames.DataBaseSection));
             services.Configure<KafkaSettings>(configuration.GetSection(SectionNames.KafkaSettingsSection));
 
         }

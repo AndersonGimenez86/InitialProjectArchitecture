@@ -15,7 +15,7 @@
             this IServiceCollection services,
             IConfiguration configurationSection)
         {
-            var endPointCollectionSettings = configurationSection.Get<EndPointCollectionSettings>();
+            var endPointCollectionSettings = configurationSection.Get<EndPointCollectionConfiguration>();
 
             foreach (var endpoint in endPointCollectionSettings.EndPointSettings)
             {

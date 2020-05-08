@@ -6,6 +6,6 @@
 
     public interface IClient
     {
-        Task<HttpClient> GetClientObject(EndPointSettings endPointSettings);
+        Task<HttpClient> GetClientObject(EndPointConfiguration endPointSettings);
     }
 }

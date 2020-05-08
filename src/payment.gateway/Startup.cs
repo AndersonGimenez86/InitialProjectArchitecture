@@ -33,7 +33,7 @@ namespace AG.PaymentApp.gateway
                 options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
 
-            var identitySettings = new IdentitySettings();
+            var identitySettings = new IdentityConfiguration();
             Configuration.GetSection(SectionNames.ApplicationIdentitySection).Bind(identitySettings);
 
             services.AddAuthentication(options =>
@@ -68,7 +68,7 @@ namespace AG.PaymentApp.gateway
             IApplicationBuilder app,
             IHostingEnvironment env,
             IOptions<EnvironmentSettings> environmentSettings,
-            IOptions<EndPointCollectionSettings> endPointCollectionSettings
+            IOptions<EndPointCollectionConfiguration> endPointCollectionSettings
             )
         {
             if (env.IsDevelopment())

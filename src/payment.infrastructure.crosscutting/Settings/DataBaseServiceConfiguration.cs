@@ -1,6 +1,6 @@
 ﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Environment
 {
-    public class DataBaseServiceSettings
+    public class DataBaseServiceConfiguration
     {
         public string CollectionName { get; set; }
 

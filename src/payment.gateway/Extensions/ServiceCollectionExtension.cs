@@ -6,7 +6,7 @@
 
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection AddSwagger(this IServiceCollection services, IdentitySettings identitySettings)
+        public static IServiceCollection AddSwagger(this IServiceCollection services, IdentityConfiguration identitySettings)
         {
             services.AddSwaggerGen(options =>
             {

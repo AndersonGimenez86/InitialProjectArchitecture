@@ -14,7 +14,7 @@
             this.httpClientFactory = httpClientFactory;
         }
 
-        public Task<HttpClient> GetClientObject(EndPointSettings endPointSettings)
+        public Task<HttpClient> GetClientObject(EndPointConfiguration endPointSettings)
         {
             return Task.FromResult(httpClientFactory.CreateClient(endPointSettings.Name));
         }

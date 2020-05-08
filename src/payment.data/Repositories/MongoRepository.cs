@@ -9,9 +9,9 @@ namespace AG.PaymentApp.Data.Repositories
 {
     class MongoRepository : IMongoRepository
     {
-        private readonly DataBaseSettings config;
+        private readonly DataBaseConfiguration config;
 
-        public MongoRepository(IOptions<DataBaseSettings> options)
+        public MongoRepository(IOptions<DataBaseConfiguration> options)
         {
             this.config = options.Value;
             this.BuildMongoDatabase();

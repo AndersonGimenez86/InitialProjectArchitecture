@@ -18,12 +18,15 @@
         [ExcludeFromCodeCoverage]
         public static IServiceCollection SetupDomainCommands(this IServiceCollection services)
         {
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPreConditionEvaluator<PaymentCommand>, PreConditionEvaluator<PaymentCommand>>());
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPreConditionEvaluator<MerchantCommand>, PreConditionEvaluator<MerchantCommand>>());
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPreCondition<PaymentCommand>, PaymentAmountPreCondition>());
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPreCondition<NewPaymentCommand>, PaymentCreditCardCVVPreCondition>());
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPreCondition<NewPaymentCommand>, PaymentCreditCardExpireDatePreCondition>());
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IPreCondition<NewPaymentCommand>, PaymentCreditCardNumberPreCondition>());
+            services.TryAddEnumerable(new[]
+            {
+                ServiceDescriptor.Singleton<IPreConditionEvaluator<PaymentCommand>, PreConditionEvaluator<PaymentCommand>>(),
+                ServiceDescriptor.Singleton<IPreConditionEvaluator<MerchantCommand>, PreConditionEvaluator<MerchantCommand>>(),
+                ServiceDescriptor.Singleton<IPreCondition<PaymentCommand>, PaymentAmountPreCondition>(),
+                ServiceDescriptor.Singleton<IPreCondition<NewPaymentCommand>, PaymentCreditCardCVVPreCondition>(),
+                ServiceDescriptor.Singleton<IPreCondition<NewPaymentCommand>, PaymentCreditCardExpireDatePreCondition>(),
+                ServiceDescriptor.Singleton<IPreCondition<NewPaymentCommand>, PaymentCreditCardNumberPreCondition>()
+            });
 
             return services
                 .AddSingleton<ICommandValidation<PaymentCommand>, PaymentValidation>()
