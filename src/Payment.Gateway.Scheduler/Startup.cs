@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Payment.Gateway.Scheduler.Filters;
+using Payment.Infrastructure.Crosscutting.Scheduler.Filters;
 
 namespace Payment.Gateway.Scheduler
 {

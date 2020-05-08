@@ -48,14 +48,14 @@
 
             var creditCardProtected = CreditCardDataProtection.ProtectSensitiveData(dataProtectionProvider, newPaymentCommand.CreditCard);
 
-            var payment = new Payment(newPaymentCommand.Id, newPaymentCommand.ShopperID, newPaymentCommand.MerchantID, creditCardProtected, newPaymentCommand.Amount, newPaymentCommand.Status);
+            var payment = new Payment(newPaymentCommand.Id, newPaymentCommand.ShopperID, newPaymentCommand.MerchantID, creditCardProtected, newPaymentCommand.Amount);
 
             repository.SaveAsync(payment);
 
             if (Commit())
             {
                 var paymentRegisteredEvent = new PaymentRegisteredEvent(payment.ShopperID, payment.MerchantID, payment.TransactionID, payment.Amount, payment.CreditCard);
-                mediatorHandler.RaiseEvent(paymentRegisteredEvent, this.topicProducer);
+                mediatorHandler.RaiseEvent(paymentRegisteredEvent);
             }
 
             return Task.FromResult(true);
