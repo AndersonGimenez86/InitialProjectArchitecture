@@ -43,7 +43,7 @@
         private static ITopicProducer<TMessage> CreateProducer<TMessage>(this IServiceProvider serviceProvider, string producerName)
           where TMessage : Event
         {
-            var kafkaSettings = serviceProvider.GetRequiredService<IOptions<KafkaSettings>>();
+            var kafkaSettings = serviceProvider.GetRequiredService<IOptions<KafkaConfiguration>>();
             var producerFactory = serviceProvider.GetRequiredService<KafkaProducerFactory>();
 
             var topicProducerSettings = kafkaSettings.Value.GetTopicProducerSettings(producerName);
@@ -71,7 +71,7 @@
         private static ITopicPartitionConsumer CreateConsumer<TMessage>(this IServiceProvider serviceProvider, string consumerName)
             where TMessage : class
         {
-            var kafkaSettings = serviceProvider.GetRequiredService<IOptions<KafkaSettings>>();
+            var kafkaSettings = serviceProvider.GetRequiredService<IOptions<KafkaConfiguration>>();
             var consumerFactory = serviceProvider.GetRequiredService<KafkaConsumerFactory>();
 
             var topicConsumerSettings = kafkaSettings.Value.GetTopicConsumerSettings(consumerName);

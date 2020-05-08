@@ -1,6 +1,6 @@
 ﻿namespace AG.PaymentApp.gateway.Extensions
 {
-    using AG.PaymentApp.Infrastructure.Crosscutting.Environment;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Settings;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.OpenApi.Models;
 
@@ -11,7 +11,6 @@
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", CreateInfoForApiVersion());
-                options.DescribeAllEnumsAsStrings();
 
                 //options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 //{

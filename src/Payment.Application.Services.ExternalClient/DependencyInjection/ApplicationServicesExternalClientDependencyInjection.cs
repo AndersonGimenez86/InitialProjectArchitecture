@@ -4,7 +4,7 @@
     using System.Diagnostics.CodeAnalysis;
     using AG.Payment.Application.Services.ExternalClient;
     using AG.Payment.Application.Services.ExternalClient.Interface;
-    using AG.Payment.Infrastructure.Crosscutting.Settings;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Settings;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -13,11 +13,10 @@
         [ExcludeFromCodeCoverage]
         public static IServiceCollection SetupApplicationServicesExternalClient(
             this IServiceCollection services,
-            IConfiguration configurationSection)
+            IConfiguration configurationSection,
+            IEndPointCollectionConfiguration endPointCollectionConfiguration)
         {
-            var endPointCollectionSettings = configurationSection.Get<EndPointCollectionConfiguration>();
-
-            foreach (var endpoint in endPointCollectionSettings.EndPointSettings)
+            foreach (var endpoint in endPointCollectionConfiguration.EndPointSettings)
             {
                 services.AddHttpClient(endpoint.Name, c => c.BaseAddress = new Uri(endpoint.BaseAddress));
             }

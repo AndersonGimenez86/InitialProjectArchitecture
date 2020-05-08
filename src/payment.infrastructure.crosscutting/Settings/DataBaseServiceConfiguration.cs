@@ -1,4 +1,5 @@
-﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Environment
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Settings
+
 {
     public class DataBaseServiceConfiguration
     {

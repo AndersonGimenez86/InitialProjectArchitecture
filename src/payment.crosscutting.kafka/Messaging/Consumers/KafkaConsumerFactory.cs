@@ -18,7 +18,7 @@
         {
         }
 
-        public IConsumer<string, byte[]> CreateConsumer(ClusterSettings clusterSettings, TopicConsumerSettings topicConsumerSettings)
+        public IConsumer<string, byte[]> CreateConsumer(ClusterSettings clusterSettings, TopicConsumerConfiguration topicConsumerSettings)
         {
             if (topicConsumerSettings == null)
             {

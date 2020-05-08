@@ -1,7 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace AG.PaymentApp.Infrastructure.Crosscutting.Environment
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Settings
 {
+    using System.Diagnostics.CodeAnalysis;
+
     [ExcludeFromCodeCoverage]
     public static class SectionNames
     {

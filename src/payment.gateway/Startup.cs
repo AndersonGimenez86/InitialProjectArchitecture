@@ -1,7 +1,6 @@
-﻿using AG.Payment.Infrastructure.Crosscutting.Settings;
-using AG.PaymentApp.gateway.Extensions;
-using AG.PaymentApp.Infrastructure.Crosscutting.Environment;
+﻿using AG.PaymentApp.gateway.Extensions;
 using AG.PaymentApp.Infrastructure.Crosscutting.IoC;
+using AG.PaymentApp.Infrastructure.Crosscutting.Settings;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 namespace AG.PaymentApp.gateway
 {
@@ -67,8 +65,8 @@ namespace AG.PaymentApp.gateway
         public void Configure(
             IApplicationBuilder app,
             IHostingEnvironment env,
-            IOptions<EnvironmentSettings> environmentSettings,
-            IOptions<EndPointCollectionConfiguration> endPointCollectionSettings
+            IEnvironmentConfiguration environmentSettings,
+            IEndPointCollectionConfiguration endPointCollectionSettings
             )
         {
             if (env.IsDevelopment())
@@ -91,7 +89,7 @@ namespace AG.PaymentApp.gateway
             {
 
                 c.DocumentTitle = "AG API";
-                c.SwaggerEndpoint(environmentSettings.Value.SwaggerPath, "AG.com API V1");
+                c.SwaggerEndpoint(environmentSettings.SwaggerPath, "AG.com API V1");
                 c.OAuthClientId("AG.com-privacy");
                 c.OAuthAppName("AG.com-privacy");
 

@@ -21,7 +21,7 @@
             this IServiceCollection serviceCollection,
             IConfigurationSection configurationSection)
         {
-            var kafkaSettings = configurationSection.Get<KafkaSettings>();
+            var kafkaSettings = configurationSection.Get<KafkaConfiguration>();
 
             serviceCollection.AddSingleton<ITopicConsumerService, TopicConsumerService>();
 

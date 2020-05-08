@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using AG.Payment.Infrastructure.Crosscutting.Settings.EndPoints;
-    public class EndPointCollectionConfiguration : IEndPointCollectionConfiguration
+    public interface IEndPointCollectionConfiguration
     {
-        public IEnumerable<EndPointConfiguration> EndPointSettings { get; set; }
+        IEnumerable<EndPointConfiguration> EndPointSettings { get; set; }
     }
 }

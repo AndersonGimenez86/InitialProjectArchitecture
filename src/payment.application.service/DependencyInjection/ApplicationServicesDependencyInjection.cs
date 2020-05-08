@@ -23,7 +23,7 @@
             this IServiceCollection services,
             IConfigurationSection configurationSection)
         {
-            var kafkaSettings = configurationSection.Get<KafkaSettings>();
+            var kafkaSettings = configurationSection.Get<KafkaConfiguration>();
 
             if (kafkaSettings.IsProducerEnabled("ProducerBankAcquiring"))
             {

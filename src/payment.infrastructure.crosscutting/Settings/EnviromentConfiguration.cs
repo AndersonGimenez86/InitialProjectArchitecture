@@ -1,6 +1,6 @@
-﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Environment
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Settings
 {
-    public class EnvironmentSettings
+    public class EnvironmentConfiguration : IEnvironmentConfiguration
     {
         public string HostUri { get; set; }
 

@@ -4,12 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class KafkaSettings
+    public class KafkaConfiguration : IKafkaConfiguration
     {
         public string Environment { get; set; }
         public Dictionary<string, ClusterSettings> Clusters { get; set; } = new Dictionary<string, ClusterSettings>();
-        public Dictionary<string, TopicConsumerSettings> Consumers { get; set; } = new Dictionary<string, TopicConsumerSettings>();
-        public Dictionary<string, TopicProducerSettings> Producers { get; set; } = new Dictionary<string, TopicProducerSettings>();
+        public Dictionary<string, TopicConsumerConfiguration> Consumers { get; set; } = new Dictionary<string, TopicConsumerConfiguration>();
+        public Dictionary<string, TopicProducerConfiguration> Producers { get; set; } = new Dictionary<string, TopicProducerConfiguration>();
 
         public bool IsProducerEnabled(string producerName)
         {
@@ -21,7 +21,7 @@
             return this.GetTopicConsumerSettings(consumerName)?.Enabled == true;
         }
 
-        public TopicConsumerSettings GetTopicConsumerSettings(string consumerName)
+        public TopicConsumerConfiguration GetTopicConsumerSettings(string consumerName)
         {
             if (this.Consumers?.ContainsKey(consumerName) != true)
             {
@@ -31,7 +31,7 @@
             return this.Consumers[consumerName];
         }
 
-        public TopicProducerSettings GetTopicProducerSettings(string producerName)
+        public TopicProducerConfiguration GetTopicProducerSettings(string producerName)
         {
             if (this.Producers?.ContainsKey(producerName) != true)
             {

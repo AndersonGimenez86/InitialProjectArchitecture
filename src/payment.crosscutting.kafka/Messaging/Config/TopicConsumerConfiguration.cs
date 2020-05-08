@@ -1,6 +1,6 @@
 ﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Kafka.Messaging.Config
 {
-    public class TopicConsumerSettings
+    public class TopicConsumerConfiguration
     {
         public string Cluster { get; set; }
         public string TopicName { get; set; }

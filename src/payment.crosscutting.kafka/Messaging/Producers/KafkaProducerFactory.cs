@@ -14,7 +14,7 @@
         {
         }
 
-        public IProducer<string, byte[]> CreateProducer(ClusterSettings clusterSettings, TopicProducerSettings topicProducerSettings)
+        public IProducer<string, byte[]> CreateProducer(ClusterSettings clusterSettings, TopicProducerConfiguration topicProducerSettings)
         {
             if (topicProducerSettings == null)
             {

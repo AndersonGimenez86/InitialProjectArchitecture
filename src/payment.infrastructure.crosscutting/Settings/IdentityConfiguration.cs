@@ -1,6 +1,6 @@
-﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Environment
+﻿namespace AG.PaymentApp.Infrastructure.Crosscutting.Settings
 {
-    public class IdentityConfiguration
+    public class IdentityConfiguration : IIdentityConfiguration
     {
         public string ApiName { get; set; }
 

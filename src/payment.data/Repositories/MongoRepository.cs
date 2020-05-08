@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AG.PaymentApp.Domain.Interface;
-using AG.PaymentApp.Infrastructure.Crosscutting.Environment;
-using Microsoft.Extensions.Options;
+using AG.PaymentApp.Infrastructure.Crosscutting.Settings;
 using MongoDB.Driver;
 
 namespace AG.PaymentApp.Data.Repositories
 {
     class MongoRepository : IMongoRepository
     {
-        private readonly DataBaseConfiguration config;
+        private readonly IDataBaseConfiguration config;
 
-        public MongoRepository(IOptions<DataBaseConfiguration> options)
+        public MongoRepository(IDataBaseConfiguration options)
         {
-            this.config = options.Value;
+            this.config = options;
             this.BuildMongoDatabase();
             this.LoadKnownPayloadTypes();
         }
