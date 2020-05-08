@@ -6,6 +6,7 @@
     using AG.PaymentApp.Application.Messaging;
     using AG.PaymentApp.Application.Messaging.DependencyInjection;
     using AG.PaymentApp.Application.Services.DependencyInjection;
+    using AG.PaymentApp.Application.Services.ExternalClient.DependencyInjection;
     using AG.PaymentApp.Crosscutting.Bus.DependencyInjection;
     using AG.PaymentApp.Domain.Commands.DependencyInjection;
     using AG.PaymentApp.Domain.Query.DependencyInjection;

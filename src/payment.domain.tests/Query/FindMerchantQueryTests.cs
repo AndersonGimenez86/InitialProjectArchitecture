@@ -50,7 +50,7 @@
             var findMerchantQuery = new FindMerchantQuery(merchantID, string.Empty, string.Empty);
 
             var mockIFindMerchantEventRepository = new Mock<IFindMerchantRepository>();
-            mockIFindMerchantEventRepository.Setup(r => r.GetAsync(findMerchantQuery))
+            mockIFindMerchantEventRepository.Setup(r => r.GetAsync(findMerchantQuery.MerchantID))
                 .ReturnsAsync(expectedMerchant);
 
             var mapperConfiguration = new MapperConfiguration(c => c.AddProfile(new MerchantProfile()));

@@ -27,7 +27,7 @@
 
         public async Task<Merchant> GetAsync(FindMerchantQuery query)
         {
-            return await this.repository.GetAsync(query);
+            return await this.repository.GetAsync(query.MerchantID);
         }
 
         public async Task<IEnumerable<Merchant>> GetMerchantsByCountry(FindMerchantQuery query)
