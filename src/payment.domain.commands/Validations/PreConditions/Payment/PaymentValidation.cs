@@ -1,11 +1,11 @@
 ﻿namespace AG.PaymentApp.Domain.Commands.Validations.Payments
 {
-    using AG.Payment.Domain.Commands.Validations.Interface;
     using AG.PaymentApp.Domain.Commands.Payments;
     using AG.PaymentApp.Domain.Commands.Validations.Interface;
     using Ether.Outcomes;
+    using global::Payment.Domain.Commands.Validations.PreConditions;
 
-    public class PaymentValidation : ICommandValidation<PaymentCommand>
+    public class PaymentValidation : CommandValidation<PaymentCommand>
     {
         private readonly IPreConditionEvaluator<PaymentCommand> preConditionEvaluator;
 
@@ -15,7 +15,7 @@
             this.preConditionEvaluator = preConditionEvaluator;
         }
 
-        public IOutcome ValidateCommand(PaymentCommand payment)
+        public override IOutcome ValidateCommand(PaymentCommand payment)
         {
             return preConditionEvaluator.Evaluate(payment);
         }

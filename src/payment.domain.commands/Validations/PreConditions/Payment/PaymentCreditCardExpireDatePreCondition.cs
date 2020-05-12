@@ -2,12 +2,12 @@
 {
     using System;
     using AG.PaymentApp.Domain.Commands.Payments;
-    using AG.PaymentApp.Domain.Commands.Validations.Interface;
     using Ether.Outcomes;
+    using global::Payment.Domain.Commands.Validations.PreConditions;
 
-    public class PaymentCreditCardExpireDatePreCondition : IPreCondition<NewPaymentCommand>
+    public class PaymentCreditCardExpireDatePreCondition : PreCondition<NewPaymentCommand>
     {
-        public IOutcome Accept(NewPaymentCommand payment)
+        public override IOutcome Accept(NewPaymentCommand payment)
         {
             if (payment.CreditCard.ExpireDate > DateTime.Now)
             {

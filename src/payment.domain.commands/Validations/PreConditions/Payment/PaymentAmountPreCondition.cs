@@ -1,12 +1,12 @@
 ﻿namespace AG.PaymentApp.Domain.Commands.Validations.PreConditions.Payments
 {
     using AG.PaymentApp.Domain.Commands.Payments;
-    using AG.PaymentApp.Domain.Commands.Validations.Interface;
     using Ether.Outcomes;
+    using global::Payment.Domain.Commands.Validations.PreConditions;
 
-    public class PaymentAmountPreCondition : IPreCondition<PaymentCommand>
+    public class PaymentAmountPreCondition : PreCondition<PaymentCommand>
     {
-        public IOutcome Accept(PaymentCommand payment)
+        public override IOutcome Accept(PaymentCommand payment)
         {
             if (payment.Amount.Value > 0)
             {

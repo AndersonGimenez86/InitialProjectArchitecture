@@ -6,15 +6,19 @@
     using AG.PaymentApp.Domain.Core.Notifications;
     using MediatR;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.DependencyInjection.Extensions;
 
     public static class DomainEventsDependencyInjection
     {
         [ExcludeFromCodeCoverage]
         public static IServiceCollection SetupDomainEvents(this IServiceCollection services)
         {
-            return services
-                    .AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>()
-                    .AddScoped<INotificationHandler<PaymentRegisteredEvent>, PaymentEventHandler>();
+            services.TryAddEnumerable(new[]
+           {
+                ServiceDescriptor.Scoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>(),
+                ServiceDescriptor.Scoped<INotificationHandler<PaymentRegisteredEvent>, PaymentEventHandler>()
+            });
+            return services;
         }
     }
 }

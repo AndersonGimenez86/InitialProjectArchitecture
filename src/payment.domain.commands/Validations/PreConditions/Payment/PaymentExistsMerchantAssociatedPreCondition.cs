@@ -3,11 +3,11 @@
     using System;
     using System.Threading.Tasks;
     using AG.PaymentApp.Domain.Commands.Payments;
-    using AG.PaymentApp.Domain.Commands.Validations.Interface;
     using AG.PaymentApp.Domain.queries.Interface;
     using Ether.Outcomes;
+    using global::Payment.Domain.Commands.Validations.PreConditions;
 
-    public class PaymentExistsMerchantAssociatedPreCondition : IPreCondition<PaymentCommand>
+    public class PaymentExistsMerchantAssociatedPreCondition : PreCondition<PaymentCommand>
     {
         private readonly IFindMerchantRepository findMerchantRepository;
 
@@ -16,7 +16,7 @@
             this.findMerchantRepository = findMerchantRepository;
         }
 
-        public IOutcome Accept(PaymentCommand payment)
+        public override IOutcome Accept(PaymentCommand payment)
         {
             var merchantExists = FindMerchantByID(payment.MerchantID).GetAwaiter();
 

@@ -5,6 +5,7 @@
     using AG.PaymentApp.Application.Services.DTO.Shoppers;
     using AG.PaymentApp.Application.Services.Interface;
     using AG.PaymentApp.gateway.Extensions;
+    using AG.PaymentApp.Infrastructure.Crosscutting.Logging.Interface;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -16,16 +17,13 @@
     {
         private readonly IHostingEnvironment environment;
         private readonly IShopperApplicationService shopperService;
-        //private readonly ILogger logger;
 
         public ShopperController(
             IHostingEnvironment environment,
             IShopperApplicationService shopperService)
-        //ILogger logger)
         {
             this.environment = environment;
             this.shopperService = shopperService;
-            //this.logger = logger;
         }
 
         /// <summary>
@@ -37,13 +35,14 @@
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> Post([FromBody]ShopperViewModel shopperDTO)
+        public async Task<IActionResult> Post([FromBody]ShopperViewModel shopperDTO, [FromServices]ILogger logger)
         {
             try
             {
                 if (this.environment.AllowPost())
                 {
                     await this.shopperService.CreateAsync(shopperDTO);
+                    logger.WriteLog<string>(null);
 
                     return Ok();
                 }

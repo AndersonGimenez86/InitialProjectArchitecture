@@ -1,11 +1,11 @@
 ﻿namespace AG.PaymentApp.Data.Startup
 {
+    using AG.PaymentApp.Data.Interface;
     using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.Interface;
-    using AG.PaymentApp.Data.Interface;
     using MongoDB.Driver;
 
-    public class EventPaymentRepositoryStartup : IPaymentRepositoryStartup
+    public class EventPaymentRepositoryStartup : IRepositoryStartup<PaymentMongo>
     {
         private readonly IMongoRepository mongoRepository;
 

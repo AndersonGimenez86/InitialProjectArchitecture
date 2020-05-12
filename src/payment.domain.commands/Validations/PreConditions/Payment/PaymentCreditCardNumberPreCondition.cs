@@ -1,12 +1,12 @@
 ﻿namespace AG.PaymentApp.Domain.Commands.Validations.PreConditions.Payments
 {
     using AG.PaymentApp.Domain.Commands.Payments;
-    using AG.PaymentApp.Domain.Commands.Validations.Interface;
     using Ether.Outcomes;
+    using global::Payment.Domain.Commands.Validations.PreConditions;
 
-    public class PaymentCreditCardNumberPreCondition : IPreCondition<NewPaymentCommand>
+    public class PaymentCreditCardNumberPreCondition : PreCondition<NewPaymentCommand>
     {
-        public IOutcome Accept(NewPaymentCommand payment)
+        public override IOutcome Accept(NewPaymentCommand payment)
         {
             if (payment.CreditCard.Number.Length == 16)
             {

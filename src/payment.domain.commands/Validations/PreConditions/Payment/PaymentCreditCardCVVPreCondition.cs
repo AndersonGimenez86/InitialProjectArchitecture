@@ -2,12 +2,12 @@
 {
     using System;
     using AG.PaymentApp.Domain.Commands.Payments;
-    using AG.PaymentApp.Domain.Commands.Validations.Interface;
     using Ether.Outcomes;
+    using global::Payment.Domain.Commands.Validations.PreConditions;
 
-    public class PaymentCreditCardCVVPreCondition : IPreCondition<NewPaymentCommand>
+    public class PaymentCreditCardCVVPreCondition : PreCondition<NewPaymentCommand>
     {
-        public IOutcome Accept(NewPaymentCommand payment)
+        public override IOutcome Accept(NewPaymentCommand payment)
         {
             if (Math.Floor(Math.Log10(payment.CreditCard.CVV) + 1) == 3)
             {
