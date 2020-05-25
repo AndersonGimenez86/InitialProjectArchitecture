@@ -26,8 +26,8 @@
                 config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170);
                 config.UseSimpleAssemblyNameTypeSerializer();
                 config.UseRecommendedSerializerSettings();
-                config.UseMongoStorage(configuration.GetSection("MongoDbConnectionString")
-                      .GetSection("HangFireConnection").Value, new MongoStorageOptions { MigrationOptions = migrationOptions });
+                config.UseMongoStorage(configuration.GetSection("MongoDbConnectionString:HangFireConnection").Value
+                    , new MongoStorageOptions { MigrationOptions = migrationOptions });
             });
         }
     }

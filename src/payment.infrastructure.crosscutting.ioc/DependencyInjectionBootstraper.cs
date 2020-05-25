@@ -30,10 +30,10 @@
             SetupGlobalLogging(services, loggingConfiguration);
 
             services.TryAddSingleton<IEnvironmentConfiguration>(sp =>
-                sp.GetRequiredService<IOptions<EnvironmentConfiguration>>().Value);
+                sp.GetRequiredService<IOptionsSnapshot<EnvironmentConfiguration>>().Value);
 
             services.TryAddSingleton<IIdentityConfiguration>(sp =>
-               sp.GetRequiredService<IOptions<IdentityConfiguration>>().Value);
+               sp.GetRequiredService<IOptionsSnapshot<IdentityConfiguration>>().Value);
 
             services.TryAddSingleton<IDataBaseConfiguration>(sp =>
                sp.GetRequiredService<IOptions<DataBaseConfiguration>>().Value);

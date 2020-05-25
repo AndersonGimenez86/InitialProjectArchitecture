@@ -4,23 +4,23 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using AG.PaymentApp.Data.Filters;
+    using AG.PaymentApp.Data.Interface;
     using AG.PaymentApp.Domain.Commands.Interface;
     using AG.PaymentApp.Domain.Entity.Mongo;
     using AG.PaymentApp.Domain.Entity.Payments;
     using AG.PaymentApp.Domain.queries.Interface;
     using AG.PaymentApp.Domain.Query.Payments;
-    using AG.PaymentApp.Data.Filters;
-    using AG.PaymentApp.Data.Interface;
     using AutoMapper;
     using MongoDB.Driver;
 
     public class PaymentRepository : IPaymentRepository, IFindPaymentRepository
     {
-        private readonly IPaymentRepositoryStartup eventPaymentRepositoryStartup;
+        private readonly IRepositoryStartup<PaymentMongo> eventPaymentRepositoryStartup;
         private readonly IMongoCollection<PaymentMongo> paymentEvents;
         private readonly IMapper typeMapper;
 
-        public PaymentRepository(IPaymentRepositoryStartup eventPaymentRepositoryStartup,
+        public PaymentRepository(IRepositoryStartup<PaymentMongo> eventPaymentRepositoryStartup,
             IMapper typeMapper)
         {
             this.eventPaymentRepositoryStartup = eventPaymentRepositoryStartup;

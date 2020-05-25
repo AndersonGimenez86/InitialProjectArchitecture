@@ -32,7 +32,9 @@ namespace AG.PaymentApp.gateway
             });
 
             var identitySettings = new IdentityConfiguration();
-            Configuration.GetSection(SectionNames.ApplicationIdentitySection).Bind(identitySettings);
+
+            // TODO: Review Configuration.GetSection(SectionNames.ApplicationIdentitySection).Bind(identitySettings);
+            services.Configure<IdentityConfiguration>(Configuration);
 
             services.AddAuthentication(options =>
             {
