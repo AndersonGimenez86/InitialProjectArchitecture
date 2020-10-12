@@ -2,12 +2,15 @@
 using AG.PaymentApp.Infrastructure.Crosscutting.IoC;
 using AG.PaymentApp.Infrastructure.Crosscutting.Settings;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Polly;
+using System;
 
 namespace AG.PaymentApp.gateway
 {
@@ -36,21 +39,24 @@ namespace AG.PaymentApp.gateway
             // TODO: Review Configuration.GetSection(SectionNames.ApplicationIdentitySection).Bind(identitySettings);
             services.Configure<IdentityConfiguration>(Configuration);
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddIdentityServerAuthentication(options =>
+            //{
+            //    options.Authority = identitySettings.Authority;
+            //    options.RequireHttpsMetadata = false;
+            //    options.ApiName = identitySettings.ApiName;
+            //    options.ApiSecret = identitySettings.ClientSecret;
+            //    options.ClaimsIssuer = identitySettings.Authority;
 
-            .AddIdentityServerAuthentication(options =>
-            {
-                options.Authority = identitySettings.Authority;
-                options.RequireHttpsMetadata = false;
-                options.ApiName = identitySettings.ApiName;
-                options.ApiSecret = identitySettings.ClientSecret;
-                options.ClaimsIssuer = identitySettings.Authority;
+            //});
 
-            });
+
+            services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
 
             services.AddSwagger(identitySettings);
 
@@ -58,6 +64,11 @@ namespace AG.PaymentApp.gateway
 
             // Adding MediatR for Domain Events and Notifications
             services.AddMediatR(typeof(Startup));
+
+            services.AddHttpClient("BankService", config =>
+            {
+                config.BaseAddress = new Uri(Configuration["Services:Bank"]);
+            }).AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(5, _ => TimeSpan.FromMinutes(5)));
 
             DependencyInjectionBootstraper.InitializeAppSettings(services, this.Configuration);
             DependencyInjectionBootstraper.RegisterServices(services, this.Configuration);
@@ -80,12 +91,10 @@ namespace AG.PaymentApp.gateway
                 app.UseHsts();
             }
 
-            app.UseAuthentication();
-
             app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseMvcWithDefaultRoute();
-
+            
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -96,6 +105,9 @@ namespace AG.PaymentApp.gateway
                 c.OAuthAppName("AG.com-privacy");
 
             });
+
+            app.UseAuthentication();
+            //app.UseAuthorization();
 
             DependencyInjectionBootstraper.InitializeServices(app.ApplicationServices);
         }
