@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace AG.PaymentApp.bank.Controllers
 {
@@ -12,7 +12,5 @@ namespace AG.PaymentApp.bank.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-
-
     }
 }
