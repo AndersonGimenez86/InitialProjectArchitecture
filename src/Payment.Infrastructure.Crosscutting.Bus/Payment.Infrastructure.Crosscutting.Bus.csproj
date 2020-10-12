@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\payment.domain.commands\Payment.Domain.Commands.csproj" />
     <ProjectReference Include="..\Payment.Domain.Events\Payment.Domain.Events.csproj" />
-    <ProjectReference Include="..\payment.domain.even\Payment.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>
